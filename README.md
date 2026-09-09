@@ -16,17 +16,20 @@ Only after those pass does a score mean anything.
 > published results yet. Nothing here is production-tested. See
 > [Honest limitations](#honest-limitations).
 
-### One question, three domains
+### One question, five domains
 
 **"Are these sources answering the same question?"**
 
 Most tooling asks whether independent sources *agree*. This one asks whether they are
 measuring the same thing at all — two sources can differ by 68 points and both be right.
 
-The same seven failure families keep surfacing in four unrelated domains. Three are
-public repositories, below; the fourth is a local experiment cited in the evidence
-table. This repo is the **LLM-judge** instance — and, in the seventh family, the one
-that supplied the near-miss.
+Five failure families keep surfacing in five unrelated domains; a sixth has so far
+appeared in one domain, and a seventh was found the other way round — first in
+someone else's published work, and only then looked for here. Three of the five
+domains are public repositories, below; the fourth is a local experiment cited in
+the evidence table; the fifth is a third-party skill I did not write. This repo is
+the **LLM-judge** instance — and, in the seventh family, the one that supplied the
+near-miss.
 
 | repo | domain | the question it asks |
 |---|---|---|
