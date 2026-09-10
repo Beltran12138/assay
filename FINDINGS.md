@@ -528,7 +528,7 @@ was to make MiniMax stricter (0.90 → 0.00).
 
 ## #8 — Two model ids, one backend, and nothing in the reply says so
 
-`npm run faithfulness` · 2026-09-09 · router `api.gonkarouter.io/v1`
+`npm run faithfulness` · 2026-09-09 · a third-party OpenAI-compatible router
 
 Layer 0 of the faithfulness harness asks each configured model id to reply
 `OK`, and reads the `model` field the router puts in the response body:
