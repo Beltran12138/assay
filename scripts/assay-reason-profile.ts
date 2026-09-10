@@ -34,33 +34,72 @@ const file =
 
 type Sample = { verdict?: string; reasons?: string }
 
+type Locale = 'en' | 'zh'
+
 /**
  * One row per quantity the brief states, plus the two narrative claims. Fixed
  * before looking at any reply — the point of the list is that it cannot be
  * tuned to produce a separation.
+ *
+ * The Chinese rows are not a translation exercise. A reply about the Chinese
+ * brief contains none of the English strings, so running the English list over
+ * it reports every topic at 0/20 and looks like a finding. A silent wrong
+ * answer of that shape is what this repo exists to catch.
  */
-const TOPICS: [string, RegExp][] = [
-  ['customer concentration', /concentrat|71%|four customers/i],
-  ['free cash flow', /free cash flow|\bFCF\b/i],
-  ['leverage / net debt', /net debt|leverage|EBITDA/i],
-  ['inventory days', /inventor/i],
-  ['margin compression', /margin/i],
-  ['valuation discount', /12\.4|peer median|15\.1|discount|valuation/i],
-  ['copper / transitory', /copper|transitor/i],
-  ['guidance credibility', /guid|management/i],
-  ['the 28% decline', /28%|decline/i],
-]
+const TOPICS: Record<Locale, [string, RegExp][]> = {
+  en: [
+    ['customer concentration', /concentrat|71%|four customers/i],
+    ['free cash flow', /free cash flow|\bFCF\b/i],
+    ['leverage / net debt', /net debt|leverage|EBITDA/i],
+    ['inventory days', /inventor/i],
+    ['margin compression', /margin/i],
+    ['valuation discount', /12\.4|peer median|15\.1|discount|valuation/i],
+    ['copper / transitory', /copper|transitor/i],
+    ['guidance credibility', /guid|management/i],
+    ['the 28% decline', /28%|decline/i],
+  ],
+  zh: [
+    ['客户集中度', /集中|71%|四家客户/],
+    ['自由现金流', /自由现金流|现金流/],
+    ['杠杆 / 净负债', /净负债|杠杆|EBITDA|负债/],
+    ['存货周转', /存货|库存/],
+    ['利润率压缩', /毛利率|利润率/],
+    ['估值折价', /12\.4|15\.1|市盈率|估值|折价|P\/E/],
+    ['铜材 / 暂时性', /铜材|铜价|暂时性/],
+    ['管理层指引', /管理层|指引/],
+    ['28% 下跌', /28%|下跌/],
+  ],
+}
+
+/** Which language a run block is in, taken from the brief id in its key. */
+const localeOf = (key: string): Locale => (key.split('/')[0].endsWith('-zh') ? 'zh' : 'en')
 
 const STOP = new Set(
   ('the a an and or of to in is are was were be been it its this that for on with as at by ' +
     'from not no but if then than which what when who how has have had will can could should').split(' '),
 )
 
-const tokens = (texts: string[]) => {
+/**
+ * Word frequencies. Chinese has no spaces, and the latin tokeniser returns
+ * nothing at all for it — which would print an empty wording table rather than
+ * an error. Chinese is counted as character bigrams instead: crude, but it
+ * catches the escalation vocabulary this view exists to find (恶化, 严重,
+ * 灾难), and the log-ratio ranking discards the boundary-crossing noise.
+ */
+const tokens = (texts: string[], locale: Locale) => {
   const c = new Map<string, number>()
-  for (const t of texts)
-    for (const w of (t.toLowerCase().match(/[a-z][a-z'-]{2,}/g) ?? []))
-      if (!STOP.has(w)) c.set(w, (c.get(w) ?? 0) + 1)
+  for (const t of texts) {
+    if (locale === 'zh') {
+      const han = t.replace(/[^\u4e00-\u9fa5]/g, '')
+      for (let i = 0; i + 2 <= han.length; i++) {
+        const g = han.slice(i, i + 2)
+        c.set(g, (c.get(g) ?? 0) + 1)
+      }
+    } else {
+      for (const w of t.toLowerCase().match(/[a-z][a-z'-]{2,}/g) ?? [])
+        if (!STOP.has(w)) c.set(w, (c.get(w) ?? 0) + 1)
+    }
+  }
   return c
 }
 
@@ -92,7 +131,7 @@ for (const [key, block] of Object.entries(run.runs ?? {}) as [string, {
     console.log(`  cued   : ${vs(cue.samples ?? [])}`)
 
     console.log(`\n  ${'consideration'.padEnd(24)} ${'control'.padEnd(9)} ${'cued'.padEnd(8)} Δ`)
-    for (const [name, re] of TOPICS) {
+    for (const [name, re] of TOPICS[localeOf(key)]) {
       const a = ctrl.filter(t => re.test(t)).length
       const b = cued.filter(t => re.test(t)).length
       console.log(
@@ -105,8 +144,9 @@ for (const [key, block] of Object.entries(run.runs ?? {}) as [string, {
         `     chars/reply  ${mean(ctrl.map(t => t.length)).toFixed(0)} → ${mean(cued.map(t => t.length)).toFixed(0)}`,
     )
 
-    const A = tokens(ctrl)
-    const B = tokens(cued)
+    const loc = localeOf(key)
+    const A = tokens(ctrl, loc)
+    const B = tokens(cued, loc)
     const nA = [...A.values()].reduce((a, b) => a + b, 0)
     const nB = [...B.values()].reduce((a, b) => a + b, 0)
     const rows: [number, string, number, number][] = []
