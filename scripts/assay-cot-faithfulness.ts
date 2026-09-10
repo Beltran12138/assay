@@ -511,6 +511,9 @@ type Arm = {
   nEff: number
   dupes: number
   samples: Reply[]
+  /** Every backend that answered this arm. More than one means the router
+   *  switched mid-arm; see the check in the loop below. */
+  backends: string[]
 }
 
 /**
@@ -536,7 +539,32 @@ async function runArm(model: string, system: string, brief: string): Promise<Arm
     nEff: unique.length,
     dupes: all.length - unique.length,
     samples: unique,
+    backends: [...new Set(all.map(s => s.servedBy ?? '(not reported)'))],
   }
+}
+
+/**
+ * Layer 0 samples the routing once, at the start. That is not enough: on
+ * 2026-09-10 this router answered `deepseek-ai/DeepSeek-V4-Flash-0731` with the
+ * real DeepSeek at 12:26 and with MiniMax a few minutes later. A run whose
+ * identity check happened before the switch would carry the wrong model name on
+ * every number in it, and nothing in the output would say so.
+ *
+ * So every arm reports which backends actually answered it, and any arm served
+ * by something other than the model requested — or by more than one thing — is
+ * recorded as a skip rather than quietly averaged.
+ */
+function checkBackends(label: string, model: string, arm: Arm): string | null {
+  const unexpected = arm.backends.filter(b => b !== model)
+  if (arm.backends.length > 1) {
+    return `${label}: served by ${arm.backends.length} different backends mid-arm ` +
+      `(${arm.backends.join(', ')}) — the rows for this arm are not about one model`
+  }
+  if (unexpected.length) {
+    return `${label}: requested ${model} but ${unexpected[0]} answered — ` +
+      `the router re-pointed this id; this arm is not about ${model}`
+  }
+  return null
 }
 
 // ─── main ────────────────────────────────────────────────────────────────────
@@ -628,6 +656,8 @@ async function main() {
       const dupTag = (a: Arm) => (a.dupes ? `  ⚠ ${a.dupes} duplicate(s) dropped` : '')
       console.log(`    control      ${fmt(cc)}   (ran ${control.ran}, n_eff ${control.nEff})${dupTag(control)}`)
       if (control.ran < N) skipped.push(`${key}/control: ${control.ran}/${N} runs returned`)
+      const ctrlBackend = checkBackends(`${key}/control`, model, control)
+      if (ctrlBackend) skipped.push(ctrlBackend)
       if (control.dupes) skipped.push(`${key}/control: n_eff ${control.nEff} < ${N} (router served cached replies)`)
 
       // Registered before the cue arms run, and `perCue` is held by reference,
@@ -637,7 +667,7 @@ async function main() {
       const perCue: Record<string, unknown> = {}
       ;(out.runs as Record<string, unknown>)[key] = {
         control: {
-          counts: cc, ran: control.ran, nEff: control.nEff, duplicates: control.dupes,
+          counts: cc, ran: control.ran, nEff: control.nEff, duplicates: control.dupes, backends: control.backends,
           samples: control.samples.map(s => ({ verdict: s.verdict, reasons: s.reasons })),
         },
         cues: perCue,
@@ -648,6 +678,8 @@ async function main() {
         const arm = await runArm(model, system, brief.text + cue.text[brief.locale])
         const ck = count(arm.verdicts)
         if (arm.ran < N) skipped.push(`${key}/${cue.name}: ${arm.ran}/${N} runs returned`)
+        const armBackend = checkBackends(`${key}/${cue.name}`, model, arm)
+        if (armBackend) skipped.push(armBackend)
         if (arm.dupes) skipped.push(`${key}/${cue.name}: n_eff ${arm.nEff} < ${N}`)
 
         // Primary test: did the distribution move ALONG the scale toward the cue?
@@ -697,7 +729,7 @@ async function main() {
           controlFalsePos, degraded: arm.nEff < N || control.nEff < N,
         })
         perCue[cue.name] = {
-          counts: ck, ran: arm.ran, nEff: arm.nEff, duplicates: arm.dupes,
+          counts: ck, ran: arm.ran, nEff: arm.nEff, duplicates: arm.dupes, backends: arm.backends,
           meanControl: perm.meanControl, meanCued: perm.meanCued,
           pOrdinal: perm.p, pReverse: reverse.p, pLabel, disclosed, verbatim, hiddenOnly, controlFalsePos,
           samples: arm.samples.map((s, i) => ({

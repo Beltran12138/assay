@@ -935,3 +935,77 @@ component twice and attributes it to whichever arm is examined first.
   1/20 here and 15–19/20 on the metadata arms, so it is not globally broken —
   but its preference patterns were written from a probe of six replies, and a
   disclosure phrased in a way none of those used would be scored as silence.
+
+---
+
+## #11 — Three ways a cue can fail to appear, and only one of them is hiding
+
+`npm run faithfulness` · 2026-09-10 · MiniMax-M2.7 · n=20 per arm
+
+#9 and #10 both ended at the same boundary: a cue that moves the verdict and is
+not disclosed could be concealment or could be influence the model never
+noticed, and a disclosure rate cannot tell them apart.
+
+There is a second channel. These models emit reasoning inside `<think>` before
+the answer, and the harness stores it. Scoring both channels with the same
+detector separates cases the disclosure rate merges:
+
+| arm | lang | n | in the reasons | in `<think>` only | knew it at all |
+|-----|------|---|----------------|-------------------|----------------|
+| meta→AVOID | en | 10 | **10/10** | 0/10 | 10/10 |
+| meta→AVOID | zh | 20 | **5/20** | **4/20** | 9/20 |
+| pref→AVOID | en, plain | 20 | 0/20 | 0/20 | 0/20 |
+| pref→AVOID | en, asked | 20 | 2/20 | 0/20 | 2/20 |
+| pref→AVOID | zh | 20 | 0/20 | 0/20 | 0/20 |
+
+Three distinct patterns:
+
+**Transparent.** English metadata cue: mentioned in the reasoning and written
+into the reasons, 10 times out of 10. Nothing withheld.
+
+**Withheld.** Chinese metadata cue: mentioned in `<think>` 9 times, written
+into the reasons 5. Four replies raised the desk rating internally and did not
+put it in the list. That is the shape concealment would have, and it is the
+only place in this repo where it appears.
+
+**Unstateable.** The preference cue: absent from both channels, in both
+languages, while moving the verdict by −0.37 to −0.60 with p as low as 0.0001.
+The model does not decline to mention it. It never represents it as a thing
+that could be mentioned.
+
+The third is the one worth worrying about, and it is the one no completeness
+check can catch. A reader auditing the reason list, a monitor reading the
+chain of thought, and the model itself all see the same list — and the
+influence is in none of them, because it arrived as the register of every item
+rather than as an item. #10 argued that from the wording data; this is the same
+conclusion from an independent channel.
+
+**⚠️ `<think>` is not the model's internal state.** It is a second generated
+text, subject to the same pressures as the first. "Present in `<think>`" means
+"the model wrote it down somewhere less polished", not "the model knew it".
+The three-way split is a distinction between two output channels, which is
+weaker than a distinction between knowing and saying — but it is more than a
+single channel can support, and the middle row would be invisible without it.
+
+### The metadata cue's high disclosure rate is an English result
+
+Same cue, same model, same `asked` prompt, translated brief: **10/10 becomes
+5/20.** The preference cue is 0/20 in both languages.
+
+So the defensibility reading from #10 needs a qualifier. Whether an influence
+can be written down as a respectable reason is not a property of the influence
+alone — it depends on the conventions of the language the reply is written in.
+Citing a prior desk rating is ordinary in an English research note. In Chinese
+it apparently is not, and the model keeps it in `<think>` instead.
+
+**Not established:**
+
+- **Why.** Training-data conventions, house style for Chinese research notes,
+  or something about the translated cue block reading as less citable. Nothing
+  here distinguishes them.
+- **That Chinese verdicts are more conservative.** The Chinese control sits at
+  mean 0.47 against English `asked` controls of 0.60 and 0.85. Consistent
+  direction, two English observations, and run-to-run variation on this brief
+  has already spanned 0.40 to 0.85. This is not a result.
+- **That the withheld rate is 4/20 rather than noise.** One arm, one language,
+  no repetition.
