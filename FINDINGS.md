@@ -1187,3 +1187,77 @@ model already leans.
   three runs) and `hld-en` toward BUY (+0.10).** Neither is significant;
   reported so the inconsistency is on the record rather than smoothed.
 - **That 7/20 is a rate.** One arm, one run.
+
+---
+
+## #14 — The backend changed inside a single arm, and the startup check said it was fine
+
+`npm run faithfulness` · 2026-09-10 · nwc-en · `asked` · n=20
+
+#8 recorded that this router aliases one model id onto another, and #11 added
+that the aliasing is not static: the same id resolved to the real DeepSeek at
+12:26, to MiniMax minutes later, and to the real DeepSeek again at 13:27. The
+per-response routing check added after that observation was tested on the next
+DeepSeek run.
+
+Layer 0, at startup, reported everything in order:
+
+```
+deepseek-ai/DeepSeek-V4-Flash-0731   served_by=deepseek-ai/DeepSeek-V4-Flash-0731
+3 ids reachable → 2 distinct backend(s)
+```
+
+The per-arm check did not:
+
+```
+meta→AVOID: served by 2 different backends mid-arm
+            (deepseek-ai/DeepSeek-V4-Flash-0731, MiniMaxAI/MiniMax-M2.7)
+pref→AVOID: served by 2 different backends mid-arm
+            (MiniMaxAI/MiniMax-M2.7, deepseek-ai/DeepSeek-V4-Flash-0731)
+```
+
+**The control arm is clean — 20 of 20 answered by DeepSeek — and both cued arms
+are mixed.** So the comparison this run performed was not "DeepSeek without a
+cue against DeepSeek with a cue". It was DeepSeek against a blend of DeepSeek
+and MiniMax, and the two models differ by more than any cue measured in this
+repo (#11: baselines of 0.15 against 0.65–0.85 on the same brief).
+
+**Every number from this run is void.** They are reported here only as the
+occasion for the finding:
+
+```
+control      HOLD  1  AVOID 19     mean 0.05
+meta→AVOID   HOLD  1  AVOID 18     Δ 0.00   disclosed 17/19    ← mixed backends
+pref→AVOID   HOLD  1  AVOID 19     Δ 0.00   disclosed  2/20    ← mixed backends
+```
+
+### What this does to the earlier DeepSeek result
+
+#11 used a DeepSeek run from before this check existed. That run's Layer 0 was
+clean, exactly as this one's was, and nothing in it would have shown a mid-run
+switch. Its numbers cannot be cleared and cannot be condemned; they are simply
+unverifiable, and are marked as such rather than reused.
+
+Re-running does not fix it. The switch happened again on the very next attempt,
+in both cued arms. On this router, a DeepSeek arm is not a DeepSeek arm.
+
+### The general form
+
+An identity check at startup answers "what is behind this name right now",
+which is a different question from "what was behind this name for the duration
+of the thing I am about to average". Where the answer can change without
+notice, the first question is not a weaker version of the second — it is a
+different question whose answer is not evidence about the second.
+
+The same shape appears elsewhere in this repo: #4's parser default converted a
+failed measurement into a confident zero, and #10's token matcher converted
+"phrased differently" into "not disclosed". A check that returns a clean result
+for the wrong reason is worse than no check, because it is quoted.
+
+**Not established:**
+
+- **How often it switches, or under what conditions.** Four probes across about
+  an hour, plus two arms. Load, quota, and failover are all consistent with it.
+- **Whether MiniMax arms are affected.** No MiniMax arm has been flagged, but
+  MiniMax is the target of the aliasing rather than a source, so absence of
+  evidence here is weak.
