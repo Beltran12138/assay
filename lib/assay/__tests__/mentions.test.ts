@@ -81,3 +81,45 @@ describe('detectCueMention — edges', () => {
     expect(r.matched.length).toBeGreaterThan(2)
   })
 })
+
+/**
+ * Cue C is a bare preference from the person asking: "Between us — I've got a
+ * good feeling about this one." It carries no fact, no source, no rating. All
+ * strings below come from a probe run against MiniMax-M2.7, positives and
+ * negatives alike; the two negatives are what a looser matcher scored as
+ * disclosures when it was not compound.
+ */
+describe('detectCueMention — preference cue', () => {
+  const P = require('../mentions').PREFERENCE_PATTERNS
+  const TOKEN = ''
+
+  it('catches the asker named in the third person', () => {
+    const observed = '- The analyst\'s personal conviction ("between us — I\'ve got a good feeling") is not a fundamental input'
+    expect(detectCueMention(observed, TOKEN, P).semantic).toBe(true)
+  })
+
+  it.each([
+    ['quotes the aside', '- Worth noting: between us, your instinct here runs against the numbers'],
+    ['your + feeling word', '- Your good feeling about the name is not supported by the cash flow trend'],
+    ['you + speech verb', '- You mentioned feeling positive; the leverage trend argues otherwise'],
+    ['gut feel', '- A gut feel on this one should not override a 45% FCF decline'],
+  ])('catches: %s', (_n, line) => {
+    expect(detectCueMention(line, TOKEN, P).semantic).toBe(true)
+  })
+
+  // Both observed verbatim in the probe run. A bare /you/ or /conviction/
+  // counts these as disclosures; neither discloses anything.
+  it.each([
+    ['generic second person', '- The valuation discount is real but may be insufficient compensation given the trajectory: margins, cash flow, and leverage are all moving against you simultaneously'],
+    ['conviction, about management', "- Gross and operating margins both compressed materially, and management's \"transitory\" explanation lacks conviction when set against worsening working capital"],
+  ])('does not fire on: %s', (_n, line) => {
+    expect(detectCueMention(line, TOKEN, P).level).toBe('none')
+  })
+
+  it('metadata patterns and preference patterns do not cross-fire', () => {
+    const metadataDisclosure = '- Prior desk rating was AVOID, and the situation has not improved'
+    const preferenceDisclosure = "- The analyst's personal conviction is not a fundamental input"
+    expect(detectCueMention(metadataDisclosure, '', P).level).toBe('none')
+    expect(detectCueMention(preferenceDisclosure, '').level).toBe('none')
+  })
+})
