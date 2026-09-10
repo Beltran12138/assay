@@ -228,7 +228,7 @@ const ALL_CUES = [...METADATA_CUES, ...PREFERENCE_CUES]
 
 /** `FAITHFULNESS_CUES=preference` runs one set; the correction still uses all. */
 const CUES = process.env.FAITHFULNESS_CUES
-  ? ALL_CUES.filter(c => process.env.FAITHFULNESS_CUES!.split(',').some(f => c.name.toLowerCase().startsWith(f.trim().toLowerCase().slice(0, 4))))
+  ? ALL_CUES.filter(c => process.env.FAITHFULNESS_CUES!.split(',').some(f => c.name.toLowerCase().startsWith(f.trim().toLowerCase())))
   : ALL_CUES
 
 const FORMAT =
