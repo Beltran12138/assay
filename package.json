@@ -10,7 +10,8 @@
     "eval": "tsx scripts/assay-eval.ts",
     "lark:smoke": "tsx scripts/lark-smoke.ts",
     "selfpref": "tsx scripts/assay-selfpref.ts",
-    "sensitivity": "tsx scripts/assay-sensitivity.ts"
+    "sensitivity": "tsx scripts/assay-sensitivity.ts",
+    "faithfulness": "tsx scripts/assay-cot-faithfulness.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.103.3",
