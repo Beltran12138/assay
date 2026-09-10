@@ -12,7 +12,8 @@
     "selfpref": "tsx scripts/assay-selfpref.ts",
     "sensitivity": "tsx scripts/assay-sensitivity.ts",
     "faithfulness": "tsx scripts/assay-cot-faithfulness.ts",
-    "reasons": "tsx scripts/assay-reason-profile.ts"
+    "reasons": "tsx scripts/assay-reason-profile.ts",
+    "ambiguity": "tsx scripts/assay-ambiguity-dose.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.103.3",
