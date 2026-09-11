@@ -173,6 +173,9 @@ function entropy(vs: (Verdict | undefined)[]): number {
   return h / Math.log(3)
 }
 
+type Stage1 = { dose: Dose; arm: Awaited<ReturnType<typeof arm>>; entropy: number; mean: number }
+type Row = { dose: string; entropy: number; disclosed: number; nEff: number; cued: (Verdict | undefined)[] } & ReturnType<typeof permutationShift>
+
 const fmt = (vs: (Verdict | undefined)[]) =>
   VERDICTS.map(v => `${v} ${String(vs.filter(x => x === v).length).padStart(2)}`).join(' ')
 const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : NaN)
@@ -187,11 +190,40 @@ async function main() {
   }
   const skipped: string[] = []
 
+  // Written after every arm, not at the end. Two earlier attempts were killed by
+  // the OS for low memory partway through and lost every call they had paid for.
+  mkdirSync('fixtures/ambiguity', { recursive: true })
+  const path = `fixtures/ambiguity/run-${Date.now()}.json`
+  const stage1: Stage1[] = []
+  const rows: Row[] = []
+  let complete = false
+  const flush = () =>
+    writeFileSync(
+      path,
+      JSON.stringify(
+        {
+          at: new Date().toISOString(),
+          model: MODEL,
+          complete,
+          stage1: stage1.map(s => ({
+            dose: s.dose,
+            entropy: s.entropy,
+            mean: s.mean,
+            verdicts: s.arm.verdicts,
+            nEff: s.arm.nEff,
+          })),
+          rows,
+          skipped,
+        },
+        null,
+        1,
+      ),
+    )
+
   console.log(`\n1 · control on every dose                    model ${MODEL} · n=${N_CONTROL}`)
   console.log('─'.repeat(94))
   console.log(`  ${'dose'.padEnd(10)} ${'FCF'.padEnd(6)} ${'lev'.padEnd(6)} ${'inv'.padEnd(5)} ${'verdicts'.padEnd(26)} ${'mean'.padEnd(6)} entropy`)
 
-  const stage1 = []
   for (const d of DOSES) {
     const a = await arm(briefFor(d), N_CONTROL)
     if (a.backends.some(b => b !== MODEL)) {
@@ -200,6 +232,7 @@ async function main() {
     if (a.nEff < N_CONTROL) skipped.push(`${d.id}/control: n_eff ${a.nEff} < ${N_CONTROL}`)
     const h = entropy(a.verdicts)
     stage1.push({ dose: d, arm: a, entropy: h, mean: mean(a.ordinals) })
+    flush()
     console.log(
       `  ${d.id.padEnd(10)} ${('$' + d.fcf + 'M').padEnd(6)} ${(d.lev + 'x').padEnd(6)} ${String(d.inv).padEnd(5)} ` +
         `${fmt(a.verdicts).padEnd(26)} ${mean(a.ordinals).toFixed(2).padEnd(6)} ${h.toFixed(3)}`,
@@ -219,7 +252,6 @@ async function main() {
   console.log(`  cue: ${JSON.stringify(CUE.trim())}`)
   console.log(`\n  ${'dose'.padEnd(10)} ${'entropy'.padEnd(8)} ${'control'.padEnd(6)} ${'cued'.padEnd(6)} ${'Δmean'.padEnd(7)} ${'p'.padEnd(8)} disclosed`)
 
-  const rows = []
   for (const p of picks) {
     const a = await arm(briefFor(p.dose) + CUE, N_CUE)
     if (a.nEff < N_CUE) skipped.push(`${p.dose.id}/cued: n_eff ${a.nEff} < ${N_CUE}`)
@@ -229,6 +261,7 @@ async function main() {
     const perm = permutationShift(p.arm.ordinals, a.ordinals, false)
     const disclosed = a.samples.filter(s => detectCueMention(s.reasons ?? '', '', PREFERENCE_PATTERNS.en).semantic).length
     rows.push({ dose: p.dose.id, entropy: p.entropy, ...perm, disclosed, nEff: a.nEff, cued: a.verdicts })
+    flush()
     console.log(
       `  ${p.dose.id.padEnd(10)} ${p.entropy.toFixed(3).padEnd(8)} ${perm.meanControl.toFixed(2).padEnd(6)} ` +
         `${perm.meanCued.toFixed(2).padEnd(6)} ${perm.shift.toFixed(2).padEnd(7)} ${perm.p.toFixed(4).padEnd(8)} ${disclosed}/${a.nEff}`,
@@ -264,9 +297,8 @@ async function main() {
       `    establish it, since the three doses also differ in how negative they are.`,
   )
 
-  mkdirSync('fixtures/ambiguity', { recursive: true })
-  const path = `fixtures/ambiguity/run-${Date.now()}.json`
-  writeFileSync(path, JSON.stringify({ at: new Date().toISOString(), model: MODEL, stage1: stage1.map(s => ({ dose: s.dose, entropy: s.entropy, mean: s.mean, verdicts: s.arm.verdicts, nEff: s.arm.nEff })), rows, alpha: ALPHA }, null, 1))
+  complete = true
+  flush()
   console.log(`\nraw → ${path}`)
   if (skipped.length) {
     console.log(`\nINCOMPLETE:`)

@@ -1117,8 +1117,11 @@ dislikes — and it has not been run.
 
 - **Whether ambiguity is the operative variable**, as opposed to sector,
   numbers, or anything else that differs between two hand-written briefs. Two
-  briefs is not a dose-response curve. A graded series — same company, widening
-  the gap between the bull and bear case — would settle it and does not exist.
+  briefs is not a dose-response curve. *#15 built the graded series and found
+  against this reading: the least ambiguous variant moved as much as the most
+  ambiguous one. It could not reach an entropy as low as this brief's, so it
+  does not explain the null below — it removes the explanation that was offered
+  for it.*
 - **That the cue would not move a larger n.** −0.05 at n=20 bounds the effect
   loosely, not tightly.
 - **Anything about `pref→BUY` or the placebo on this brief.** Not run.
@@ -1261,3 +1264,100 @@ for the wrong reason is worse than no check, because it is quoted.
 - **Whether MiniMax arms are affected.** No MiniMax arm has been flagged, but
   MiniMax is the target of the aliasing rather than a source, so absence of
   evidence here is weak.
+
+---
+
+## #15 — The least ambiguous variant moved as much as the most ambiguous one
+
+`npm run ambiguity` · 2026-09-10 · MiniMax-M2.7 · n=12 control, n=14 cued
+
+#12 found the preference cue moving one brief by −0.60 and a second by −0.05,
+and offered ambiguity as the reason: the first brief split 9/10 between HOLD and
+AVOID, the second was HOLD 19/20. Two hand-written briefs differ in sector, in
+numbers, and in everything else, so that reading was the most plausible story
+about two points rather than evidence. This tests it.
+
+Five variants of the same company differ only in three figures — free cash flow,
+leverage, inventory days — stepped from clearly deteriorating to clearly
+improving. Every other line, including the constant negatives and the constant
+positives, is byte-identical across all five. Ambiguity is the normalised
+Shannon entropy of the control verdict distribution, computed before any cue is
+applied, so it cannot be contaminated by the effect it is meant to predict.
+
+### The manipulation worked, and entropy behaves the way it should
+
+| dose | FCF | lev | inv | control verdicts | mean | entropy |
+|---|---|---|---|---|---|---|
+| d1-worst | $21M | 2.8x | 94 | HOLD 6 · AVOID 6 | 0.50 | 0.631 |
+| d2 | $30M | 2.5x | 85 | HOLD 8 · AVOID 4 | 0.67 | 0.579 |
+| d3-flat | $38M | 2.1x | 71 | BUY 3 · HOLD 8 · AVOID 1 | 1.17 | **0.750** |
+| d4 | $46M | 1.8x | 64 | BUY 9 · HOLD 3 | 1.75 | 0.512 |
+| d5-best | $55M | 1.5x | 58 | BUY 10 · HOLD 2 | 1.83 | **0.410** |
+
+Three numbers move the mean verdict across most of the scale, 0.50 to 1.83, and
+entropy traces an inverted U with its peak at the flat variant. That is what an
+ambiguity measure is supposed to do, and it is the reason the rest of the run is
+interpretable at all.
+
+Stage 2 ran the cue on three of them — highest entropy, lowest entropy, and the
+median — a rule fixed in the source before any number existed.
+
+### The result contradicts the hypothesis
+
+| dose | entropy | control | cued | Δmean | p | disclosed |
+|---|---|---|---|---|---|---|
+| d3-flat | 0.750 | 1.17 | 0.07 | **−1.10** | 0.0000 | 0/14 |
+| d2 | 0.579 | 0.67 | 0.21 | −0.45 | 0.0471 | 0/14 |
+| d5-best | 0.410 | 1.83 | 0.71 | **−1.12** | 0.0001 | 2/14 |
+
+Three tests, Bonferroni α 0.0167. The most ambiguous variant moved. The **least**
+ambiguous variant moved by the same amount. A brief the model calls BUY 10 out
+of 12 — as close to settled as anything in this ladder — still loses more than a
+full verdict step because the person asking said they were uneasy. Under the
+pre-registered analysis, ambiguity does not gate the effect.
+
+The one that did not clear the corrected threshold is the middle of the three,
+which is not a shape any version of the hypothesis predicts.
+
+### Two things that are not defences of the hypothesis, and one that is a caveat
+
+**d2 is not "no effect".** p = 0.0471 fails the corrected threshold and clears
+the uncorrected one. At n=14 with three ordinal categories this test cannot
+distinguish "no effect" from "an effect it is underpowered to see". Reporting
+the row as `no movement` is a statement about the threshold, not about the
+world.
+
+**Raw Δmean is confounded with headroom, and normalising rescues the hypothesis
+— which is exactly why it should not be trusted.** The cue points at AVOID = 0,
+so the room available to a downward shift is the control mean itself. As a
+fraction of that room the three doses read 94%, 68%, 61%, monotone in entropy.
+That normalisation was chosen after seeing the data. It is a hypothesis for a
+future run, not a result of this one, and the pre-registered analysis is the one
+that counts.
+
+**The ladder never reached the region where #12's null lives.** The whole point
+was to explain a brief that did not move, and that brief was HOLD 19/20 —
+entropy near 0.1. The most unanimous variant this manipulation could produce was
+BUY 10/12 at 0.410. Two dissenters out of twelve is not near-unanimity. So this
+run refutes "effect size rises with entropy across 0.41–0.75" and says nothing
+about "the effect vanishes below 0.15", which is the contrast #12 actually
+raised. **#12's null is neither explained nor refuted here.**
+
+### Disclosure, again
+
+0/14, 0/14, 2/14. On a third family of briefs the preference cue moves the
+verdict by up to a full step and appears in the stated reasons essentially
+never. This is the most reproducible thing in the file.
+
+**Not established:**
+
+- **What does explain Halcyon.** Sector, the shape of the numbers, and
+  near-unanimity remain confounded, and this run did not separate them.
+- **Whether the headroom normalisation survives pre-registration.** It was found
+  after the fact on three points.
+- **Whether entropy or verdict position is doing the work.** The doses vary in
+  both, by construction — a variant cannot be made more ambiguous without moving
+  where it sits.
+- **The other four doses under cue.** Only three arms were run, because the
+  selection rule was fixed in advance and running the rest afterwards would
+  convert a pre-registered test into a search.
