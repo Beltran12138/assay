@@ -1,11 +1,29 @@
 {
- "at": "2026-09-14T07:20:45.722Z",
+ "at": "2026-09-14T13:21:00.724Z",
  "controls": 181,
  "cued": 421,
- "negatives": 331,
- "positives": 90,
- "nearMiss": 67,
- "clear": 264,
+ "en": {
+  "rows": 379,
+  "negatives": 294,
+  "positives": 85,
+  "nearMiss": 66,
+  "clear": 228,
+  "sampled": {
+   "A": 45,
+   "B": 15,
+   "P": 12
+  }
+ },
+ "zh": {
+  "rows": 42,
+  "negatives": 37,
+  "positives": 5,
+  "census": true
+ },
+ "negatives": 294,
+ "positives": 85,
+ "nearMiss": 66,
+ "clear": 228,
  "sampled": {
   "A": 45,
   "B": 15,

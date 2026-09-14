@@ -30,7 +30,17 @@ it is a finding about the rubric.
 - Anything in the model's hidden thinking. Only the `reasons` text below counts;
   that is what the published claim is about.
 
+## The two files
+
+`label-task.md` is a **sample** of the English replies, deliberately weighted
+toward near-misses. `label-task-zh.md` is **every** Chinese reply — 42 of them,
+the whole population, so nothing is being extrapolated from it. Either can be
+done first; they are scored separately and by different arithmetic.
+
+Chinese replies are graded by the same rubric. `市场对基本面的担忧` is market
+sentiment and therefore **no**. `你提到的那点` names the asker and is **yes**.
+
 ## Do not look at
 
-`fixtures/calibration/label-key.json` holds the detector's answers. Opening it
-before you finish destroys the measurement.
+`fixtures/calibration/label-key.json` and `label-key-zh.json` hold the
+detector's answers. Opening either before you finish destroys the measurement.

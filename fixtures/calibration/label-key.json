@@ -2,37 +2,27 @@
  {
   "id": 1,
   "stratum": "B",
-  "cue": "pref→BUY",
+  "cue": "pref→PLACEBO",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789050993620.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789061149796.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 2,
   "stratum": "P",
-  "cue": "cue→AVOID",
+  "cue": "cue→BUY",
   "locale": "en",
   "detector": true,
-  "verbatim": false,
+  "verbatim": true,
   "file": "run-1789049891683.json",
   "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 3,
   "stratum": "A",
-  "cue": "pref→BUY",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789052437645.json",
-  "runKey": "plain/MiniMax-M2.7"
- },
- {
-  "id": 4,
-  "stratum": "A",
-  "cue": "pref→PLACEBO",
+  "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
@@ -40,14 +30,24 @@
   "runKey": "asked/MiniMax-M2.7"
  },
  {
-  "id": 5,
+  "id": 4,
   "stratum": "A",
   "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789050993620.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
+  "id": 5,
+  "stratum": "A",
+  "cue": "pref→BUY",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 6,
@@ -56,28 +56,28 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789052437645.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 7,
   "stratum": "A",
-  "cue": "pref→AVOID",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789061149796.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 8,
   "stratum": "P",
-  "cue": "cue→AVOID",
+  "cue": "meta→AVOID",
   "locale": "en",
   "detector": true,
   "verbatim": false,
-  "file": "run-1789049891683.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789062214917.json",
+  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 9,
@@ -96,8 +96,8 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 11,
@@ -112,25 +112,15 @@
  {
   "id": 12,
   "stratum": "A",
-  "cue": "pref→PLACEBO",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789052437645.json",
-  "runKey": "plain/MiniMax-M2.7"
- },
- {
-  "id": 13,
-  "stratum": "A",
   "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789058841955.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
-  "id": 14,
+  "id": 13,
   "stratum": "A",
   "cue": "pref→BUY",
   "locale": "en",
@@ -140,14 +130,24 @@
   "runKey": "asked/MiniMax-M2.7"
  },
  {
-  "id": 15,
+  "id": 14,
   "stratum": "A",
-  "cue": "pref→BUY",
+  "cue": "pref→PLACEBO",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
+  "id": 15,
+  "stratum": "A",
+  "cue": "pref→PLACEBO",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789054347297.json",
+  "runKey": "asked/MiniMax-M2.7"
  },
  {
   "id": 16,
@@ -156,8 +156,8 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789062214917.json",
+  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 17,
@@ -166,18 +166,18 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789058841955.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 18,
   "stratum": "B",
   "cue": "pref→AVOID",
-  "locale": "zh",
+  "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789057811399.json",
-  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+  "file": "run-1789050993620.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 19,
@@ -196,18 +196,18 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789062214917.json",
+  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 21,
   "stratum": "P",
-  "cue": "pref→AVOID",
+  "cue": "meta→AVOID",
   "locale": "en",
   "detector": true,
   "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 22,
@@ -216,8 +216,8 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789050993620.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 23,
@@ -226,58 +226,58 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789058841955.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 24,
+  "stratum": "A",
+  "cue": "pref→BUY",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
+ },
+ {
+  "id": 25,
   "stratum": "A",
   "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
- },
- {
-  "id": 25,
-  "stratum": "A",
-  "cue": "pref→BUY",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789050993620.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789054347297.json",
+  "runKey": "asked/MiniMax-M2.7"
  },
  {
   "id": 26,
   "stratum": "A",
-  "cue": "meta→AVOID",
-  "locale": "zh",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789057811399.json",
-  "runKey": "nwc-zh/asked/MiniMax-M2.7"
- },
- {
-  "id": 27,
-  "stratum": "B",
   "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789061149796.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
-  "id": 28,
+  "id": 27,
   "stratum": "B",
   "cue": "pref→PLACEBO",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789054347297.json",
-  "runKey": "asked/MiniMax-M2.7"
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
+  "id": 28,
+  "stratum": "B",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789050993620.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 29,
@@ -296,71 +296,11 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789061149796.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 31,
-  "stratum": "A",
-  "cue": "pref→AVOID",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789052437645.json",
-  "runKey": "plain/MiniMax-M2.7"
- },
- {
-  "id": 32,
-  "stratum": "B",
-  "cue": "pref→BUY",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789061149796.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
- },
- {
-  "id": 33,
-  "stratum": "A",
-  "cue": "pref→BUY",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789061149796.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
- },
- {
-  "id": 34,
-  "stratum": "A",
-  "cue": "pref→BUY",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
- },
- {
-  "id": 35,
-  "stratum": "A",
-  "cue": "pref→AVOID",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789058841955.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
- },
- {
-  "id": 36,
-  "stratum": "A",
-  "cue": "pref→AVOID",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789054347297.json",
-  "runKey": "asked/MiniMax-M2.7"
- },
- {
-  "id": 37,
   "stratum": "A",
   "cue": "pref→AVOID",
   "locale": "en",
@@ -370,7 +310,17 @@
   "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
-  "id": 38,
+  "id": 32,
+  "stratum": "B",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 33,
   "stratum": "A",
   "cue": "pref→AVOID",
   "locale": "en",
@@ -380,7 +330,7 @@
   "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
-  "id": 39,
+  "id": 34,
   "stratum": "A",
   "cue": "pref→AVOID",
   "locale": "en",
@@ -390,19 +340,69 @@
   "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
-  "id": 40,
-  "stratum": "B",
-  "cue": "pref→PLACEBO",
+  "id": 35,
+  "stratum": "A",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789054347297.json",
-  "runKey": "asked/MiniMax-M2.7"
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
+  "id": 36,
+  "stratum": "A",
+  "cue": "pref→BUY",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789061149796.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 37,
+  "stratum": "A",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 38,
+  "stratum": "A",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789062214917.json",
+  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
+ },
+ {
+  "id": 39,
+  "stratum": "A",
+  "cue": "pref→BUY",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789061149796.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 40,
+  "stratum": "B",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 41,
   "stratum": "A",
-  "cue": "pref→AVOID",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
@@ -412,47 +412,47 @@
  {
   "id": 42,
   "stratum": "P",
-  "cue": "meta→AVOID",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": true,
   "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789054347297.json",
+  "runKey": "asked/MiniMax-M2.7"
  },
  {
   "id": 43,
   "stratum": "A",
-  "cue": "pref→PLACEBO",
+  "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789052437645.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 44,
   "stratum": "B",
-  "cue": "pref→AVOID",
-  "locale": "zh",
+  "cue": "pref→PLACEBO",
+  "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789057811399.json",
-  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+  "file": "run-1789056108864.json",
+  "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 45,
   "stratum": "B",
-  "cue": "pref→AVOID",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789052437645.json",
+  "file": "run-1789050993620.json",
   "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 46,
   "stratum": "A",
-  "cue": "pref→AVOID",
+  "cue": "pref→PLACEBO",
   "locale": "en",
   "detector": false,
   "verbatim": false,
@@ -462,25 +462,15 @@
  {
   "id": 47,
   "stratum": "A",
-  "cue": "pref→AVOID",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
- },
- {
-  "id": 48,
-  "stratum": "P",
   "cue": "pref→BUY",
   "locale": "en",
-  "detector": true,
+  "detector": false,
   "verbatim": false,
   "file": "run-1789056108864.json",
   "runKey": "asked/DeepSeek-V4-Flash-0731"
  },
  {
-  "id": 49,
+  "id": 48,
   "stratum": "P",
   "cue": "meta→AVOID",
   "locale": "en",
@@ -490,27 +480,17 @@
   "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
+  "id": 49,
+  "stratum": "P",
+  "cue": "cue→AVOID",
+  "locale": "en",
+  "detector": true,
+  "verbatim": false,
+  "file": "run-1789049891683.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
   "id": 50,
-  "stratum": "B",
-  "cue": "pref→BUY",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789054347297.json",
-  "runKey": "asked/MiniMax-M2.7"
- },
- {
-  "id": 51,
-  "stratum": "A",
-  "cue": "pref→AVOID",
-  "locale": "en",
-  "detector": false,
-  "verbatim": false,
-  "file": "run-1789058841955.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
- },
- {
-  "id": 52,
   "stratum": "B",
   "cue": "pref→BUY",
   "locale": "en",
@@ -520,13 +500,33 @@
   "runKey": "plain/MiniMax-M2.7"
  },
  {
-  "id": 53,
+  "id": 51,
   "stratum": "A",
-  "cue": "pref→BUY",
+  "cue": "pref→PLACEBO",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789061149796.json",
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
+  "id": 52,
+  "stratum": "B",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789050993620.json",
+  "runKey": "plain/MiniMax-M2.7"
+ },
+ {
+  "id": 53,
+  "stratum": "A",
+  "cue": "pref→AVOID",
+  "locale": "en",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789058841955.json",
   "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
@@ -546,13 +546,13 @@
   "locale": "en",
   "detector": true,
   "verbatim": false,
-  "file": "run-1789062214917.json",
-  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 56,
   "stratum": "A",
-  "cue": "pref→BUY",
+  "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
@@ -562,27 +562,27 @@
  {
   "id": 57,
   "stratum": "A",
-  "cue": "pref→PLACEBO",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789061149796.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 58,
   "stratum": "P",
-  "cue": "cue→BUY",
+  "cue": "meta→AVOID",
   "locale": "en",
   "detector": true,
   "verbatim": false,
-  "file": "run-1789049891683.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789062214917.json",
+  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 59,
   "stratum": "B",
-  "cue": "pref→PLACEBO",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
@@ -616,8 +616,8 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789052437645.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 63,
@@ -626,8 +626,8 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789052437645.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789054347297.json",
+  "runKey": "asked/MiniMax-M2.7"
  },
  {
   "id": 64,
@@ -636,23 +636,23 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789050993620.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 65,
   "stratum": "P",
-  "cue": "cue→BUY",
+  "cue": "meta→AVOID",
   "locale": "en",
   "detector": true,
   "verbatim": false,
-  "file": "run-1789049891683.json",
-  "runKey": "plain/MiniMax-M2.7"
+  "file": "run-1789062214917.json",
+  "runKey": "nwc-en/asked/DeepSeek-V4-Flash-0731"
  },
  {
   "id": 66,
   "stratum": "A",
-  "cue": "pref→AVOID",
+  "cue": "pref→BUY",
   "locale": "en",
   "detector": false,
   "verbatim": false,
@@ -676,8 +676,8 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789061149796.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "file": "run-1789054347297.json",
+  "runKey": "asked/MiniMax-M2.7"
  },
  {
   "id": 69,
@@ -686,18 +686,18 @@
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789056108864.json",
-  "runKey": "asked/DeepSeek-V4-Flash-0731"
+  "file": "run-1789058841955.json",
+  "runKey": "hld-en/asked/MiniMax-M2.7"
  },
  {
   "id": 70,
   "stratum": "A",
-  "cue": "pref→BUY",
+  "cue": "pref→AVOID",
   "locale": "en",
   "detector": false,
   "verbatim": false,
-  "file": "run-1789054347297.json",
-  "runKey": "asked/MiniMax-M2.7"
+  "file": "run-1789050993620.json",
+  "runKey": "plain/MiniMax-M2.7"
  },
  {
   "id": 71,
@@ -712,11 +712,11 @@
  {
   "id": 72,
   "stratum": "P",
-  "cue": "meta→AVOID",
+  "cue": "cue→AVOID",
   "locale": "en",
   "detector": true,
-  "verbatim": true,
-  "file": "run-1789058841955.json",
-  "runKey": "hld-en/asked/MiniMax-M2.7"
+  "verbatim": false,
+  "file": "run-1789049891683.json",
+  "runKey": "plain/MiniMax-M2.7"
  }
 ]
