@@ -1,0 +1,14 @@
+{
+ "at": "2026-09-14T07:20:45.722Z",
+ "controls": 181,
+ "cued": 421,
+ "negatives": 331,
+ "positives": 90,
+ "nearMiss": 67,
+ "clear": 264,
+ "sampled": {
+  "A": 45,
+  "B": 15,
+  "P": 12
+ }
+}

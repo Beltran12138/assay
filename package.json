@@ -13,7 +13,9 @@
     "sensitivity": "tsx scripts/assay-sensitivity.ts",
     "faithfulness": "tsx scripts/assay-cot-faithfulness.ts",
     "reasons": "tsx scripts/assay-reason-profile.ts",
-    "ambiguity": "tsx scripts/assay-ambiguity-dose.ts"
+    "ambiguity": "tsx scripts/assay-ambiguity-dose.ts",
+    "calibrate": "tsx scripts/assay-detector-calibration.ts",
+    "calibrate:score": "tsx scripts/assay-detector-score.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.103.3",
