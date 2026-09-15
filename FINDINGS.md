@@ -1395,30 +1395,56 @@ collapse to 0.00 on the thank-you. With the isolation floor set to
 can be attributed to the pushback rather than to the mere presence of a second
 turn survives.
 
-### What the effect actually is
+### The re-ask, alone
 
-Not sycophancy — the judge does not cave to *pressure*, because it caves equally
-to gratitude. It cannot carry a score across a conversational turn at all: any
-second user message re-rolls the verdict, and the re-roll is worst exactly where
-the first verdict was most confident. The 1.00 logic and claim scores evaporated
-under a thank-you; the 0.00 scores, with nowhere to fall, held under everything.
-A coaching number that a "thanks, got it" flips from perfect to zero is not a
-property of the argument, and the tool that was going to show it to a user would
-have been showing them noise dressed as a grade. The control that caught this is
-the one this file has run before (#5, #10): the expected effect appeared, and a
-placebo made it disappear.
+If a neutral turn moves the score as much as an attack, the follow-up's content
+is not the variable. What is left is the instruction that both share: "score it
+again." So the ladder gained a rung below the placebo — a **bare re-ask**: the
+same argument and the same "score again" instruction, with no user turn appended
+at all. Nothing a user could have said is present; only the request to re-score.
+
+It moved the score as hard as anything else. On DeepSeek-V4-Flash the four rungs
+read: retest 0.00/0.00, bare-reask mean 0.230 / max 1.00, placebo mean 0.267 /
+max 1.00, rebuttal mean 0.197 / max 1.00. The Python-vs-C logic score fell 1.00
+→ 0.00 on the bare re-ask; the claim score fell 0.90. The only thing separating
+the flat retest floor from the bare-reask collapse is the sentence "please score
+this again" — which the model evidently reads as "your first answer was wrong."
+
+So the effect is not sycophancy, and it is not even about a conversational turn.
+It is the re-scoring request itself. Asked to grade the identical argument a
+second time, this judge changes its grade, worst exactly where it was most
+confident: the 1.00s evaporate, the 0.00s (nowhere to fall) hold. A coaching
+number that flips from perfect to zero when the tool merely asks itself to check
+its work is not a property of the argument. The control that caught the false
+"sycophancy" headline is the one this file has run before (#5, #10): the expected
+effect appeared, and a placebo — here, a bare re-ask — dissolved it.
+
+### A second judge does not do it
+
+The instability is a property of the judge, not a law. `MiniMaxAI/MiniMax-M2.7`,
+run through the same ladder, is also deterministic on retest (0.00) but holds its
+scores far better: on the cells that parsed, its bare-reask and placebo moves sit
+at or below 0.20 and 0.30, with no collapse — the sharpest single move was a 0.70
+on a bare disagreement, and a few "you scored too low" turns nudged scores up
+rather than flipping them. Whatever makes DeepSeek-V4-Flash rewrite a 1.00 into a
+0.00 on "score it again" does not reproduce here. So "an LLM judge cannot re-grade
+its own verdict" is too strong; the honest claim is that *this* judge cannot, and
+another mostly can.
 
 **Not established:**
 
-- **The mechanism.** The re-score prompt shows the judge a user turn and asks it
-  to score again; a model may read any re-ask as dissatisfaction and mark a high
-  score down reflexively. "A second turn destabilises the score" and "the
-  instruction to re-score reads as a complaint" were not separated — a single
-  fresh prompt with the neutral sentence embedded inline, no re-ask, would do it.
-- **Generality.** One judge, three hand-written Chinese arguments, one run. The
-  default judge (the generator) was not reachable under this endpoint's model
-  list, so only DeepSeek-V4-Flash ran; whether other judges hold a score across a
-  turn is unmeasured.
-- **Direction.** Movement was scored as `|Δ|`. Whether re-asks push scores *down*
-  specifically, rather than merely around, was not tested — though every large
-  move observed here was a high score falling.
+- **MiniMax at full coverage.** As a reasoning model it often spent its token
+  budget inside `<think>` and returned no verdict — parse yield ~63% at the
+  default cap, and the higher-cap re-run built to fix that was killed for memory
+  after six cells. Its stability is a read off the cells that parsed, not a
+  complete matrix; whether the unparsed cells hide movement is unmeasured.
+- **What in the re-ask does it.** "Score it again" was not separated from any
+  other appended sentence. A neutral, non-re-ask trailer ("这段论证到此结束") would
+  test whether it is the *re-scoring* semantics specifically or merely a second
+  instruction of any kind.
+- **Direction.** Movement was scored as `|Δ|`. On DeepSeek every large move was a
+  high score falling; on MiniMax the "too low" nudges pushed up. Whether the
+  re-ask has a consistent direction per judge was not tested.
+- **Generality.** Two judges, three hand-written Chinese arguments. The default
+  judge (the generator) was unreachable under this endpoint's model list, so the
+  comparison is between the two models the endpoint did offer.
