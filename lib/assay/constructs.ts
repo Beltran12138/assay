@@ -11,6 +11,10 @@ export type Construct =
   | 'relevance'            // does the answer address what was asked?
   | 'retrieval_recall'     // did retrieval surface the context needed to answer?
   | 'policy_adherence'     // did the agent obey the operator's written rules?
+  | 'argument_claim'       // is the argument's central claim single and bounded?
+  | 'argument_evidence'    // is that claim backed by relevant, checkable evidence?
+  | 'argument_logic'       // is the reasoning free of the closed-set fallacies?
+  | 'argument_steelman'    // does it engage the strongest opposing case, not a straw man?
 
 export const CONSTRUCTS: Construct[] = [
   'faithfulness',
@@ -19,6 +23,10 @@ export const CONSTRUCTS: Construct[] = [
   'relevance',
   'retrieval_recall',
   'policy_adherence',
+  'argument_claim',
+  'argument_evidence',
+  'argument_logic',
+  'argument_steelman',
 ]
 
 // Prose used in reports. Written so that a reader who has never seen this
@@ -30,7 +38,47 @@ export const CONSTRUCT_QUESTION: Record<Construct, string> = {
   relevance:           'Does the answer address the question that was asked?',
   retrieval_recall:    'Did retrieval surface the context needed to answer?',
   policy_adherence:    'Did the agent obey the written operator policy?',
+  argument_claim:      'Is the central claim single, clear, and bounded by its conditions?',
+  argument_evidence:   'Is the claim backed by relevant, checkable evidence rather than assertion?',
+  argument_logic:      'Is the reasoning free of the nine closed-set fallacies?',
+  argument_steelman:   'Does it answer the strongest opposing case rather than a straw man?',
 }
+
+// ─── The four argument constructs are not a rubric total ─────────────────────
+//
+// They arrived together, from a rubric that scored a written argument on claim,
+// evidence, logic and steelman — each 0..3 — and then reported their sum as a
+// single 0..12 "argument quality". That sum is exactly the move this file's
+// central rule forbids: claim clarity, evidence quality, logical validity and
+// engagement with the opposition are four different questions, and a number
+// that averages them answers none of them. An argument can state one crisp,
+// well-bounded claim (claim = 3) on no evidence at all (evidence = 0); the 12-
+// point total buries that, and two arguments that fail in opposite ways can
+// land on the same total. Report the four separately, or report the weakest of
+// the four as a floor — never their sum as a grade.
+//
+// `argument_logic` has a fixed label space, deliberately closed so a judge
+// cannot invent a fallacy name and make the result irreproducible. The nine:
+//   滑坡 · 稻草人 · 诉诸情感 · 诉诸权威 · 以偏概全 · 循环论证 · 虚假两难 · 偷换概念 · 因果倒置
+// (slippery-slope, straw-man, appeal-to-emotion, appeal-to-authority, hasty-
+// generalisation, circular, false-dilemma, equivocation, reversed-causation).
+// See fixtures/argument/RUBRIC.md for the anchors and docs/ARGUMENT-JUDGE.md
+// for where the constructs came from and what the judge must survive to be
+// trusted (a coach that lowers a score because the user pushed back is not
+// measuring the argument — see the rebuttal-stability probe).
+export const ARGUMENT_CONSTRUCTS: Construct[] = [
+  'argument_claim',
+  'argument_evidence',
+  'argument_logic',
+  'argument_steelman',
+]
+
+export const ARGUMENT_FALLACIES = [
+  '滑坡', '稻草人', '诉诸情感', '诉诸权威',
+  '以偏概全', '循环论证', '虚假两难', '偷换概念', '因果倒置',
+] as const
+
+export type ArgumentFallacy = (typeof ARGUMENT_FALLACIES)[number]
 
 // `fact_token_presence` is NOT a cheap version of `correctness` — it is a
 // different question, and this repo learned that the hard way. Asked for the
