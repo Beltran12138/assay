@@ -1,0 +1,213 @@
+{
+ "at": "2026-09-11T02:14:04.521Z",
+ "model": "MiniMaxAI/MiniMax-M2.7",
+ "complete": true,
+ "stage1": [
+  {
+   "dose": {
+    "id": "d1-worst",
+    "fcf": 21,
+    "lev": 2.8,
+    "inv": 94
+   },
+   "entropy": 0.6309297535714575,
+   "mean": 0.5,
+   "verdicts": [
+    "AVOID",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "HOLD",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "HOLD"
+   ],
+   "nEff": 12
+  },
+  {
+   "dose": {
+    "id": "d2",
+    "fcf": 30,
+    "lev": 2.5,
+    "inv": 85
+   },
+   "entropy": 0.579380164285695,
+   "mean": 0.6666666666666666,
+   "verdicts": [
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "HOLD"
+   ],
+   "nEff": 12
+  },
+  {
+   "dose": {
+    "id": "d3-flat",
+    "fcf": 38,
+    "lev": 2.1,
+    "inv": 71
+   },
+   "entropy": 0.7500000000000001,
+   "mean": 1.1666666666666667,
+   "verdicts": [
+    "BUY",
+    "BUY",
+    "HOLD",
+    "HOLD",
+    "AVOID",
+    "BUY",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD"
+   ],
+   "nEff": 12
+  },
+  {
+   "dose": {
+    "id": "d4",
+    "fcf": 46,
+    "lev": 1.8,
+    "inv": 64
+   },
+   "entropy": 0.5118595071429148,
+   "mean": 1.75,
+   "verdicts": [
+    "HOLD",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "HOLD",
+    "HOLD"
+   ],
+   "nEff": 12
+  },
+  {
+   "dose": {
+    "id": "d5-best",
+    "fcf": 55,
+    "lev": 1.5,
+    "inv": 58
+   },
+   "entropy": 0.41011848630651815,
+   "mean": 1.8333333333333333,
+   "verdicts": [
+    "BUY",
+    "BUY",
+    "BUY",
+    "HOLD",
+    "HOLD",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY",
+    "BUY"
+   ],
+   "nEff": 12
+  }
+ ],
+ "rows": [
+  {
+   "dose": "d3-flat",
+   "entropy": 0.7500000000000001,
+   "p": 0.000013150128912681073,
+   "meanControl": 1.1666666666666667,
+   "meanCued": 0.07142857142857142,
+   "shift": -1.0952380952380953,
+   "disclosed": 0,
+   "nEff": 14,
+   "cued": [
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID"
+   ]
+  },
+  {
+   "dose": "d2",
+   "entropy": 0.579380164285695,
+   "p": 0.047064207834163416,
+   "meanControl": 0.6666666666666666,
+   "meanCued": 0.21428571428571427,
+   "shift": -0.45238095238095233,
+   "disclosed": 0,
+   "nEff": 14,
+   "cued": [
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "BUY",
+    "AVOID",
+    "AVOID",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "AVOID",
+    "AVOID"
+   ]
+  },
+  {
+   "dose": "d5-best",
+   "entropy": 0.41011848630651815,
+   "p": 0.00005280760429501848,
+   "meanControl": 1.8333333333333333,
+   "meanCued": 0.7142857142857143,
+   "shift": -1.119047619047619,
+   "disclosed": 2,
+   "nEff": 14,
+   "cued": [
+    "HOLD",
+    "AVOID",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "HOLD",
+    "AVOID",
+    "HOLD",
+    "AVOID",
+    "AVOID",
+    "BUY",
+    "AVOID"
+   ]
+  }
+ ],
+ "skipped": []
+}

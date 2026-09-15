@@ -1,0 +1,422 @@
+[
+ {
+  "id": 1,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 2,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": true,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 3,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057222920.json",
+  "runKey": "nwc-zh/plain/MiniMax-M2.7"
+ },
+ {
+  "id": 4,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 5,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 6,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 7,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 8,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 9,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 10,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 11,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 12,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 13,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 14,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 15,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 16,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 17,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 18,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 19,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 20,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 21,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 22,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": true,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 23,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 24,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 25,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 26,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 27,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 28,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 29,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 30,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": true,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 31,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 32,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057222920.json",
+  "runKey": "nwc-zh/plain/MiniMax-M2.7"
+ },
+ {
+  "id": 33,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 34,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 35,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 36,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": true,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 37,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 38,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 39,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 40,
+  "stratum": "C",
+  "cue": "pref→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 41,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": false,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ },
+ {
+  "id": 42,
+  "stratum": "C",
+  "cue": "meta→AVOID",
+  "locale": "zh",
+  "detector": true,
+  "verbatim": false,
+  "file": "run-1789057811399.json",
+  "runKey": "nwc-zh/asked/MiniMax-M2.7"
+ }
+]
