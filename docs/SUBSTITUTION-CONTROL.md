@@ -1,6 +1,6 @@
 # Substitution control: does the judge use what it reads?
 
-> Design only. Nothing here has been run. Written 2026-09-21.
+> Written 2026-09-21. **Stage 1 has run** — see [Stage 1 result](#stage-1-result-2026-09-21--and-what-it-invalidates). Stage 2 (the full ladder) has not, and its design changed because of what stage 1 returned.
 >
 > **This one needs no human labels.** Unlike `docs/STATED-CONFIDENCE.md`, which is
 > blocked on 421 annotations, every arm below runs against answers already frozen
@@ -133,6 +133,141 @@ first, read sd off it, and only then commit to the full ladder.** If sd lands ne
 0.3, the honest options are (a) report only the large contrast `intact` vs
 `identity_free`, or (b) widen the corpus. Do not run six rungs and report the one
 that cleared.
+
+## Stage 1 result (2026-09-21) — and what it invalidates
+
+Run: `npm run substitution`, `scripts/assay-substitution.ts`, raw in
+`fixtures/runs/substitution-stage1.json`. **One judge only** — `.env.local` is
+absent in this clone, so `ASSAY_JUDGE_*` is unset and Kimi / MiniMax were
+unreachable. Everything below is `deepseek-chat`.
+
+| | |
+|---|---:|
+| usable cells | 39 / 39 |
+| mean `intact` | 0.772 |
+| mean `empty` | **0.000** |
+| benefit mean | 0.7718 |
+| **benefit sd** | **0.2322** |
+| noise floor, mean \|repeat diff\| | 0.0103 |
+| identical repeats | 73 / 78 |
+
+**Power, now measured instead of guessed.** sd = 0.232 sits just above the 0.20
+threshold this doc predicted. At n=39 the design resolves a paired shift of
+**0.092**; δ=0.10 needs n=34 (have it), δ=0.05 needs n=134 (do not). So the
+ladder is worth running, and 0.05-scale effects are out of reach on this corpus.
+
+Noise is a non-issue: ~1pt against an sd of 23pt, and 73/78 repeats byte-identical
+at temperature 0. The five that moved are all on the `intact` side.
+
+### 🔴 `empty` is a degenerate rung, and `benefit` as defined is not a quantity
+
+> ⛔⛔ **CORRECTED the same day, once the other two judges ran.** Everything in
+> this subsection is true of `deepseek-chat` and **false as a general claim**. The
+> original text is kept below unchanged; the correction is in the next subsection.
+> I wrote "degenerate rung" from a single judge — `feedback_single_source_overconfidence`
+> in one move: one source, high-confidence negative.
+
+**All 78 `empty` calls returned exactly 0.** Zero variance, no exceptions.
+
+That is not a bug and arguably not even wrong: the judge is told
+`0.0 = contains claims absent from the context`, and with no context every claim
+is absent. It is the logically forced answer.
+
+The consequence is structural:
+
+```
+J(empty) ≡ 0   ⟹   benefit = J(intact) − J(empty) = J(intact)
+```
+
+**`benefit` is not measuring what the context is worth. It is the intact score
+under another name**, and its sd is just the sd of the intact scores. What the
+`empty` rung actually tests is whether the judge notices the Context block is
+missing — a trivial capability, and one it has.
+
+### Consequences for stage 2, decided before running it
+
+1. **`identity_free` becomes the primary contrast, not `empty`.** Only a rung that
+   *keeps* a context block while emptying it of relevant content can separate
+   "needs something there" from "needs that thing".
+2. **Drop the ratio.** `specificity = Δ / benefit` inherits a denominator that is
+   now known to be degenerate. Report the raw paired difference
+   **`Δ = J(intact) − J(identity_free)`** against the measured sd and noise floor.
+   A ratio whose denominator is a different measurement of the numerator's own
+   input is not a normalisation, it is a reparametrisation.
+3. **`empty` stays, demoted to a sanity check.** If a future judge does *not*
+   return 0 on `empty`, it is not reading the Context block at all, and its whole
+   column is suspect before any rung is interpreted.
+
+⚠️ This is stage 1 doing its job. Had the six rungs been written and run at once,
+`benefit` would have gone into the denominator of every reported number and the
+degeneracy would have been invisible in the output.
+
+### ⭐⭐ Then two more judges ran, and the answer changed
+
+`.env.local` was restored mid-session, so `MiniMaxAI/MiniMax-M2.7` and
+`zai-org/GLM-5.3-Flash` became reachable. (`moonshotai/Kimi-K2.6` did **not** —
+it is no longer served by the router, which means the −0.373 self-preference in
+FINDINGS #5 is currently not reproducible at all. The raw matrix survives in
+`fixtures/runs/selfpref-matrix.json`, so that result is auditable but not
+re-runnable.)
+
+| judge | usable | intact | **empty** | sd | noise mean\|diff\| | identical |
+|---|---|---:|---:|---:|---:|---|
+| deepseek-chat | 39/39 | 0.783 | **0.000** | 0.230 | 0.0064 | 74/78 |
+| MiniMax-M2.7 | **29/39** | 0.876 | **0.187** | 0.374 | **0.1671** | 38/58 |
+| GLM-5.3-Flash | 38/39 | 0.689 | **0.067** | 0.393 | 0.0526 | 61/76 |
+
+**Score distribution with no context at all:**
+
+```
+deepseek-chat     nonzero  0/78   {0: 78}
+MiniMax-M2.7      nonzero 15/58   {0:43, 0.2:1, 0.22:1, 0.5:5, 0.9:1, 1:7}
+GLM-5.3-Flash     nonzero  6/76   {0:70, 0.5:1, 0.8:1, 0.9:2, 1:2}
+```
+
+🔴 **MiniMax returned a perfect 1.0 seven times on a prompt containing no context.**
+"Every claim is supported by the context" cannot be true when there is no context;
+the statement has no truth-maker. GLM did it twice. **These judges are not checking
+whether the context block exists.**
+
+So `empty` is not degenerate — it is **the most discriminating rung of the six**,
+and it discriminates between judges rather than between answers. The three
+revisions in the previous subsection still stand for a different reason: `empty` is
+too informative to be a denominator, because for deepseek it is a constant and for
+MiniMax it is noise.
+
+**What this already establishes, before any further rung runs:**
+
+The three judges differ at the most basic level available — *whether the score is
+conditioned on the presence of the source document at all*. `assay-selfpref.ts`
+puts their scores in one matrix and decomposes them into leniency + quality +
+self-preference. That decomposition assumes the three are measuring the same
+thing. On this evidence they are not, and the residual attributed to
+"self-preference" is sitting on top of a difference in what is being read.
+
+This is [[project_decision_confidence]]'s question — *are these sources answering
+the same question?* — arriving inside `assay` from the other direction.
+
+### ⚠️ MiniMax is not usable for stage 2
+
+Its noise floor (0.1671) is essentially equal to the smallest paired shift its n
+and sd can resolve (0.173). There is no effect it could detect that its own
+repeat-to-repeat variation would not manufacture. Worst cells are full flips at
+temperature 0:
+
+```
+deepseek-chat#6    intact 1 / 0        (same input, twice)
+deepseek-chat#12   empty  1 / 0
+Kimi-K2.6#10       empty  1 / 0
+```
+
+Also **26% of its cells dropped** (10/39) against 0/39 and 1/39 for the others —
+the reasoning-model token exhaustion already logged in FINDINGS #16. The drops are
+not evenly spread across generators (5 MiniMax / 4 deepseek / 1 Kimi), which is the
+shape of a stratum rather than a sample, but n is far too small to call it —
+`FINDINGS.md` #7 made exactly this mistake's mirror and had to check it properly.
+
+**Stage 2 runs on deepseek-chat and GLM.** MiniMax is reported, not used.
 
 ## Controls
 

@@ -1673,3 +1673,103 @@ existed, which is the only reason these numbers can be binned at all.
   chosen after seeing it.
 - **Cause.** Nothing here distinguishes a different decoding path, a different
   head, or a different training objective behind the two question types.
+
+---
+
+## #19 — Seven perfect scores on a prompt that had no context
+
+**2026-09-21** · `npm run substitution` · raw in `fixtures/runs/substitution-stage1.json`
+
+Back to this repo's own fixture. The judges are commercial models, as they have
+been since #5; nothing here is a measurement of a third-party product's claims.
+
+Stage 1 of the substitution control (`docs/SUBSTITUTION-CONTROL.md`): grade the 39
+frozen answers twice with the context intact, and twice with the `Context:` block
+deleted. Everything else byte-identical. The question was meant to be boring —
+estimate the sd of the paired difference so the real ladder could be powered.
+
+| judge | usable | intact | **empty** | sd | noise mean\|diff\| | identical repeats |
+|---|---|---:|---:|---:|---:|---|
+| deepseek-chat | 39/39 | 0.783 | **0.000** | 0.230 | 0.0064 | 74/78 |
+| MiniMax-M2.7 | 29/39 | 0.876 | **0.187** | 0.374 | 0.1671 | 38/58 |
+| GLM-5.3-Flash | 38/39 | 0.689 | **0.067** | 0.393 | 0.0526 | 61/76 |
+
+### The distribution is the finding, not the mean
+
+With **no context in the prompt at all**:
+
+```
+deepseek-chat    nonzero  0/78    {0: 78}
+MiniMax-M2.7     nonzero 15/58    {0:43, 0.2:1, 0.22:1, 0.5:5, 0.9:1, 1:7}
+GLM-5.3-Flash    nonzero  6/76    {0:70, 0.5:1, 0.8:1, 0.9:2, 1:2}
+```
+
+The judge is asked whether every claim in the answer **is supported by the context
+given**, and told `0.0 = contains claims absent from the context`. With the context
+block removed, every claim is trivially absent and 0 is the forced answer.
+
+**MiniMax returned 1.0 — every claim supported — seven times.** GLM twice. The
+sentence they affirmed has no truth-maker: there is no context for anything to be
+supported by.
+
+deepseek returned 0 on all 78. It is checking. The other two, at least some of the
+time, are not.
+
+### What that does to the self-preference matrix
+
+`assay-selfpref.ts` puts all three judges' scores in one table and decomposes each
+cell into `leniency(judge) + quality(generator) + residual`, calling the residual
+self-preference. That decomposition assumes the three are measuring the same
+quantity and differ in strictness.
+
+They differ in something prior: **whether the score is conditioned on the source
+document being present.** A judge that sometimes scores without reading the context
+has a leniency term that is partly "did not look", and the residual left over after
+subtracting it is not cleanly self-preference.
+
+This does not overturn the matrix. It says the matrix has a prerequisite that was
+never checked, and on one of three judges the prerequisite fails outright.
+
+### MiniMax cannot be used for stage 2
+
+Its noise floor (0.1671) is essentially equal to the smallest paired shift its own
+n and sd can resolve (0.173) — no detectable effect that its own repeat variation
+could not manufacture. At temperature 0, same input twice:
+
+```
+deepseek-chat#6    intact 1 / 0
+deepseek-chat#12   empty  1 / 0
+Kimi-K2.6#10       empty  1 / 0
+```
+
+And 10/39 cells dropped (26%) against 0/39 and 1/39 — the reasoning-model token
+exhaustion from #16, recurring.
+
+### A reproducibility casualty, found in passing
+
+`moonshotai/Kimi-K2.6` is **no longer served by the router** (checked 2026-09-21;
+it now offers DeepSeek-V4-Flash, MiniMax-M2.7, GLM-5.3-Flash). Kimi produced the
+**−0.373** self-preference in #5 — the single most-cited number from that
+experiment. It is now **not reproducible**.
+
+The raw per-question matrix survives in `fixtures/runs/selfpref-matrix.json`
+(tracked), so the result stays **auditable**. That file exists because answers were
+frozen to separate judge disagreement from generator temperature — a decision made
+for an unrelated reason in August, which is the only thing standing between that
+finding and unfalsifiability now.
+
+**Not established:**
+
+- **Why they skip the check.** Nothing here distinguishes a model that infers a
+  missing context from one that ignores the instruction, or one whose reasoning
+  trace consumed the prompt. The mechanism is unmeasured.
+- **Whether MiniMax's drops are a stratum.** They fall 5 / 4 / 1 across the three
+  generators, which is suggestively uneven, but n=10 cannot carry that claim. #7
+  had to check its own version of this properly and so should this.
+- **Whether the effect survives a clearer prompt.** The judge system prompt never
+  says what to do when the context is missing, because the case was not
+  anticipated. A prompt that says so might close the gap entirely — which would
+  make this a prompt finding, not a model finding.
+- **Anything about specificity.** This is the `empty` rung only. Whether the judges
+  read the *content* of a context that is present is stage 2, and unrun.
+- **One corpus, 13 questions, one judging prompt.**

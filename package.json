@@ -18,7 +18,8 @@
     "stated": "tsx scripts/assay-stated-confidence.ts",
     "calibrate": "tsx scripts/assay-detector-calibration.ts",
     "calibrate:score": "tsx scripts/assay-detector-score.ts",
-    "calibrate:ablate": "tsx scripts/assay-detector-ablation.ts"
+    "calibrate:ablate": "tsx scripts/assay-detector-ablation.ts",
+    "substitution": "tsx scripts/assay-substitution.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.103.3",
