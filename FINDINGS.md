@@ -1837,6 +1837,14 @@ deepseek:  Kimi#1  1.00 -> 0.0     GLM:  deepseek#9  0.80 -> 0.3
 **The two judges are reading different things.** One grades prose in which facts
 sit; the other grades a bag of facts. Both are defensible readings of "stays
 inside its source context", and nothing in the prompt chooses between them —
+
+> ⛔ **"a bag of facts" is too strong, corrected by #21 the same day.** Stage 3
+> replaced blocks rather than sentences and GLM tracked *which* block mattered
+> just as hard as deepseek (Δ 0.565 vs 0.289 for one relevant block versus two
+> irrelevant ones). GLM is insensitive to **sentence order**, not to content
+> organisation. The difference established here is narrower than the sentence
+> above claims: both judges track block-level relevance; only deepseek also
+> tracks discourse order. The rest of this entry stands.
 which makes this the same disease as #5's extrapolation split, one level deeper:
 not an undefined rule about *what counts as supported*, but an undefined rule
 about *what the context is*.
@@ -1874,3 +1882,102 @@ mean is hiding sign flips rather than sitting on a tight distribution.
 - **One corpus, one prompt, two judges.** MiniMax, the one that behaved most
   strangely in #19, is absent from this table precisely because it could not be
   measured.
+
+---
+
+## #21 — Replacing one relevant block costs more than replacing two irrelevant ones
+
+**2026-09-21** · `npm run substitution -- --stage3` · raw in `fixtures/runs/substitution-stage3.json`
+
+#20 left the ladder with no middle: every rung except `shuffled` sat at 0.000 for
+both judges. Real contexts degrade partially, so this rung degrades partially, and
+it is built so the two halves predict **opposite** things:
+
+| rung | replaced | text swapped |
+|---|---|---|
+| `swap_top1` | the **one** block most related to the answer | 1/3 |
+| `swap_bot2` | the **two** least related blocks | 2/3 |
+
+A judge tracking *which* block supports the answer loses more on `top1`. A judge
+counting *how much* genuine material remains loses more on `bot2`. Block count,
+length and format are held fixed — filler blocks of identical shape go in.
+
+The offline token-overlap control fixes what "objectively worse" means before any
+judge runs:
+
+```
+intact 0.770   swap_bot2 0.660   swap_top1 0.589   identity_free 0.290
+```
+
+Swapping one relevant block destroys **more** answer-supporting material (−0.181)
+than swapping two irrelevant ones (−0.110), a ratio of **1.65×**.
+
+### Result: both judges, same direction, and amplified
+
+| | intact | swap_top1 | Δ | swap_bot2 | Δ | identity_free |
+|---|---:|---:|---:|---:|---:|---:|
+| deepseek-chat | 0.794 | **0.141** | **0.653 ±0.079** | 0.536 | 0.258 ±0.097 | 0.000 |
+| GLM-5.3-Flash | 0.717 | **0.153** | **0.565 ±0.099** | 0.428 | 0.289 ±0.110 | 0.000 |
+
+n = 39 / 39, no drops.
+
+| | ratio top1 : bot2 |
+|---|---:|
+| token overlap (objective) | 1.65× |
+| deepseek | **2.53×** |
+| GLM | **1.95×** |
+
+Both judges move in the direction the content loss dictates, and **both move
+harder than the content loss alone**. They are not counting matched tokens; they
+are locating the block that carries the answer and noticing when it is gone.
+
+### This narrows #20 rather than extending it
+
+#20 said the two judges "read different things — one grades prose, the other a bag
+of facts". **The second half is wrong** and is corrected in place. GLM tracks
+block-level relevance essentially as hard as deepseek. What it does not track is
+*sentence order within the blocks* (#20: Δ 0.030, not detected).
+
+The established difference is therefore much narrower:
+
+- **Shared**: both judges locate the relevant block and penalise its removal
+  super-proportionally.
+- **Differs**: only deepseek additionally penalises scrambled discourse.
+
+I predicted the opposite before this run — having seen GLM shrug at `shuffled`, I
+expected it to be the "counts text volume" judge. It is not. That is the third
+time in this session that a single-condition observation was over-generalised and
+the next condition reversed it (the other two: aggregator dispersion in the TRV
+audit, and `empty` being called a degenerate rung off one judge).
+
+### The ladder now has a usable middle
+
+```
+intact         0.794 / 0.717
+swap_bot2      0.536 / 0.428    <- middle
+swap_top1      0.141 / 0.153    <- middle
+identity_free  0.000 / 0.000
+```
+
+Four points with real variance between them, where stage 2 had two. Any future
+comparison — a prompt variant, a new judge, a policy line — now has a scale to be
+measured against rather than a floor to sit on.
+
+**Not established:**
+
+- **Why relevance is amplified.** 2.53× and 1.95× against an objective 1.65× shows
+  super-proportional sensitivity, but nothing here separates "identifies the
+  supporting block" from "notices that a *specific* claim in the answer is now
+  unsupported and zeroes the whole score". The second is a plausible and much
+  cheaper mechanism.
+- **Whether `top1` is the right block.** Relevance is character-set overlap with
+  the answer — crude, and it chooses the victim. On `withdraw` queries all three
+  blocks scored 0.78/0.77/0.67, so "most relevant" is nearly arbitrary there; on
+  `fee` it was 0.68/0.33/0.31 and unambiguous. The effect is not decomposed by how
+  separable the blocks were.
+- **`one_number`, the rung this replaced.** Only 4 of 13 queries share a numeric
+  token between answer and context — 12 cells, resolving 0.17. Dropped for power,
+  not because it is uninteresting: a single altered figure is the sharpest possible
+  test of whether the judge checks facts or topics, and it remains unrun.
+- **MiniMax**, still excluded since #19.
+- **One corpus, 13 queries, one judging prompt.**

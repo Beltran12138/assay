@@ -46,6 +46,7 @@ loadEnv()
 import { parseScore, ScoreParseError } from '../lib/assay/parse'
 
 const STAGE2 = process.argv.includes('--stage2')
+const STAGE3 = process.argv.includes('--stage3')
 
 const ROUTER_BASE = process.env.ASSAY_JUDGE_BASE_URL
 const ROUTER_KEY = process.env.ASSAY_JUDGE_API_KEY
@@ -71,13 +72,17 @@ const JUDGE_SYSTEM =
 
 const TAIL = '0.0 = contains claims absent from the context / 1.0 = every claim is supported.'
 
-type Rung = 'intact' | 'shuffled' | 'other' | 'identity_free' | 'empty'
+type Rung = 'intact' | 'shuffled' | 'other' | 'identity_free' | 'empty' | 'swap_top1' | 'swap_bot2'
 const STAGE1_RUNGS: Rung[] = ['intact', 'empty']
 const STAGE2_RUNGS: Rung[] = ['intact', 'identity_free', 'shuffled', 'other', 'empty']
+const STAGE3_RUNGS: Rung[] = ['intact', 'swap_top1', 'swap_bot2', 'identity_free']
 /** Repeats per rung. The two anchors of the contrast get two; the rest get one,
  *  because stage 1 already measured the noise floor for these judges. */
 const REPEATS: Record<Rung, number> = {
   intact: 2, identity_free: 2, shuffled: 1, other: 1, empty: 1,
+  // stage 3: the two swap rungs are the contrast, identity_free only anchors the
+  // floor and stage 2 already showed it is a hard 0.000 for both judges.
+  swap_top1: 2, swap_bot2: 2,
 }
 
 type Frozen = { query: string; intent: string; context: string; answer: string }
@@ -131,6 +136,53 @@ function leakTokens(answer: string, filler: string): string[] {
   return [...facty(answer)].filter(t => f.has(t))
 }
 
+// ── stage 3: partial degradation ────────────────────────────────────────────
+// Stage 2 left every rung except `shuffled` at the floor: both judges score
+// 0.000 on identity_free and on another real context. The ladder has no middle,
+// and real deployments degrade context partially, not totally.
+//
+// `one_number` (alter a single figure the answer depends on) was the first
+// choice and was dropped: only 4 of 13 queries share a numeric token between
+// answer and context, which is 12 cells and resolves 0.17 — the same
+// underpowering that killed `sibling`.
+//
+// These two swap block-for-block, so length, format and block count are held
+// fixed, and they are designed to point in OPPOSITE directions:
+//
+//   swap_top1  replaces the ONE block most related to the answer  (1/3 of the text)
+//   swap_bot2  replaces the TWO least related blocks              (2/3 of the text)
+//
+// A judge tracking *which* block supports the answer loses more on top1. A judge
+// counting *how much* genuine material is present loses more on bot2. The pair
+// is a discriminator, not two more points on a line.
+
+function splitBlocks(ctx: string): { header: string; blocks: string[] } {
+  const i = ctx.indexOf('【')
+  if (i < 0) return { header: ctx, blocks: [] }
+  return { header: ctx.slice(0, i), blocks: ctx.slice(i).split(/\n\n(?=【)/).filter(b => b.trim()) }
+}
+
+/** Character-set overlap with the answer. Crude on purpose: it decides only
+ *  which block to remove, and the removal is what gets measured. */
+function relevance(block: string, answer: string): number {
+  const a = new Set(answer), b = new Set(block)
+  return b.size ? [...b].filter(c => a.has(c)).length / b.size : 0
+}
+
+function fillerBlock(i: number): string {
+  const [t, b, q] = FILLER[i % FILLER.length]
+  return `【${t}】\n${b}\n常見追問：${q}`
+}
+
+function swapBlocks(a: Frozen, mode: 'top1' | 'bot2'): string | null {
+  const { header, blocks } = splitBlocks(a.context)
+  if (blocks.length < 3) return null
+  const ranked = blocks.map((b, i) => ({ i, s: relevance(b, a.answer) })).sort((x, y) => y.s - x.s)
+  const victims = new Set(mode === 'top1' ? [ranked[0].i] : ranked.slice(-2).map(x => x.i))
+  let f = 0
+  return header + blocks.map((b, i) => (victims.has(i) ? fillerBlock(f++) : b)).join('\n\n')
+}
+
 function shuffleSentences(ctx: string, r: () => number): string {
   const parts = ctx.split(/(?<=[。！？\n])/).filter(s => s.trim())
   for (let i = parts.length - 1; i > 0; i--) {
@@ -150,6 +202,8 @@ function buildContext(a: Frozen, rung: Rung, others: string[], r: () => number):
       return pool[Math.floor(r() * pool.length)]
     }
     case 'identity_free': return identityFree(a.context.length, r)
+    case 'swap_top1': return swapBlocks(a, 'top1')
+    case 'swap_bot2': return swapBlocks(a, 'bot2')
   }
 }
 
@@ -193,7 +247,7 @@ function runControls(cells: Cell[], others: string[]): { ok: boolean; lines: str
 
   // The positive control must fall as the ladder degrades, or the ladder is not
   // a ladder. This is the rung ordering asserted offline, before any judge runs.
-  const rungs = STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
+  const rungs = STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
   const means = rungs.map(rung => {
     const v = cells.map(c => tokenOverlap(c.a, buildContext(c.a, rung, others, r)))
     return [rung, v.reduce((s, x) => s + x, 0) / v.length] as const
@@ -208,7 +262,7 @@ function runControls(cells: Cell[], others: string[]): { ok: boolean; lines: str
   const negOk = constantScorer() - constantScorer() === 0
   lines.push(`  negative · constant scorer  max|diff| 0.000   ${negOk ? 'PASS' : 'FAIL'}`)
 
-  if (STAGE2) {
+  if (STAGE2 || STAGE3) {
     const r2 = rng(7)
     const leaks = cells.map(c => leakTokens(c.a.answer, identityFree(c.a.context.length, r2)))
     const nLeak = leaks.filter(l => l.length).length
@@ -258,9 +312,9 @@ const sd = (xs: number[]) => {
 }
 
 async function main() {
-  const stage = STAGE2 ? 2 : 1
-  const rungs = STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
-  const judgesAll = STAGE2 ? STAGE2_JUDGES : STAGE1_JUDGES
+  const stage = STAGE3 ? 3 : STAGE2 ? 2 : 1
+  const rungs = STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
+  const judgesAll = STAGE2 || STAGE3 ? STAGE2_JUDGES : STAGE1_JUDGES
 
   console.log(`assay · substitution stage ${stage} — is the score a function of the context?`)
   console.log('═'.repeat(78))
@@ -285,7 +339,7 @@ async function main() {
     console.log(`\n── ${j.id}`)
     const jobs = cells.flatMap(c =>
       rungs.flatMap(rg =>
-        Array.from({ length: STAGE2 ? REPEATS[rg] : 2 }, (_, k) => ({ c, rg, rep: k + 1 }))))
+        Array.from({ length: STAGE2 || STAGE3 ? REPEATS[rg] : 2 }, (_, k) => ({ c, rg, rep: k + 1 }))))
     process.stdout.write(`   ${jobs.length} calls  `)
     // Seeded per cell+rung so a rerun swaps in the same substitute.
     const got = await pool(jobs, 8, async ({ c, rg, rep }) =>
@@ -317,7 +371,7 @@ async function main() {
     }
 
     const dIdf = usable.map(([, v]) => avg(v, 'intact')! - avg(v, 'identity_free')!)
-    if (STAGE2) {
+    if (STAGE2 || STAGE3) {
       const m = mean(dIdf), s = sd(dIdf), n = dIdf.length
       const half = 1.96 * s / Math.sqrt(n)
       console.log(`\n   ⭐ Δ(intact − identity_free) = ${m.toFixed(4)}  95% CI [${(m - half).toFixed(3)}, ${(m + half).toFixed(3)}]  n=${n}`)
@@ -331,7 +385,7 @@ async function main() {
         mean: mean(usable.map(([, v]) => avg(v, rg)!)),
         sd: sd(usable.map(([, v]) => avg(v, rg)!)),
       }])),
-      deltaIdentityFree: STAGE2 ? { mean: mean(dIdf), sd: sd(dIdf), n: dIdf.length } : null,
+      deltaIdentityFree: STAGE2 || STAGE3 ? { mean: mean(dIdf), sd: sd(dIdf), n: dIdf.length } : null,
       perCell: usable.map(([k, v]) => ({ cell: k, ...v })),
     })
   }

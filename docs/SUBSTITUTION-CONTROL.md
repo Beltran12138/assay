@@ -317,6 +317,65 @@ say which to be.
    variance actually is. `other` at 0.000/0.014 shows the current ladder has no
    middle.
 
+## Stage 3 result (2026-09-21) — the middle, and a prediction of mine that failed
+
+`npm run substitution -- --stage3` · raw in `fixtures/runs/substitution-stage3.json` ·
+written up as FINDINGS #21.
+
+`one_number` was the first choice for this rung and was dropped before running:
+only 4 of 13 queries share a numeric token between answer and context — 12 cells,
+resolving 0.17. Same underpowering that killed `sibling`. **It remains the sharpest
+untried test in this design** and is recorded as such rather than quietly forgotten.
+
+Built instead: two block-swap rungs whose predictions **oppose** each other.
+
+| | intact | swap_top1 (1/3 swapped) | swap_bot2 (2/3 swapped) | identity_free |
+|---|---:|---:|---:|---:|
+| token overlap (objective) | 0.770 | 0.589 | 0.660 | 0.290 |
+| deepseek | 0.794 | **0.141** | 0.536 | 0.000 |
+| GLM | 0.717 | **0.153** | 0.428 | 0.000 |
+
+| ratio top1 : bot2 | |
+|---|---:|
+| objective content loss | 1.65× |
+| deepseek | **2.53×** |
+| GLM | **1.95×** |
+
+**Both judges lose more from one relevant block than from two irrelevant ones, and
+both lose more than the token accounting says they should.** They locate the
+supporting block; they are not counting matches.
+
+### ⛔ It also falsified my own prediction, and narrowed #20
+
+Having watched GLM shrug at `shuffled` in stage 2, I wrote that it "grades a bag of
+facts" and predicted it would be the judge that penalises *volume* — i.e. that its
+`swap_bot2` would hurt more. It did not; GLM tracks block relevance nearly as hard
+as deepseek.
+
+The real difference between the two judges is **narrower than stage 2 suggested**:
+both locate the relevant block, only deepseek also penalises scrambled sentence
+order. #20's wording is corrected in place.
+
+**Three times this session a single-condition reading was over-generalised and the
+next condition reversed it** — aggregator dispersion in the TRV audit, `empty` as a
+degenerate rung, and this. The pattern is not carelessness about any one of them;
+it is that each was stated at full confidence from one arm. The cheap fix is
+already in this design and keeps working: **run the next condition before writing
+the sentence.**
+
+### The ladder finally has a scale
+
+```
+intact         0.794 / 0.717
+swap_bot2      0.536 / 0.428
+swap_top1      0.141 / 0.153
+identity_free  0.000 / 0.000
+```
+
+Four populated points instead of two. Anything measured against this ladder from
+here — a prompt variant, a new judge, an added policy line — has somewhere to land
+other than the floor.
+
 ## Controls
 
 Following `npm run sensitivity`: exit 0 pass, 1 control failed, **2 a control
