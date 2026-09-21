@@ -269,6 +269,54 @@ shape of a stratum rather than a sample, but n is far too small to call it —
 
 **Stage 2 runs on deepseek-chat and GLM.** MiniMax is reported, not used.
 
+## Stage 2 result (2026-09-21) — the rung that nearly got cut is the one that mattered
+
+`npm run substitution -- --stage2` · raw in `fixtures/runs/substitution-stage2.json` ·
+written up as FINDINGS #20.
+
+Two corpus limits hit on implementation, both recorded rather than worked around:
+
+- **`sibling` and `distant` merged into `other`.** 13 queries over 11 intents means
+  only `fee` and `withdraw` have same-intent pairs — 4 queries, 12 cells, which at
+  the measured sd resolves 0.17. The graded-dependence probe is **dropped, not run
+  underpowered**.
+- **11 distinct contexts, not 39.** All three generators answer the same queries,
+  so the 39 cells share 11 contexts. Pairing is unaffected; the effective variety
+  of substitutes is not 39.
+
+| rung | deepseek | Δ | GLM | Δ |
+|---|---:|---:|---:|---:|
+| intact | 0.787 | — | 0.661 | — |
+| identity_free | 0.000 | 0.787 ±0.071 | 0.000 | 0.661 ±0.110 |
+| **shuffled** | **0.579** | **0.208 ±0.074** | **0.631** | **0.030 ±0.065** |
+| other | 0.000 | 0.787 ±0.071 | 0.014 | 0.647 ±0.107 |
+| empty | 0.000 | 0.787 ±0.071 | 0.051 | 0.609 ±0.133 |
+
+**The primary contrast came back at ceiling for both judges.** Unrelated filler
+scores 0; a different real context scores 0. Specificity is 1.00 on both. Had this
+doc's own plan been followed — `intact` vs `identity_free` as *the* result — the
+conclusion would have been "both judges read the context, both fine", and it would
+have been true and useless.
+
+**`shuffled` separated them:** deepseek loses 0.208 (resolvable floor 0.094 →
+detected), GLM loses 0.030 (floor 0.083 → **not detected, which is not zero**).
+One judge grades prose, the other grades a bag of facts, and the prompt does not
+say which to be.
+
+### What this changes in the design
+
+1. **Demote `identity_free` from "the result" to "the precondition".** It answers a
+   yes/no question (is the score conditioned on content?) and both judges answered
+   yes. Ceiling effects carry no information about *how* they use it.
+2. **`shuffled` is promoted.** It is the only rung here that produced a difference
+   between judges, and it was originally justified in one sentence as a
+   nice-to-have.
+3. **The next rung to build is a partial one.** Everything except `shuffled` is
+   all-or-nothing, and both judges are at the floor on all of them. A rung that
+   removes *half* the relevant facts, or replaces one number, would sit where the
+   variance actually is. `other` at 0.000/0.014 shows the current ladder has no
+   middle.
+
 ## Controls
 
 Following `npm run sensitivity`: exit 0 pass, 1 control failed, **2 a control

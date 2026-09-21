@@ -1773,3 +1773,104 @@ finding and unfalsifiability now.
 - **Anything about specificity.** This is the `empty` rung only. Whether the judges
   read the *content* of a context that is present is stage 2, and unrun.
 - **One corpus, 13 questions, one judging prompt.**
+
+---
+
+## #20 — Shuffling the sentences costs one judge 0.21 and the other nothing measurable
+
+**2026-09-21** · `npm run substitution -- --stage2` · raw in `fixtures/runs/substitution-stage2.json`
+
+The ladder #19 was gating. Same 39 frozen answers, same judge prompt, one field
+swapped. `sibling`/`distant` were merged into `other` because the corpus cannot
+support the distinction — 13 queries over 11 intents, and the three generators
+answer the same queries, so there are **11 distinct contexts, not 39**. MiniMax
+is excluded: its noise floor equals its resolution.
+
+Offline controls first, and the token-overlap control confirms the ladder is a
+ladder before any judge is called:
+
+```
+intact 0.770   shuffled 0.770   other 0.384   identity_free 0.290   empty 0.000
+```
+
+`shuffled` keeps **every token** — it destroys order and nothing else. That is
+the whole point of the rung.
+
+### Result
+
+| rung | deepseek mean | Δ vs intact | GLM mean | Δ vs intact |
+|---|---:|---:|---:|---:|
+| intact | 0.787 | — | 0.661 | — |
+| **identity_free** | **0.000** | 0.787 ±0.071 | **0.000** | 0.661 ±0.110 |
+| **shuffled** | **0.579** | **0.208 ±0.074** | **0.631** | **0.030 ±0.065** |
+| other | 0.000 | 0.787 ±0.071 | 0.014 | 0.647 ±0.107 |
+| empty | 0.000 | 0.787 ±0.071 | 0.051 | 0.609 ±0.133 |
+
+n = 39 / 37.
+
+**Both judges have perfect content specificity.** Unrelated filler scores 0.
+Another real context from the same corpus scores 0. Not one cell out of 39 and 37
+lets a substitute beat the real thing (GLM's three apparent ties are cells where
+`intact` was itself 0 — a draw at the floor, not a filler winning).
+
+If the experiment had run only the contrast it was designed around —
+`intact` vs `identity_free` — the conclusion would be **"both judges read the
+context, both are fine."**
+
+### The rung that was nearly cut is the one that separates them
+
+| | Δ shuffled | sd | smallest resolvable at this n | verdict |
+|---|---:|---:|---:|---|
+| deepseek-chat | **+0.2077** | 0.236 | 0.094 | **detected** |
+| GLM-5.3-Flash | +0.0297 | 0.203 | 0.083 | **not detected** |
+
+Destroying sentence order costs deepseek **26% of its score** and costs GLM
+nothing this design can measure. Per-cell, deepseek's losses include total
+collapses:
+
+```
+deepseek:  Kimi#1  1.00 -> 0.0     GLM:  deepseek#9  0.80 -> 0.3
+           deepseek#9  0.60 -> 0.0        MiniMax#8   0.90 -> 0.4
+           MiniMax#12  1.00 -> 0.4        Kimi#0      1.00 -> 0.5
+```
+
+**The two judges are reading different things.** One grades prose in which facts
+sit; the other grades a bag of facts. Both are defensible readings of "stays
+inside its source context", and nothing in the prompt chooses between them —
+which makes this the same disease as #5's extrapolation split, one level deeper:
+not an undefined rule about *what counts as supported*, but an undefined rule
+about *what the context is*.
+
+⚠️ **"Not detected" is not "zero".** GLM's Δ of 0.030 is below the 0.083 this n
+and sd can resolve. The honest statement is that GLM shows no order-dependence
+larger than 8 points, not that it has none.
+
+### Two cells worth keeping
+
+GLM, `MiniMax#6`: **empty 1.0, intact 0.30.** It scored the answer higher with no
+context than with the real one. Not noise in the usual sense — the ordering is
+inverted, which no amount of leniency explains.
+
+GLM, `Kimi#10`: **intact 0.00, shuffled 0.80.** Scrambling the source document
+took an answer from failing to nearly passing.
+
+Both are single cells and neither is a finding on its own. They are logged because
+an aggregate Δ of 0.030 would otherwise read as "GLM is stable", and these say the
+mean is hiding sign flips rather than sitting on a tight distribution.
+
+**Not established:**
+
+- **Which reading is correct.** Nothing here says order-sensitivity is better or
+  worse. A judge that ignores discourse may be robust; a judge that tracks it may
+  be catching real incoherence. The finding is that they differ and the prompt
+  does not say which to be.
+- **Whether a stated rule closes it.** #5's `--policy` collapsed a 53%→83%
+  disagreement with one added sentence. The equivalent here — a line saying
+  whether the context is an ordered document or a set of facts — is untried.
+- **`sibling` vs `distant`.** Merged into `other` for lack of same-intent pairs.
+  The graded-dependence probe from the source paper (arXiv 2609.12090) is not
+  reproduced here, and `other` at 0.000/0.014 shows no room for it anyway.
+- **GLM's two dropped cells** (37/39), unexamined.
+- **One corpus, one prompt, two judges.** MiniMax, the one that behaved most
+  strangely in #19, is absent from this table precisely because it could not be
+  measured.
