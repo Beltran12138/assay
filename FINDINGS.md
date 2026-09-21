@@ -3,8 +3,16 @@
 What the harness found when pointed at its own fixture. Each entry states what
 was measured, on what date, with what command — and what it does *not* establish.
 
-Nothing here is a claim about any commercial product. The fixture is a fictional
-exchange with a made-up FAQ corpus.
+Entries #1–#16 are about this harness and its own fixture: a fictional exchange
+with a made-up FAQ corpus, and no claim about any commercial product.
+
+From **#17** that changes, and the change is stated rather than assumed. Those
+entries measure a third-party API from the outside — published documentation,
+and responses to requests anyone with a key can repeat. They are black-box
+behavioural readings of a pinned model version on a stated date, not a review,
+not an endorsement, and not evidence of any relationship with the vendor. Where
+an entry says a formula holds, it holds *to the precision the API reports*,
+which is two decimals. Every such entry names the script that reproduces it.
 
 ---
 
@@ -1448,3 +1456,220 @@ another mostly can.
 - **Generality.** Two judges, three hand-written Chinese arguments. The default
   judge (the generator) was unreachable under this endpoint's model list, so the
   comparison is between the two models the endpoint did offer.
+
+---
+
+## #17 — One name, two statistics, and a single set of thresholds
+
+**2026-09-20** · `TYPESAFE_API_KEY=… python scripts/probe_jev_confidence.py`
+
+Arm A of `docs/STATED-CONFIDENCE.md` cannot be read until one question is
+settled: what does the `confidence` field compute? **The vendor discloses that it
+is derived** — `docs.typesafe.ai/confidence.md` says it is "a statistic computed
+from the probability distribution the answer already gives you", and that Noul
+answers carry none. That is not the finding and must not be reported as one.
+
+What the documentation does not settle is *which* statistic. It offers
+`(n·peak − 1)/(n − 1)` as an **approximation** for three options — their word —
+and a reading cannot be built on an approximation. So: five states spanning the
+certainty range, each carrying Choice questions at n = 2/3/4/5/8 and Score
+questions at n = 3/4/5, collected twice against a pinned `jev-1.13.0`.
+
+### Choice — the "approximation" is indistinguishable from exact
+
+| | pooled, two collections |
+|---|---:|
+| pairs | 50 |
+| agree within the 2dp reporting precision | **49 / 50** |
+| max \|err\| | 0.0129 |
+| mean \|err\| | 0.0031 |
+
+The one exception is `n=8, peak 0.81, confidence 0.77` against a predicted
+0.7829. Rounding of a two-decimal peak explains at most 0.011 of that, and it is
+off by 0.013 — close enough to be rounding plus a little, not close enough to
+claim the form is confirmed. The honest statement is **"indistinguishable from
+`(n·peak − 1)/(n − 1)` at the precision the API reports"**, not "equals".
+
+Confirmed independently on the real fixtures: 58 two-option Choice answers over
+`fixtures/calibration/label-task.md`, all 58 satisfying `confidence = 2·peak − 1`
+within 0.01.
+
+**Consequence for arm A.** In the binary case the field is a linear relabelling
+of `probabilities["yes"]`. Scoring its calibration and scoring the probability's
+calibration are the same measurement performed twice. Arm A therefore reads
+`noul` / `probabilities`, and `confidence` is reported only as *the number the
+documentation tells users to threshold on*.
+
+### Score — a different function, and it can outrun its own peak
+
+Nine candidate closed forms were fitted. Every one failed on Score; the best,
+`1 − mad/mad_max`, matched 6/15. But the failure has a shape:
+
+| probabilities | peak | confidence |
+|---|---:|---:|
+| `[0.79 0.21 0.00]` | 0.79 | **0.67** |
+| `[0.78 0.12 0.10]` | 0.78 | **0.51** |
+
+Same peak to within 0.01, confidence differing by **0.16**. The only difference
+is whether the leftover mass sits *next to* the peak or scatters away from it —
+so Score's confidence weighs the distance between levels, and Choice's does not.
+
+That is defensible: Score levels are ordered, and "between level 0 and level 1"
+is a precise answer rather than a confused one. It has a consequence that is
+harder to defend:
+
+```
+[0.40 0.59 0.01 0.00 0.00]   peak 0.59   ->   confidence 0.66
+```
+
+**Score returned a confidence above its own peak probability in 4/15 answers,
+in both collections. Choice did so in 0/25, also in both.** No concentration
+measure on an unordered distribution can exceed its peak, so this is proof the
+two question types do not share a definition — independent of which closed form
+Score actually uses, which remains unsolved.
+
+And `confidence.md` teaches `if confidence < 0.5: route_to_human`. The answer
+above is 59% sure, nearly split between two levels, and clears that gate.
+
+### The threshold does not travel between option counts
+
+Inverting the Choice form, `peak = (conf·(n−1) + 1)/n`:
+
+| n options | conf = 0.5 admits peak | conf = 0.7 | conf = 0.9 |
+|---:|---:|---:|---:|
+| 2 | 0.750 | 0.850 | 0.950 |
+| 3 | 0.667 | 0.800 | 0.933 |
+| 5 | 0.600 | 0.760 | 0.920 |
+| 20 | 0.525 | 0.715 | 0.905 |
+| **spread, n=2..20** | **22.5pt** | **13.5pt** | **4.5pt** |
+
+A `confidence > 0.9` gate is portable enough (4.5pt). The `confidence < 0.5`
+floor — the one the docs present as catching "anything the model reports as
+genuinely uncertain" — is not: it blocks anything under 75% on a binary question
+and anything under 52.5% on a twenty-option one. Widening the option list
+loosens a gate that was never re-tuned, and the direction is unhelpful, because
+more options is also the harder task.
+
+**What the vendor already says, so that this is not overstated.**
+`model-jaggedness/jev-1.13` does warn: *"Don't carry a threshold tuned on a Noul
+over to a Choice."* The gap is that the same page says nothing about carrying one
+between Choice and Score, or between Choice questions of different n — and those
+two are not model jaggedness that a later version might fix. They follow from the
+definition.
+
+**Not established:**
+
+- **Score's actual formula.** Nine candidates, none fit. Only that it is
+  order-aware and can exceed the peak.
+- **Whether Choice's form is exactly `(n·peak − 1)/(n − 1)`.** One of 50 pairs
+  sits just outside what rounding explains. A higher-precision endpoint, or many
+  more pairs, would settle it; two decimals cannot.
+- **Any calibration claim whatsoever.** This entry is about what the field
+  *computes*, not about whether the numbers are right. That needs labels.
+- **Other versions.** `jev-1.13.0`, read on 2026-09-20.
+
+---
+
+## #18 — The same judgment, asked two ways, agreed 0 times out of 59
+
+**2026-09-20** · `TYPESAFE_API_KEY=… python scripts/probe_jev_retest.py`
+
+This runs with no ground truth, which is the point: it can go while the labelling
+in `fixtures/calibration/` is unfinished, and it *has* to go first, because it
+sets the floor under every calibration number computed later. Two arms cannot be
+separated by less than the amount one arm moves against itself.
+
+Items sampled every 13th from `label-task.md`, each asked the disclosure judgment
+three ways in one call — the same Noul under two ids, plus a two-option Choice —
+and the whole thing repeated. The answer key was never opened.
+
+The probe was run twice, on the same day: **29 items** (one request lost to a TLS
+handshake failure on the proxy) and **30 items**. Both collections are reported,
+because the second reproducing the first is the strongest part of this entry.
+
+### First: reproducibility, so that disagreement cannot be blamed on noise
+
+| | identical at 2dp | max \|diff\| | mean \|diff\| | crosses 0.5 |
+|---|---:|---:|---:|---:|
+| within one request (same Noul, two ids) | 50–72% | 0.020–0.050 | 0.0038–0.0070 | **0 / 118** |
+| between requests (identical call, repeated) | 41–47% | 0.020–0.030 | 0.0062–0.0073 | **0 / 59** |
+
+Wobble is real but tiny — **0.4 to 0.7pt** mean, and **not one decision flip in
+any of the 177 comparisons**. Against the ~10pt resolution that 421 labelled items
+buy across ten bins, measurement noise is more than an order of magnitude smaller
+and does not need to be carried into the intervals.
+
+⚠️ It is not zero, though. `docs.typesafe.ai/introduction` states each question is
+evaluated "in parallel and in isolation against the same state". Two byte-identical
+Nouls in one request returned different values in 28% to 50% of items depending
+on the round. The magnitude is negligible; the word "isolation" is not literally
+true, and anyone building a cache key or a dedup rule on that sentence should know
+it.
+
+### Then: Noul versus Choice
+
+| | collection 1 (n=29) | collection 2 (n=30) |
+|---|---:|---:|
+| identical at 2dp | **0 / 29** | **0 / 30** |
+| mean \|diff\| | 0.0614 | 0.0617 |
+| max \|diff\| | 0.190 | 0.200 |
+| crosses 0.5 | 0/29 | 0/30 |
+
+`model-jaggedness/jev-1.13` shows one example of this (`noul 0.22` against
+`Choice yes 0.01`) and says *"it is not obvious how to interpret either"*. With
+29 items and two rounds, the example becomes a rate: **they never agree**, while
+the decision they imply agrees every time. The whole disagreement lives in the
+probability scale.
+
+The signed difference is what decides whether this is fixable:
+
+| collection · round | mean | median | range | noul higher |
+|---|---:|---:|---:|---:|
+| 1 · r1 | +0.005 | +0.040 | −0.19 .. +0.07 | 19/29 |
+| 1 · r2 | +0.004 | +0.040 | −0.20 .. +0.07 | 19/29 |
+| 2 · r1 | +0.005 | +0.045 | −0.20 .. +0.08 | 20/30 |
+| 2 · r2 | +0.005 | +0.040 | −0.22 .. +0.08 | 20/30 |
+
+**The sign was identical across rounds for 29/29 items in the first collection
+and 30/30 in the second.** A mean near zero with a median of +0.04 and a −0.20
+tail is not a constant offset that one rescaling would remove; it is a
+reproducible per-item difference. So the two question types cannot be mapped onto
+each other, and **at most one of them can be calibrated** on this task — unless
+the errors happen to cancel, which is itself a claim requiring the labels.
+
+That is a question 421 human labels can answer for under a cent, and the vendor
+has publicly said it does not know the answer.
+
+### A third thing, free, that changes the experiment's arithmetic
+
+Bin occupancy is a property of the model, not of the labels, so it reads now:
+
+```
+collection 1:  58 noul values, 18 distinct   below 0.10: 37   above 0.90: 13   between: 8
+collection 2:  60 noul values, 20 distinct   below 0.10: 38   above 0.90: 13   between: 9
+```
+
+Heavily tied and heavily polarised, in both. `docs/STATED-CONFIDENCE.md` assumed
+ten equal-frequency bins over 421 items — ~42 per bin, a ~10pt floor. **A
+distribution shaped like this cannot fill ten bins**, and the mid-range bins that
+carry most of the calibration signal are the close-to-empty ones. Roughly one
+value in seven lands between 0.10 and 0.90.
+
+This is also the exact condition that made the tie-splitting bug in `binify` a
+correctness issue rather than an edge case: 60 observations carrying 20 distinct
+values. That bug was found and fixed by a unit test before any of this data
+existed, which is the only reason these numbers can be binned at all.
+
+**Not established:**
+
+- **Which question type is calibrated.** Neither, both, or one — undecidable
+  without the labels. This entry only shows they cannot both be.
+- **Whether the rate holds at 421.** 29 items, sampled on a fixed stride, one
+  phrasing of each question type. A different Choice wording might close the gap;
+  that would itself be a finding about question sensitivity.
+- **The polarisation at full scale.** 118 values from 59 items across two
+  collections, all on the same fixed stride. More items will add distinct values;
+  whether the *shape* survives is unmeasured, and the bin scheme must not be
+  chosen after seeing it.
+- **Cause.** Nothing here distinguishes a different decoding path, a different
+  head, or a different training objective behind the two question types.

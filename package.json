@@ -15,6 +15,7 @@
     "faithfulness": "tsx scripts/assay-cot-faithfulness.ts",
     "reasons": "tsx scripts/assay-reason-profile.ts",
     "ambiguity": "tsx scripts/assay-ambiguity-dose.ts",
+    "stated": "tsx scripts/assay-stated-confidence.ts",
     "calibrate": "tsx scripts/assay-detector-calibration.ts",
     "calibrate:score": "tsx scripts/assay-detector-score.ts",
     "calibrate:ablate": "tsx scripts/assay-detector-ablation.ts"
