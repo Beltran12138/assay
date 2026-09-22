@@ -1,0 +1,492 @@
+[
+  {
+    "state": "clear_tech",
+    "q": "choice_2",
+    "n": 2,
+    "probs": [
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_tech",
+    "q": "choice_3",
+    "n": 3,
+    "probs": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_tech",
+    "q": "choice_4",
+    "n": 4,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_tech",
+    "q": "choice_5",
+    "n": 5,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_tech",
+    "q": "choice_8",
+    "n": 8,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_tech",
+    "q": "score_3",
+    "n": 3,
+    "probs": [
+      0.0,
+      0.09,
+      0.91
+    ],
+    "conf": 0.86
+  },
+  {
+    "state": "clear_tech",
+    "q": "score_4",
+    "n": 4,
+    "probs": [
+      0.0,
+      0.07,
+      0.86,
+      0.07
+    ],
+    "conf": 0.86
+  },
+  {
+    "state": "clear_tech",
+    "q": "score_5",
+    "n": 5,
+    "probs": [
+      0.0,
+      0.05,
+      0.85,
+      0.1,
+      0.0
+    ],
+    "conf": 0.87
+  },
+  {
+    "state": "clear_billing",
+    "q": "choice_2",
+    "n": 2,
+    "probs": [
+      1.0,
+      0.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_billing",
+    "q": "choice_3",
+    "n": 3,
+    "probs": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_billing",
+    "q": "choice_4",
+    "n": 4,
+    "probs": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_billing",
+    "q": "choice_5",
+    "n": 5,
+    "probs": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_billing",
+    "q": "choice_8",
+    "n": 8,
+    "probs": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "clear_billing",
+    "q": "score_3",
+    "n": 3,
+    "probs": [
+      0.79,
+      0.21,
+      0.0
+    ],
+    "conf": 0.67
+  },
+  {
+    "state": "clear_billing",
+    "q": "score_4",
+    "n": 4,
+    "probs": [
+      0.78,
+      0.22,
+      0.0,
+      0.0
+    ],
+    "conf": 0.78
+  },
+  {
+    "state": "clear_billing",
+    "q": "score_5",
+    "n": 5,
+    "probs": [
+      0.78,
+      0.22,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "conf": 0.81
+  },
+  {
+    "state": "murky",
+    "q": "choice_2",
+    "n": 2,
+    "probs": [
+      0.0,
+      1.0
+    ],
+    "conf": 0.99
+  },
+  {
+    "state": "murky",
+    "q": "choice_3",
+    "n": 3,
+    "probs": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "murky",
+    "q": "choice_4",
+    "n": 4,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "murky",
+    "q": "choice_5",
+    "n": 5,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      0.76,
+      0.24
+    ],
+    "conf": 0.69
+  },
+  {
+    "state": "murky",
+    "q": "choice_8",
+    "n": 8,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.68,
+      0.0,
+      0.32
+    ],
+    "conf": 0.63
+  },
+  {
+    "state": "murky",
+    "q": "score_3",
+    "n": 3,
+    "probs": [
+      0.43,
+      0.57,
+      0.0
+    ],
+    "conf": 0.35
+  },
+  {
+    "state": "murky",
+    "q": "score_4",
+    "n": 4,
+    "probs": [
+      0.41,
+      0.58,
+      0.01,
+      0.0
+    ],
+    "conf": 0.58
+  },
+  {
+    "state": "murky",
+    "q": "score_5",
+    "n": 5,
+    "probs": [
+      0.4,
+      0.59,
+      0.01,
+      0.0,
+      0.0
+    ],
+    "conf": 0.66
+  },
+  {
+    "state": "mixed",
+    "q": "choice_2",
+    "n": 2,
+    "probs": [
+      0.08,
+      0.92
+    ],
+    "conf": 0.83
+  },
+  {
+    "state": "mixed",
+    "q": "choice_3",
+    "n": 3,
+    "probs": [
+      0.17,
+      0.0,
+      0.83
+    ],
+    "conf": 0.75
+  },
+  {
+    "state": "mixed",
+    "q": "choice_4",
+    "n": 4,
+    "probs": [
+      0.16,
+      0.0,
+      0.0,
+      0.84
+    ],
+    "conf": 0.79
+  },
+  {
+    "state": "mixed",
+    "q": "choice_5",
+    "n": 5,
+    "probs": [
+      0.17,
+      0.0,
+      0.0,
+      0.0,
+      0.83
+    ],
+    "conf": 0.78
+  },
+  {
+    "state": "mixed",
+    "q": "choice_8",
+    "n": 8,
+    "probs": [
+      0.19,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.81
+    ],
+    "conf": 0.77
+  },
+  {
+    "state": "mixed",
+    "q": "score_3",
+    "n": 3,
+    "probs": [
+      0.0,
+      0.01,
+      0.99
+    ],
+    "conf": 0.98
+  },
+  {
+    "state": "mixed",
+    "q": "score_4",
+    "n": 4,
+    "probs": [
+      0.0,
+      0.01,
+      0.97,
+      0.02
+    ],
+    "conf": 0.97
+  },
+  {
+    "state": "mixed",
+    "q": "score_5",
+    "n": 5,
+    "probs": [
+      0.0,
+      0.01,
+      0.96,
+      0.03,
+      0.0
+    ],
+    "conf": 0.97
+  },
+  {
+    "state": "terse",
+    "q": "choice_2",
+    "n": 2,
+    "probs": [
+      0.0,
+      1.0
+    ],
+    "conf": 1.0
+  },
+  {
+    "state": "terse",
+    "q": "choice_3",
+    "n": 3,
+    "probs": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "conf": 0.99
+  },
+  {
+    "state": "terse",
+    "q": "choice_4",
+    "n": 4,
+    "probs": [
+      0.0,
+      0.0,
+      0.01,
+      0.99
+    ],
+    "conf": 0.99
+  },
+  {
+    "state": "terse",
+    "q": "choice_5",
+    "n": 5,
+    "probs": [
+      0.0,
+      0.0,
+      0.01,
+      0.0,
+      0.99
+    ],
+    "conf": 0.99
+  },
+  {
+    "state": "terse",
+    "q": "choice_8",
+    "n": 8,
+    "probs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.02,
+      0.0,
+      0.0,
+      0.98
+    ],
+    "conf": 0.97
+  },
+  {
+    "state": "terse",
+    "q": "score_3",
+    "n": 3,
+    "probs": [
+      0.81,
+      0.1,
+      0.09
+    ],
+    "conf": 0.59
+  },
+  {
+    "state": "terse",
+    "q": "score_4",
+    "n": 4,
+    "probs": [
+      0.86,
+      0.06,
+      0.08,
+      0.0
+    ],
+    "conf": 0.77
+  },
+  {
+    "state": "terse",
+    "q": "score_5",
+    "n": 5,
+    "probs": [
+      0.82,
+      0.08,
+      0.1,
+      0.0,
+      0.0
+    ],
+    "conf": 0.77
+  }
+]

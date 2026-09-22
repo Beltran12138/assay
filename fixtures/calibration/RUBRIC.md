@@ -32,10 +32,18 @@ it is a finding about the rubric.
 
 ## The two files
 
-`label-task.md` is a **sample** of the English replies, deliberately weighted
-toward near-misses. `label-task-zh.md` is **every** Chinese reply — 42 of them,
-the whole population, so nothing is being extrapolated from it. Either can be
-done first; they are scored separately and by different arithmetic.
+`label-task.md` holds **every** English cued reply — all 379. It started as a
+stratified sample of 72 weighted toward near-misses, and was extended to the
+full population on 2026-09-19. **Items 1–72 are unchanged**; from item 73 the
+file carries `batch n of 6` markers that split the rest into ~21-minute
+sittings. `label-task-zh.md` is **every** Chinese reply — 42 of them.
+
+Both are now censuses, so nothing is extrapolated from either and no stratum
+weights apply. Either can be done first; they are still scored separately.
+
+**Stop anywhere.** Everything downstream weights by what has actually been
+labelled, not by what was planned, so a partial pass is worth exactly the part
+that is done — two finished batches are two batches of precision, not nothing.
 
 Chinese replies are graded by the same rubric. `市场对基本面的担忧` is market
 sentiment and therefore **no**. `你提到的那点` names the asker and is **yes**.
@@ -44,3 +52,9 @@ sentiment and therefore **no**. `你提到的那点` names the asker and is **ye
 
 `fixtures/calibration/label-key.json` and `label-key-zh.json` hold the
 detector's answers. Opening either before you finish destroys the measurement.
+
+`fixtures/jev-retest.json` also. It is not the answer key — it holds a third-party
+model's probability that each of 29 of these items discloses — but it is a strong
+anchor on exactly the judgment you are making, and those 29 items are among the
+ones you will label. Reading it first would make your labels partly a measurement
+of that model, which is the thing your labels are supposed to grade.

@@ -1,0 +1,783 @@
+[
+  {
+    "judge": "deepseek-chat",
+    "n": 39,
+    "dropped": 0,
+    "meanIntact": 0.7833333333333334,
+    "meanEmpty": 0,
+    "benefitMean": 0.7833333333333334,
+    "benefitSd": 0.2297977753240002,
+    "noiseMean": 0.006410256410256409,
+    "noiseMax": 0.19999999999999996,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "intact1": 1,
+        "intact2": 0.8,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "intact1": 0.6,
+        "intact2": 0.7,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "intact1": 0.2,
+        "intact2": 0.2,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "intact1": 0.7,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "intact1": 1,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      }
+    ]
+  },
+  {
+    "judge": "MiniMaxAI/MiniMax-M2.7",
+    "n": 29,
+    "dropped": 10,
+    "meanIntact": 0.8756896551724137,
+    "meanEmpty": 0.18655172413793103,
+    "benefitMean": 0.6891379310344827,
+    "benefitSd": 0.3740728275290341,
+    "noiseMean": 0.16706896551724137,
+    "noiseMax": 1,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 1,
+        "empty2": 1
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "intact1": 0.86,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "intact1": 1,
+        "intact2": 0,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "intact1": 0.8,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 1
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "intact1": 0.85,
+        "intact2": 0.7,
+        "empty1": 1,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "intact1": 0.7,
+        "intact2": 0,
+        "empty1": 0,
+        "empty2": 0.22
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "intact1": 0.8,
+        "intact2": 0.83,
+        "empty1": 0,
+        "empty2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 1,
+        "empty2": 0.5
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "intact1": 0.9,
+        "intact2": 0.5,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0.5,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0.2,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "intact1": 0.95,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "intact1": 0.85,
+        "intact2": 0.95,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0.5
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "intact1": 0.6,
+        "intact2": 0.7,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 1,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "intact1": 0,
+        "intact2": 0,
+        "empty1": 0,
+        "empty2": 0.9
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0.5,
+        "empty2": 0.5
+      }
+    ]
+  },
+  {
+    "judge": "zai-org/GLM-5.3-Flash",
+    "n": 38,
+    "dropped": 1,
+    "meanIntact": 0.6894736842105263,
+    "meanEmpty": 0.06710526315789474,
+    "benefitMean": 0.6223684210526316,
+    "benefitSd": 0.3926172347590869,
+    "noiseMean": 0.05263157894736842,
+    "noiseMax": 0.8,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "intact1": 0.5,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "intact1": 0.3,
+        "intact2": 0.2,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "intact1": 0.5,
+        "intact2": 0.5,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "intact1": 0.7,
+        "intact2": 0.7,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "intact1": 0.8,
+        "intact2": 0.7,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "intact1": 0.7,
+        "intact2": 0.7,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "intact1": 0.3,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "intact1": 0.8,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "intact1": 0.2,
+        "intact2": 0.2,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "intact1": 0.3,
+        "intact2": 0.3,
+        "empty1": 1,
+        "empty2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "intact1": 0,
+        "intact2": 0,
+        "empty1": 0.5,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "intact1": 0.8,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "intact1": 0.7,
+        "intact2": 0.6,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0.8
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "intact1": 0.3,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "empty1": 0.9,
+        "empty2": 0.9
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "intact1": 0.7,
+        "intact2": 0,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "intact1": 0.7,
+        "intact2": 0.7,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "intact1": 1,
+        "intact2": 1,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "intact1": 0.6,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "intact1": 0.4,
+        "intact2": 0.3,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "intact1": 0.6,
+        "intact2": 0.5,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "intact1": 0.8,
+        "intact2": 0,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "empty1": 0,
+        "empty2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "intact1": 0.85,
+        "intact2": 0.85,
+        "empty1": 0,
+        "empty2": 0
+      }
+    ]
+  }
+]

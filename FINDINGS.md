@@ -3,8 +3,16 @@
 What the harness found when pointed at its own fixture. Each entry states what
 was measured, on what date, with what command — and what it does *not* establish.
 
-Nothing here is a claim about any commercial product. The fixture is a fictional
-exchange with a made-up FAQ corpus.
+Entries #1–#16 are about this harness and its own fixture: a fictional exchange
+with a made-up FAQ corpus, and no claim about any commercial product.
+
+From **#17** that changes, and the change is stated rather than assumed. Those
+entries measure a third-party API from the outside — published documentation,
+and responses to requests anyone with a key can repeat. They are black-box
+behavioural readings of a pinned model version on a stated date, not a review,
+not an endorsement, and not evidence of any relationship with the vendor. Where
+an entry says a formula holds, it holds *to the precision the API reports*,
+which is two decimals. Every such entry names the script that reproduces it.
 
 ---
 
@@ -1448,3 +1456,773 @@ another mostly can.
 - **Generality.** Two judges, three hand-written Chinese arguments. The default
   judge (the generator) was unreachable under this endpoint's model list, so the
   comparison is between the two models the endpoint did offer.
+
+---
+
+## #17 — One name, two statistics, and a single set of thresholds
+
+**2026-09-20** · `TYPESAFE_API_KEY=… python scripts/probe_jev_confidence.py`
+
+Arm A of `docs/STATED-CONFIDENCE.md` cannot be read until one question is
+settled: what does the `confidence` field compute? **The vendor discloses that it
+is derived** — `docs.typesafe.ai/confidence.md` says it is "a statistic computed
+from the probability distribution the answer already gives you", and that Noul
+answers carry none. That is not the finding and must not be reported as one.
+
+What the documentation does not settle is *which* statistic. It offers
+`(n·peak − 1)/(n − 1)` as an **approximation** for three options — their word —
+and a reading cannot be built on an approximation. So: five states spanning the
+certainty range, each carrying Choice questions at n = 2/3/4/5/8 and Score
+questions at n = 3/4/5, collected twice against a pinned `jev-1.13.0`.
+
+### Choice — the "approximation" is indistinguishable from exact
+
+| | pooled, two collections |
+|---|---:|
+| pairs | 50 |
+| agree within the 2dp reporting precision | **49 / 50** |
+| max \|err\| | 0.0129 |
+| mean \|err\| | 0.0031 |
+
+The one exception is `n=8, peak 0.81, confidence 0.77` against a predicted
+0.7829. Rounding of a two-decimal peak explains at most 0.011 of that, and it is
+off by 0.013 — close enough to be rounding plus a little, not close enough to
+claim the form is confirmed. The honest statement is **"indistinguishable from
+`(n·peak − 1)/(n − 1)` at the precision the API reports"**, not "equals".
+
+Confirmed independently on the real fixtures: 58 two-option Choice answers over
+`fixtures/calibration/label-task.md`, all 58 satisfying `confidence = 2·peak − 1`
+within 0.01.
+
+**Consequence for arm A.** In the binary case the field is a linear relabelling
+of `probabilities["yes"]`. Scoring its calibration and scoring the probability's
+calibration are the same measurement performed twice. Arm A therefore reads
+`noul` / `probabilities`, and `confidence` is reported only as *the number the
+documentation tells users to threshold on*.
+
+### Score — a different function, and it can outrun its own peak
+
+Nine candidate closed forms were fitted. Every one failed on Score; the best,
+`1 − mad/mad_max`, matched 6/15. But the failure has a shape:
+
+| probabilities | peak | confidence |
+|---|---:|---:|
+| `[0.79 0.21 0.00]` | 0.79 | **0.67** |
+| `[0.78 0.12 0.10]` | 0.78 | **0.51** |
+
+Same peak to within 0.01, confidence differing by **0.16**. The only difference
+is whether the leftover mass sits *next to* the peak or scatters away from it —
+so Score's confidence weighs the distance between levels, and Choice's does not.
+
+That is defensible: Score levels are ordered, and "between level 0 and level 1"
+is a precise answer rather than a confused one. It has a consequence that is
+harder to defend:
+
+```
+[0.40 0.59 0.01 0.00 0.00]   peak 0.59   ->   confidence 0.66
+```
+
+**Score returned a confidence above its own peak probability in 4/15 answers,
+in both collections. Choice did so in 0/25, also in both.** No concentration
+measure on an unordered distribution can exceed its peak, so this is proof the
+two question types do not share a definition — independent of which closed form
+Score actually uses, which remains unsolved.
+
+And `confidence.md` teaches `if confidence < 0.5: route_to_human`. The answer
+above is 59% sure, nearly split between two levels, and clears that gate.
+
+### The threshold does not travel between option counts
+
+Inverting the Choice form, `peak = (conf·(n−1) + 1)/n`:
+
+| n options | conf = 0.5 admits peak | conf = 0.7 | conf = 0.9 |
+|---:|---:|---:|---:|
+| 2 | 0.750 | 0.850 | 0.950 |
+| 3 | 0.667 | 0.800 | 0.933 |
+| 5 | 0.600 | 0.760 | 0.920 |
+| 20 | 0.525 | 0.715 | 0.905 |
+| **spread, n=2..20** | **22.5pt** | **13.5pt** | **4.5pt** |
+
+A `confidence > 0.9` gate is portable enough (4.5pt). The `confidence < 0.5`
+floor — the one the docs present as catching "anything the model reports as
+genuinely uncertain" — is not: it blocks anything under 75% on a binary question
+and anything under 52.5% on a twenty-option one. Widening the option list
+loosens a gate that was never re-tuned, and the direction is unhelpful, because
+more options is also the harder task.
+
+**What the vendor already says, so that this is not overstated.**
+`model-jaggedness/jev-1.13` does warn: *"Don't carry a threshold tuned on a Noul
+over to a Choice."* The gap is that the same page says nothing about carrying one
+between Choice and Score, or between Choice questions of different n — and those
+two are not model jaggedness that a later version might fix. They follow from the
+definition.
+
+**Not established:**
+
+- **Score's actual formula.** Nine candidates, none fit. Only that it is
+  order-aware and can exceed the peak.
+- **Whether Choice's form is exactly `(n·peak − 1)/(n − 1)`.** One of 50 pairs
+  sits just outside what rounding explains. A higher-precision endpoint, or many
+  more pairs, would settle it; two decimals cannot.
+- **Any calibration claim whatsoever.** This entry is about what the field
+  *computes*, not about whether the numbers are right. That needs labels.
+- **Other versions.** `jev-1.13.0`, read on 2026-09-20.
+
+---
+
+## #18 — The same judgment, asked two ways, agreed 0 times out of 59
+
+**2026-09-20** · `TYPESAFE_API_KEY=… python scripts/probe_jev_retest.py`
+
+This runs with no ground truth, which is the point: it can go while the labelling
+in `fixtures/calibration/` is unfinished, and it *has* to go first, because it
+sets the floor under every calibration number computed later. Two arms cannot be
+separated by less than the amount one arm moves against itself.
+
+Items sampled every 13th from `label-task.md`, each asked the disclosure judgment
+three ways in one call — the same Noul under two ids, plus a two-option Choice —
+and the whole thing repeated. The answer key was never opened.
+
+The probe was run twice, on the same day: **29 items** (one request lost to a TLS
+handshake failure on the proxy) and **30 items**. Both collections are reported,
+because the second reproducing the first is the strongest part of this entry.
+
+### First: reproducibility, so that disagreement cannot be blamed on noise
+
+| | identical at 2dp | max \|diff\| | mean \|diff\| | crosses 0.5 |
+|---|---:|---:|---:|---:|
+| within one request (same Noul, two ids) | 50–72% | 0.020–0.050 | 0.0038–0.0070 | **0 / 118** |
+| between requests (identical call, repeated) | 41–47% | 0.020–0.030 | 0.0062–0.0073 | **0 / 59** |
+
+Wobble is real but tiny — **0.4 to 0.7pt** mean, and **not one decision flip in
+any of the 177 comparisons**. Against the ~10pt resolution that 421 labelled items
+buy across ten bins, measurement noise is more than an order of magnitude smaller
+and does not need to be carried into the intervals.
+
+⚠️ It is not zero, though. `docs.typesafe.ai/introduction` states each question is
+evaluated "in parallel and in isolation against the same state". Two byte-identical
+Nouls in one request returned different values in 28% to 50% of items depending
+on the round. The magnitude is negligible; the word "isolation" is not literally
+true, and anyone building a cache key or a dedup rule on that sentence should know
+it.
+
+### Then: Noul versus Choice
+
+| | collection 1 (n=29) | collection 2 (n=30) |
+|---|---:|---:|
+| identical at 2dp | **0 / 29** | **0 / 30** |
+| mean \|diff\| | 0.0614 | 0.0617 |
+| max \|diff\| | 0.190 | 0.200 |
+| crosses 0.5 | 0/29 | 0/30 |
+
+`model-jaggedness/jev-1.13` shows one example of this (`noul 0.22` against
+`Choice yes 0.01`) and says *"it is not obvious how to interpret either"*. With
+29 items and two rounds, the example becomes a rate: **they never agree**, while
+the decision they imply agrees every time. The whole disagreement lives in the
+probability scale.
+
+The signed difference is what decides whether this is fixable:
+
+| collection · round | mean | median | range | noul higher |
+|---|---:|---:|---:|---:|
+| 1 · r1 | +0.005 | +0.040 | −0.19 .. +0.07 | 19/29 |
+| 1 · r2 | +0.004 | +0.040 | −0.20 .. +0.07 | 19/29 |
+| 2 · r1 | +0.005 | +0.045 | −0.20 .. +0.08 | 20/30 |
+| 2 · r2 | +0.005 | +0.040 | −0.22 .. +0.08 | 20/30 |
+
+**The sign was identical across rounds for 29/29 items in the first collection
+and 30/30 in the second.** A mean near zero with a median of +0.04 and a −0.20
+tail is not a constant offset that one rescaling would remove; it is a
+reproducible per-item difference. So the two question types cannot be mapped onto
+each other, and **at most one of them can be calibrated** on this task — unless
+the errors happen to cancel, which is itself a claim requiring the labels.
+
+That is a question 421 human labels can answer for under a cent, and the vendor
+has publicly said it does not know the answer.
+
+### A third thing, free, that changes the experiment's arithmetic
+
+Bin occupancy is a property of the model, not of the labels, so it reads now:
+
+```
+collection 1:  58 noul values, 18 distinct   below 0.10: 37   above 0.90: 13   between: 8
+collection 2:  60 noul values, 20 distinct   below 0.10: 38   above 0.90: 13   between: 9
+```
+
+Heavily tied and heavily polarised, in both. `docs/STATED-CONFIDENCE.md` assumed
+ten equal-frequency bins over 421 items — ~42 per bin, a ~10pt floor. **A
+distribution shaped like this cannot fill ten bins**, and the mid-range bins that
+carry most of the calibration signal are the close-to-empty ones. Roughly one
+value in seven lands between 0.10 and 0.90.
+
+This is also the exact condition that made the tie-splitting bug in `binify` a
+correctness issue rather than an edge case: 60 observations carrying 20 distinct
+values. That bug was found and fixed by a unit test before any of this data
+existed, which is the only reason these numbers can be binned at all.
+
+**Not established:**
+
+- **Which question type is calibrated.** Neither, both, or one — undecidable
+  without the labels. This entry only shows they cannot both be.
+- **Whether the rate holds at 421.** 29 items, sampled on a fixed stride, one
+  phrasing of each question type. A different Choice wording might close the gap;
+  that would itself be a finding about question sensitivity.
+- **The polarisation at full scale.** 118 values from 59 items across two
+  collections, all on the same fixed stride. More items will add distinct values;
+  whether the *shape* survives is unmeasured, and the bin scheme must not be
+  chosen after seeing it.
+- **Cause.** Nothing here distinguishes a different decoding path, a different
+  head, or a different training objective behind the two question types.
+
+---
+
+## #19 — Seven perfect scores on a prompt that had no context
+
+**2026-09-21** · `npm run substitution` · raw in `fixtures/runs/substitution-stage1.json`
+
+Back to this repo's own fixture. The judges are commercial models, as they have
+been since #5; nothing here is a measurement of a third-party product's claims.
+
+Stage 1 of the substitution control (`docs/SUBSTITUTION-CONTROL.md`): grade the 39
+frozen answers twice with the context intact, and twice with the `Context:` block
+deleted. Everything else byte-identical. The question was meant to be boring —
+estimate the sd of the paired difference so the real ladder could be powered.
+
+| judge | usable | intact | **empty** | sd | noise mean\|diff\| | identical repeats |
+|---|---|---:|---:|---:|---:|---|
+| deepseek-chat | 39/39 | 0.783 | **0.000** | 0.230 | 0.0064 | 74/78 |
+| MiniMax-M2.7 | 29/39 | 0.876 | **0.187** | 0.374 | 0.1671 | 38/58 |
+| GLM-5.3-Flash | 38/39 | 0.689 | **0.067** | 0.393 | 0.0526 | 61/76 |
+
+### The distribution is the finding, not the mean
+
+With **no context in the prompt at all**:
+
+```
+deepseek-chat    nonzero  0/78    {0: 78}
+MiniMax-M2.7     nonzero 15/58    {0:43, 0.2:1, 0.22:1, 0.5:5, 0.9:1, 1:7}
+GLM-5.3-Flash    nonzero  6/76    {0:70, 0.5:1, 0.8:1, 0.9:2, 1:2}
+```
+
+The judge is asked whether every claim in the answer **is supported by the context
+given**, and told `0.0 = contains claims absent from the context`. With the context
+block removed, every claim is trivially absent and 0 is the forced answer.
+
+**MiniMax returned 1.0 — every claim supported — seven times.** GLM twice. The
+sentence they affirmed has no truth-maker: there is no context for anything to be
+supported by.
+
+deepseek returned 0 on all 78. It is checking. The other two, at least some of the
+time, are not.
+
+### What that does to the self-preference matrix
+
+`assay-selfpref.ts` puts all three judges' scores in one table and decomposes each
+cell into `leniency(judge) + quality(generator) + residual`, calling the residual
+self-preference. That decomposition assumes the three are measuring the same
+quantity and differ in strictness.
+
+They differ in something prior: **whether the score is conditioned on the source
+document being present.** A judge that sometimes scores without reading the context
+has a leniency term that is partly "did not look", and the residual left over after
+subtracting it is not cleanly self-preference.
+
+This does not overturn the matrix. It says the matrix has a prerequisite that was
+never checked, and on one of three judges the prerequisite fails outright.
+
+### MiniMax cannot be used for stage 2
+
+Its noise floor (0.1671) is essentially equal to the smallest paired shift its own
+n and sd can resolve (0.173) — no detectable effect that its own repeat variation
+could not manufacture. At temperature 0, same input twice:
+
+```
+deepseek-chat#6    intact 1 / 0
+deepseek-chat#12   empty  1 / 0
+Kimi-K2.6#10       empty  1 / 0
+```
+
+And 10/39 cells dropped (26%) against 0/39 and 1/39 — the reasoning-model token
+exhaustion from #16, recurring.
+
+### A reproducibility casualty, found in passing
+
+`moonshotai/Kimi-K2.6` is **no longer served by the router** (checked 2026-09-21;
+it now offers DeepSeek-V4-Flash, MiniMax-M2.7, GLM-5.3-Flash). Kimi produced the
+**−0.373** self-preference in #5 — the single most-cited number from that
+experiment. It is now **not reproducible**.
+
+The raw per-question matrix survives in `fixtures/runs/selfpref-matrix.json`
+(tracked), so the result stays **auditable**. That file exists because answers were
+frozen to separate judge disagreement from generator temperature — a decision made
+for an unrelated reason in August, which is the only thing standing between that
+finding and unfalsifiability now.
+
+**Not established:**
+
+- **Why they skip the check.** Nothing here distinguishes a model that infers a
+  missing context from one that ignores the instruction, or one whose reasoning
+  trace consumed the prompt. The mechanism is unmeasured.
+- **Whether MiniMax's drops are a stratum.** They fall 5 / 4 / 1 across the three
+  generators, which is suggestively uneven, but n=10 cannot carry that claim. #7
+  had to check its own version of this properly and so should this.
+- **Whether the effect survives a clearer prompt.** The judge system prompt never
+  says what to do when the context is missing, because the case was not
+  anticipated. A prompt that says so might close the gap entirely — which would
+  make this a prompt finding, not a model finding.
+- **Anything about specificity.** This is the `empty` rung only. Whether the judges
+  read the *content* of a context that is present is stage 2, and unrun.
+- **One corpus, 13 questions, one judging prompt.**
+
+---
+
+## #20 — Shuffling the sentences costs one judge 0.21 and the other nothing measurable
+
+**2026-09-21** · `npm run substitution -- --stage2` · raw in `fixtures/runs/substitution-stage2.json`
+
+The ladder #19 was gating. Same 39 frozen answers, same judge prompt, one field
+swapped. `sibling`/`distant` were merged into `other` because the corpus cannot
+support the distinction — 13 queries over 11 intents, and the three generators
+answer the same queries, so there are **11 distinct contexts, not 39**. MiniMax
+is excluded: its noise floor equals its resolution.
+
+Offline controls first, and the token-overlap control confirms the ladder is a
+ladder before any judge is called:
+
+```
+intact 0.770   shuffled 0.770   other 0.384   identity_free 0.290   empty 0.000
+```
+
+`shuffled` keeps **every token** — it destroys order and nothing else. That is
+the whole point of the rung.
+
+### Result
+
+| rung | deepseek mean | Δ vs intact | GLM mean | Δ vs intact |
+|---|---:|---:|---:|---:|
+| intact | 0.787 | — | 0.661 | — |
+| **identity_free** | **0.000** | 0.787 ±0.071 | **0.000** | 0.661 ±0.110 |
+| **shuffled** | **0.579** | **0.208 ±0.074** | **0.631** | **0.030 ±0.065** |
+| other | 0.000 | 0.787 ±0.071 | 0.014 | 0.647 ±0.107 |
+| empty | 0.000 | 0.787 ±0.071 | 0.051 | 0.609 ±0.133 |
+
+n = 39 / 37.
+
+**Both judges have perfect content specificity.** Unrelated filler scores 0.
+Another real context from the same corpus scores 0. Not one cell out of 39 and 37
+lets a substitute beat the real thing (GLM's three apparent ties are cells where
+`intact` was itself 0 — a draw at the floor, not a filler winning).
+
+If the experiment had run only the contrast it was designed around —
+`intact` vs `identity_free` — the conclusion would be **"both judges read the
+context, both are fine."**
+
+### The rung that was nearly cut is the one that separates them
+
+| | Δ shuffled | sd | smallest resolvable at this n | verdict |
+|---|---:|---:|---:|---|
+| deepseek-chat | **+0.2077** | 0.236 | 0.094 | **detected** |
+| GLM-5.3-Flash | +0.0297 | 0.203 | 0.083 | **not detected** |
+
+Destroying sentence order costs deepseek **26% of its score** and costs GLM
+nothing this design can measure. Per-cell, deepseek's losses include total
+collapses:
+
+```
+deepseek:  Kimi#1  1.00 -> 0.0     GLM:  deepseek#9  0.80 -> 0.3
+           deepseek#9  0.60 -> 0.0        MiniMax#8   0.90 -> 0.4
+           MiniMax#12  1.00 -> 0.4        Kimi#0      1.00 -> 0.5
+```
+
+**The two judges are reading different things.** One grades prose in which facts
+sit; the other grades a bag of facts. Both are defensible readings of "stays
+inside its source context", and nothing in the prompt chooses between them —
+
+> ⛔ **"a bag of facts" is too strong, corrected by #21 the same day.** Stage 3
+> replaced blocks rather than sentences and GLM tracked *which* block mattered
+> just as hard as deepseek (Δ 0.565 vs 0.289 for one relevant block versus two
+> irrelevant ones). GLM is insensitive to **sentence order**, not to content
+> organisation. The difference established here is narrower than the sentence
+> above claims: both judges track block-level relevance; only deepseek also
+> tracks discourse order. The rest of this entry stands.
+which makes this the same disease as #5's extrapolation split, one level deeper:
+not an undefined rule about *what counts as supported*, but an undefined rule
+about *what the context is*.
+
+⚠️ **"Not detected" is not "zero".** GLM's Δ of 0.030 is below the 0.083 this n
+and sd can resolve. The honest statement is that GLM shows no order-dependence
+larger than 8 points, not that it has none.
+
+### Two cells worth keeping
+
+GLM, `MiniMax#6`: **empty 1.0, intact 0.30.** It scored the answer higher with no
+context than with the real one. Not noise in the usual sense — the ordering is
+inverted, which no amount of leniency explains.
+
+GLM, `Kimi#10`: **intact 0.00, shuffled 0.80.** Scrambling the source document
+took an answer from failing to nearly passing.
+
+Both are single cells and neither is a finding on its own. They are logged because
+an aggregate Δ of 0.030 would otherwise read as "GLM is stable", and these say the
+mean is hiding sign flips rather than sitting on a tight distribution.
+
+**Not established:**
+
+- **Which reading is correct.** Nothing here says order-sensitivity is better or
+  worse. A judge that ignores discourse may be robust; a judge that tracks it may
+  be catching real incoherence. The finding is that they differ and the prompt
+  does not say which to be.
+- **Whether a stated rule closes it.** #5's `--policy` collapsed a 53%→83%
+  disagreement with one added sentence. The equivalent here — a line saying
+  whether the context is an ordered document or a set of facts — is untried.
+- **`sibling` vs `distant`.** Merged into `other` for lack of same-intent pairs.
+  The graded-dependence probe from the source paper (arXiv 2609.12090) is not
+  reproduced here, and `other` at 0.000/0.014 shows no room for it anyway.
+- **GLM's two dropped cells** (37/39), unexamined.
+- **One corpus, one prompt, two judges.** MiniMax, the one that behaved most
+  strangely in #19, is absent from this table precisely because it could not be
+  measured.
+
+---
+
+## #21 — Replacing one relevant block costs more than replacing two irrelevant ones
+
+**2026-09-21** · `npm run substitution -- --stage3` · raw in `fixtures/runs/substitution-stage3.json`
+
+#20 left the ladder with no middle: every rung except `shuffled` sat at 0.000 for
+both judges. Real contexts degrade partially, so this rung degrades partially, and
+it is built so the two halves predict **opposite** things:
+
+| rung | replaced | text swapped |
+|---|---|---|
+| `swap_top1` | the **one** block most related to the answer | 1/3 |
+| `swap_bot2` | the **two** least related blocks | 2/3 |
+
+A judge tracking *which* block supports the answer loses more on `top1`. A judge
+counting *how much* genuine material remains loses more on `bot2`. Block count,
+length and format are held fixed — filler blocks of identical shape go in.
+
+The offline token-overlap control fixes what "objectively worse" means before any
+judge runs:
+
+```
+intact 0.770   swap_bot2 0.660   swap_top1 0.589   identity_free 0.290
+```
+
+Swapping one relevant block destroys **more** answer-supporting material (−0.181)
+than swapping two irrelevant ones (−0.110), a ratio of **1.65×**.
+
+### Result: both judges, same direction, and amplified
+
+| | intact | swap_top1 | Δ | swap_bot2 | Δ | identity_free |
+|---|---:|---:|---:|---:|---:|---:|
+| deepseek-chat | 0.794 | **0.141** | **0.653 ±0.079** | 0.536 | 0.258 ±0.097 | 0.000 |
+| GLM-5.3-Flash | 0.717 | **0.153** | **0.565 ±0.099** | 0.428 | 0.289 ±0.110 | 0.000 |
+
+n = 39 / 39, no drops.
+
+| | ratio top1 : bot2 |
+|---|---:|
+| token overlap (objective) | 1.65× |
+| deepseek | **2.53×** |
+| GLM | **1.95×** |
+
+Both judges move in the direction the content loss dictates, and **both move
+harder than the content loss alone**. They are not counting matched tokens; they
+are locating the block that carries the answer and noticing when it is gone.
+
+### This narrows #20 rather than extending it
+
+#20 said the two judges "read different things — one grades prose, the other a bag
+of facts". **The second half is wrong** and is corrected in place. GLM tracks
+block-level relevance essentially as hard as deepseek. What it does not track is
+*sentence order within the blocks* (#20: Δ 0.030, not detected).
+
+The established difference is therefore much narrower:
+
+- **Shared**: both judges locate the relevant block and penalise its removal
+  super-proportionally.
+- **Differs**: only deepseek additionally penalises scrambled discourse.
+
+I predicted the opposite before this run — having seen GLM shrug at `shuffled`, I
+expected it to be the "counts text volume" judge. It is not. That is the third
+time in this session that a single-condition observation was over-generalised and
+the next condition reversed it (the other two: aggregator dispersion in the TRV
+audit, and `empty` being called a degenerate rung off one judge).
+
+### The ladder now has a usable middle
+
+```
+intact         0.794 / 0.717
+swap_bot2      0.536 / 0.428    <- middle
+swap_top1      0.141 / 0.153    <- middle
+identity_free  0.000 / 0.000
+```
+
+Four points with real variance between them, where stage 2 had two. Any future
+comparison — a prompt variant, a new judge, a policy line — now has a scale to be
+measured against rather than a floor to sit on.
+
+**Not established:**
+
+- **Why relevance is amplified.** 2.53× and 1.95× against an objective 1.65× shows
+  super-proportional sensitivity, but nothing here separates "identifies the
+  supporting block" from "notices that a *specific* claim in the answer is now
+  unsupported and zeroes the whole score". The second is a plausible and much
+  cheaper mechanism.
+- **Whether `top1` is the right block.** Relevance is character-set overlap with
+  the answer — crude, and it chooses the victim. On `withdraw` queries all three
+  blocks scored 0.78/0.77/0.67, so "most relevant" is nearly arbitrary there; on
+  `fee` it was 0.68/0.33/0.31 and unambiguous. The effect is not decomposed by how
+  separable the blocks were.
+- **`one_number`, the rung this replaced.** Only 4 of 13 queries share a numeric
+  token between answer and context — 12 cells, resolving 0.17. Dropped for power,
+  not because it is uninteresting: a single altered figure is the sharpest possible
+  test of whether the judge checks facts or topics, and it remains unrun.
+- **MiniMax**, still excluded since #19.
+- **One corpus, 13 queries, one judging prompt.**
+
+---
+
+## #22 — One contradicted fact costs 0.58; the same edit on an unused line costs nothing
+
+**2026-09-21** · `npm run substitution -- --stage4` · raw in `fixtures/runs/substitution-stage4.json`
+
+The rung #21 listed as untried. It was scoped as `one_number` and rejected for
+power — only 4 of 13 queries share a numeric token between answer and context.
+**That scoping was too narrow.** The point was never the number; it was making the
+context *contradict* the answer, and a contradiction can be an entity, a direction
+or a condition. Widened that way, all 11 distinct contexts support one:
+`100x → 20x`, `maker = taker = 0.1% → maker 0.1%，taker 0.3%`,
+`错误网络会导致资产丢失 → 即使选错网络资产也会自动退回`, and so on
+(`fixtures/contradictions.json`, one entry per context, each rewriting exactly one
+fact while holding length, topic, block count and internal coherence).
+
+### Why this rung and not another
+
+Every earlier rung perturbs a lot: whole blocks replaced, whole context replaced,
+all sentences reordered. **"The judge recognises the topic" explains every one of
+those results**, and nothing so far could separate that from "the judge checks the
+facts". This rung keeps the topic perfectly intact and makes exactly one fact wrong.
+
+The controls show it is invisible to counting:
+
+```
+token overlap:   intact 0.770   contradict 0.760   perturb_unused 0.769
+fact match:      intact 0.715   contradict 0.640   perturb_unused 0.715
+```
+
+`perturb_unused` is the controlled comparison — an edit of the same kind and size
+landing on the `常見追問` line, which no answer draws on. It is not the
+cited/uncited split (34 vs 5, badly unbalanced and dependent on whether an answer
+happened to mention the fact); that split is reported but not relied on.
+
+### Result
+
+| judge | intact | contradict | Δ | perturb_unused | Δ |
+|---|---:|---:|---:|---:|---:|
+| deepseek-chat | 0.794 | **0.217** | **0.577 ±0.089** | 0.768 | **0.026 ±0.036** |
+| GLM-5.3-Flash | 0.863 | **0.146** | **0.717 ±0.112** | 0.902 | **−0.039 ±0.075** |
+
+n = 39 / 38.
+
+**Both judges locate the contradiction.** Both ignore an edit of the same size
+three lines away — `perturb_unused` has a confidence interval spanning zero on both,
+and GLM's point estimate is *negative*.
+
+This was pre-registered with three readings and it is the first: the judges are
+doing fact-checking, not topic recognition. That retroactively strengthens #19–#21
+rather than complicating them — the scores there were not an artifact of the
+perturbations being large.
+
+### The two judges have opposite strengths
+
+| | deepseek | GLM |
+|---|---:|---:|
+| `shuffled` — sentence order (#20) | **0.208** detected | 0.030 not detected |
+| `contradict` — one wrong fact | 0.577 | **0.717** |
+
+deepseek reads the prose and is the one that notices scrambled discourse. GLM
+ignores order and is the harder of the two on a false fact. Neither is strictly
+better, and the judging prompt asks for neither specifically — which is the same
+gap #20 identified, now with both sides measured.
+
+### One thing the mean hides
+
+`contradict` raises the spread on both judges: sd 0.225 → 0.263 on deepseek,
+0.220 → 0.320 on GLM. A contradiction does not move every cell the same way; it
+splits them. The per-cell data is in the raw file and is not decomposed here.
+
+**Not established:**
+
+- **Whether the contradictions are equally hard.** Eleven were hand-written by me,
+  one per context. `100x → 20x` is blatant; `工单 → 等待90天自动解除` is a
+  procedural reversal that may be easier or harder to spot. They are in a tracked
+  fixture and auditable, but they are not calibrated against each other, and that
+  is researcher discretion sitting inside the effect size.
+- **Whether the judge finds the contradiction or just the inconsistency.** The
+  answer and the context now disagree; nothing here shows the judge identified
+  *which* claim failed rather than sensing that something no longer lines up.
+  Asking for the offending claim, rather than a number, would separate these.
+- **The cited/uncited split**, at 34 vs 5, is too unbalanced to read. It is logged
+  in the raw output only.
+- **GLM's `perturb_unused` at −0.039** — scoring higher after an irrelevant edit.
+  Not significant, not explained.
+- **One corpus, 13 queries, one judging prompt, two judges.** MiniMax still
+  excluded since #19.
+
+---
+
+## #23 — Both judges locate the contradiction, and the scalar overstates it by 4×
+
+`npm run claims` · 2026-09-22 · 234 calls · raw in `fixtures/runs/substitution-claims.json`
+
+#22 closed on an admission: every rung reads one number, so "found the
+contradiction" and "sensed an inconsistency" produce identical data. This asks
+the judge for a different reply — each claim in the answer, its verdict
+(`supported` / `contradicted` / `unsupported`), and the context block it rests on,
+with the block label space closed to the titles actually present. Design and
+pre-registration: `docs/SUBSTITUTION-CONTROL.md`, written before the first call.
+
+### They find it, and the control was necessary
+
+| judge | rung | located | felt | missed | n |
+|---|---|---:|---:|---:|---:|
+| deepseek-chat | intact | 0.179 | 0.564 | 0.256 | 39 |
+| | **contradict** | **0.667** | 0.282 | 0.051 | 39 |
+| | perturb_unused | 0.128 | 0.590 | 0.282 | 39 |
+| GLM-5.3-Flash | intact | 0.212 | 0.364 | 0.424 | 33 |
+| | **contradict** | **0.667** | 0.273 | 0.061 | 33 |
+| | perturb_unused | 0.229 | 0.457 | 0.314 | 35 |
+
+Localisation lift **0.487** (deepseek) and **0.438** (GLM), against a
+pre-registered readability floor of ~0.2. Paired on the same cells, McNemar
+exact: deepseek **19 vs 0** discordant (p = 3.8e-6), GLM **15 vs 0** (p = 6.1e-5).
+Not one cell in either judge named the target block on intact context and failed
+to name it once the fact was broken.
+
+⭐ **The control earned its place.** The raw `located` rate on `contradict` is
+0.667 for both judges — and 0.18–0.23 of that is available for free, because both
+flag *something* on untouched context in 57–74% of answers. Reporting 0.667 as
+"the judge localises two thirds of contradictions" would have been wrong by a
+third. The whitepaper pattern this output format is borrowed from ships its
+three-level attribution with no control of this kind.
+
+### ⭐⭐⭐ The scalar is not counting claims
+
+Same cells, same edit, two ways of reading the judge:
+
+| judge | Δ(intact − contradict), scalar (#22) | Δ, claim-level | extra claims flagged |
+|---|---:|---:|---:|
+| deepseek-chat | 0.577 | **0.144** | **+1.05** ±0.32 vs intact, +1.18 ±0.27 vs perturb_unused |
+| GLM-5.3-Flash | 0.717 | **0.147** | +0.66 ±0.40, +0.47 ±0.29 |
+
+We broke **exactly one fact**. deepseek's itemised reply registers exactly that:
+one more claim goes non-supported, CI containing 1 and excluding 0. The holistic
+0..1 score for the same cells falls by 0.58 — **four times what the claim count
+justifies**.
+
+So the 0..1 faithfulness scale is not a proportion of supported claims. It is
+closer to a severity verdict — *is there anything wrong in here* — and #5 already
+suspected this from the leverage question's `0.00 / 0.95 / 1.00` spread. Now it
+has a number. Consequences, in order of how much they cost:
+
+- **Averaging holistic faithfulness across cells averages something nearer a flag
+  than a fraction.** `fixtures/gates/faithfulness-ladder.json` sets a bar of 0.70
+  on exactly that quantity; the bar is not on a linear scale, and the gate's
+  rationale should say so.
+- **A one-fact error and a wholly ungrounded answer land in the same region** of
+  the scalar. The claim-level reply separates them and the scalar cannot.
+- **#22 is not overturned.** Its claim was that the judges fact-check rather than
+  topic-match, resting on `perturb_unused` being null — and the localisation data
+  is a second, independent confirmation, at the level of *which* block.
+
+### Prediction 2 failed, and failed below resolution
+
+Pre-registered: GLM ≥ deepseek on lift, since GLM had the larger scalar Δ.
+Observed deepseek 0.487 > GLM 0.438. The gap is 0.049 against a resolvable
+difference of ~0.22, so this is **not detected, not a reversal** — but the
+ordering the scalar implied did not appear, and on the extra-claims measure GLM's
+CI vs `perturb_unused` ([0.18, 0.76]) **excludes 1**: its scalar collapses hardest
+while its itemised accounting registers less than one broken claim. Confounded by
+its 16 dropped cells; not a finding, a thing to check with a third judge.
+
+### What is wrong with this run
+
+- ✅ **Resolved in #24** — all of them are unparseable, none are transport, and
+  the readable cells reproduce exactly across two runs. The text below is what
+  was known when #23 was written.
+- 🔴 **GLM: 16/117 replies unreadable, and the script cannot say why.** The catch
+  in `scoreClaims` swallows API errors and `ClaimParseError` alike, so "GLM emits
+  malformed JSON" and "the router timed out" are indistinguishable in this data.
+  deepseek was 0/117. The two must be split before GLM's numbers are used for
+  anything. Drops are at least spread evenly across rungs (6/6/4), so they are
+  not selectively removing the hard cells.
+- **The decomposition is not checked for stability.** Nothing here reruns a cell
+  to see whether the judge splits the same answer into the same claims. deepseek
+  produced 7.3–7.6 claims per answer and GLM 5.6–6.3 — a standing difference in
+  granularity, and `derivedScore` has a denominator the judge chose.
+- **39 cells over 11 contexts.** Cluster size ≈3.5; the effective n for anything
+  context-driven is well under 39, as pre-registered.
+- `unsupported` on the tampered block counts as `located`. Silence and conflict
+  are both reactions to the edit; splitting them needs a larger corpus.
+
+---
+
+## #24 — Repeat run: GLM's losses are all one thing, and the two judges are unstable in opposite ways
+
+`npm run claims -- --tag run2` · 2026-09-22 · 234 calls · raw in
+`fixtures/runs/substitution-claims-run2.json`. Same cells, same prompts,
+temperature 0, with the transport/parse split #23 said was missing.
+
+### The 16 losses were not noise
+
+| judge | lost | transport | unparseable |
+|---|---:|---:|---:|
+| deepseek-chat | 0/117 | 0 | 0 |
+| GLM-5.3-Flash | 17/117 | **0** | **17** |
+
+Not one router failure. Every GLM loss is the model failing to emit a parseable
+object, so it is **a result about GLM, not about the network**, and #23's
+suspension of GLM's numbers is lifted — with the caveat below.
+
+The first example: `<think>Let me analyze the answer and compare it to the
+context provided…` followed by a JSON-shaped span that does not parse. Since
+`stripReasoning` returns the text *after* `</think>`, a reply reaching the parser
+in that state closed its reasoning and then ran out of budget mid-object. So the
+likely cause is the 1600-token cap being eaten by reasoning — the same disease as
+#16 and #19. **This is an inference from one example**, not measured: the per-cell
+detail is not stored. The cheap test is to raise the cap and re-run GLM alone; it
+has not been run, and the number 17 should be read as a property of *this token
+budget*, not of the model.
+
+### ⭐⭐ Stability is inverted between the two judges
+
+The decomposition-stability hole pre-registered in #23, answered by pairing the
+two runs cell by cell:
+
+| judge | readable in both | same claim count | same localisation verdict | mean \|Δderived\| |
+|---|---:|---:|---:|---:|
+| deepseek-chat | 117/117 | **96 (82%)**, max Δ **5 claims** | 106 (91%) | 0.024 |
+| GLM-5.3-Flash | 100/117 | **100 (100%)** | **100 (100%)** | **0.000** |
+
+**deepseek never fails and never quite repeats; GLM fails often and is bit-stable
+when it does not.** At temperature 0, on identical input, deepseek split the same
+answer into a different number of claims in one cell out of five, once by five
+claims. GLM reproduced every cell exactly.
+
+Consequences:
+
+- **`derivedScore` has a moving denominator for deepseek and a fixed one for
+  GLM.** The caveat #23 attached to the metric applies unevenly, and any
+  deepseek mean over it carries a decomposition wobble that no CI in #23 reports.
+- **The localisation lift has run-to-run noise larger than it looks.** deepseek
+  0.487 → **0.564**, GLM 0.438 → **0.455**. The deepseek spread of ~0.08 across
+  two runs is a noise floor estimate the single-run CIs did not contain. The
+  conclusion is unaffected — both runs clear the pre-registered 0.2 floor by a
+  wide margin — but a *lift difference* under ~0.1 between judges is not readable.
+- **Prediction 2 stays not-detected.** deepseek beat GLM again (0.564 vs 0.455),
+  by 0.109, which is now roughly the size of its own run-to-run wobble.
+- ⛔ **This does not say GLM is the better instrument.** Losing 15% of cells to a
+  format it cannot hold is a defect; being reproducible on the rest is a separate
+  property. The two have to be reported apart, not netted.

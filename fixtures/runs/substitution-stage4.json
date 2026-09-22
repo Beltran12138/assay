@@ -1,0 +1,739 @@
+[
+  {
+    "judge": "deepseek-chat",
+    "stage": 4,
+    "n": 39,
+    "perRung": {
+      "intact": {
+        "mean": 0.7935897435897437,
+        "sd": 0.22454031614890085
+      },
+      "contradict": {
+        "mean": 0.21666666666666665,
+        "sd": 0.2626618131175056
+      },
+      "perturb_unused": {
+        "mean": 0.767948717948718,
+        "sd": 0.23126857805521592
+      }
+    },
+    "deltaIdentityFree": null,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 1,
+        "contradict2": 1,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "intact1": 0.8,
+        "intact2": 1,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 0.8,
+        "perturb_unused2": 0.9
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.4,
+        "perturb_unused2": 0.4
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.4,
+        "perturb_unused2": 0.4
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.8,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.4,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "intact1": 0.7,
+        "intact2": 0.7,
+        "contradict1": 0.2,
+        "contradict2": 0,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0.3,
+        "contradict2": 0.3,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 1,
+        "contradict2": 1,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 0.8,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0.3,
+        "contradict2": 0.4,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "intact1": 0.2,
+        "intact2": 0.2,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.2,
+        "perturb_unused2": 0.2
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "intact1": 0.7,
+        "intact2": 0.9,
+        "contradict1": 0,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.7,
+        "perturb_unused2": 0.7
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "intact1": 0.7,
+        "intact2": 0.7,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "intact1": 0.4,
+        "intact2": 0.4,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.5,
+        "perturb_unused2": 0.5
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "intact1": 0.9,
+        "intact2": 0.8,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0.8,
+        "contradict2": 0.8,
+        "perturb_unused1": 0.8,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "intact1": 0.8,
+        "intact2": 0.8,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.8,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0.4,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.4,
+        "perturb_unused2": 0.4
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0.4,
+        "contradict2": 0.2,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "intact1": 0.5,
+        "intact2": 0.4,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.5,
+        "perturb_unused2": 0.5
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "intact1": 0.9,
+        "intact2": 1,
+        "contradict1": 0.4,
+        "contradict2": 0.4,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "intact1": 0.6,
+        "intact2": 0.6,
+        "contradict1": 0.2,
+        "contradict2": 0.2,
+        "perturb_unused1": 0.6,
+        "perturb_unused2": 0.6
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.9,
+        "perturb_unused2": 0.9
+      }
+    ]
+  },
+  {
+    "judge": "zai-org/GLM-5.3-Flash",
+    "stage": 4,
+    "n": 38,
+    "perRung": {
+      "intact": {
+        "mean": 0.8630263157894738,
+        "sd": 0.2197588957510831
+      },
+      "contradict": {
+        "mean": 0.14614473684210527,
+        "sd": 0.3197362702902473
+      },
+      "perturb_unused": {
+        "mean": 0.9023026315789472,
+        "sd": 0.21623028075922193
+      }
+    },
+    "deltaIdentityFree": null,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 1,
+        "contradict2": 1,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "intact1": 0.86,
+        "intact2": 0.86,
+        "contradict1": 0,
+        "contradict2": 0.667,
+        "perturb_unused1": null,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "intact1": 0.9,
+        "intact2": 0.8,
+        "contradict1": 0,
+        "contradict2": null,
+        "perturb_unused1": 0.9,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "intact1": 0.7,
+        "intact2": 0,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": null,
+        "perturb_unused2": 0.95
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "intact1": null,
+        "intact2": 1,
+        "contradict1": null,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "intact1": 1,
+        "intact2": 0.8,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "intact1": 0.875,
+        "intact2": null,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.9,
+        "perturb_unused2": 0
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "intact1": 0,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.75,
+        "perturb_unused2": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "intact1": 0.75,
+        "intact2": 0,
+        "contradict1": 0,
+        "contradict2": 0.5,
+        "perturb_unused1": 0.75,
+        "perturb_unused2": 0.75
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 1,
+        "contradict2": 1,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "intact1": 0,
+        "intact2": 0.47,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.5,
+        "perturb_unused2": 0.9
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "intact1": 0.3,
+        "intact2": 0.95,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.7,
+        "perturb_unused2": 0
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0.75,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "intact1": 1,
+        "intact2": 0.8,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0.8,
+        "perturb_unused2": 0.5
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0.86,
+        "contradict2": 0.86,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 1,
+        "contradict2": 1,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "intact1": 0.9,
+        "intact2": 0.9,
+        "contradict1": 0.67,
+        "contradict2": 0.8,
+        "perturb_unused1": 0.875,
+        "perturb_unused2": 0.9
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "intact1": 0.9,
+        "intact2": 0.8,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 0.8
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "intact1": 0.5,
+        "intact2": null,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 0.9
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "intact1": 0,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 0,
+        "perturb_unused2": 0
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "intact1": 0.7,
+        "intact2": null,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "intact1": 0.95,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "intact1": 1,
+        "intact2": 1,
+        "contradict1": 0,
+        "contradict2": 0,
+        "perturb_unused1": 1,
+        "perturb_unused2": 1
+      }
+    ]
+  }
+]
