@@ -1981,3 +1981,92 @@ measured against rather than a floor to sit on.
   test of whether the judge checks facts or topics, and it remains unrun.
 - **MiniMax**, still excluded since #19.
 - **One corpus, 13 queries, one judging prompt.**
+
+---
+
+## #22 — One contradicted fact costs 0.58; the same edit on an unused line costs nothing
+
+**2026-09-21** · `npm run substitution -- --stage4` · raw in `fixtures/runs/substitution-stage4.json`
+
+The rung #21 listed as untried. It was scoped as `one_number` and rejected for
+power — only 4 of 13 queries share a numeric token between answer and context.
+**That scoping was too narrow.** The point was never the number; it was making the
+context *contradict* the answer, and a contradiction can be an entity, a direction
+or a condition. Widened that way, all 11 distinct contexts support one:
+`100x → 20x`, `maker = taker = 0.1% → maker 0.1%，taker 0.3%`,
+`错误网络会导致资产丢失 → 即使选错网络资产也会自动退回`, and so on
+(`fixtures/contradictions.json`, one entry per context, each rewriting exactly one
+fact while holding length, topic, block count and internal coherence).
+
+### Why this rung and not another
+
+Every earlier rung perturbs a lot: whole blocks replaced, whole context replaced,
+all sentences reordered. **"The judge recognises the topic" explains every one of
+those results**, and nothing so far could separate that from "the judge checks the
+facts". This rung keeps the topic perfectly intact and makes exactly one fact wrong.
+
+The controls show it is invisible to counting:
+
+```
+token overlap:   intact 0.770   contradict 0.760   perturb_unused 0.769
+fact match:      intact 0.715   contradict 0.640   perturb_unused 0.715
+```
+
+`perturb_unused` is the controlled comparison — an edit of the same kind and size
+landing on the `常見追問` line, which no answer draws on. It is not the
+cited/uncited split (34 vs 5, badly unbalanced and dependent on whether an answer
+happened to mention the fact); that split is reported but not relied on.
+
+### Result
+
+| judge | intact | contradict | Δ | perturb_unused | Δ |
+|---|---:|---:|---:|---:|---:|
+| deepseek-chat | 0.794 | **0.217** | **0.577 ±0.089** | 0.768 | **0.026 ±0.036** |
+| GLM-5.3-Flash | 0.863 | **0.146** | **0.717 ±0.112** | 0.902 | **−0.039 ±0.075** |
+
+n = 39 / 38.
+
+**Both judges locate the contradiction.** Both ignore an edit of the same size
+three lines away — `perturb_unused` has a confidence interval spanning zero on both,
+and GLM's point estimate is *negative*.
+
+This was pre-registered with three readings and it is the first: the judges are
+doing fact-checking, not topic recognition. That retroactively strengthens #19–#21
+rather than complicating them — the scores there were not an artifact of the
+perturbations being large.
+
+### The two judges have opposite strengths
+
+| | deepseek | GLM |
+|---|---:|---:|
+| `shuffled` — sentence order (#20) | **0.208** detected | 0.030 not detected |
+| `contradict` — one wrong fact | 0.577 | **0.717** |
+
+deepseek reads the prose and is the one that notices scrambled discourse. GLM
+ignores order and is the harder of the two on a false fact. Neither is strictly
+better, and the judging prompt asks for neither specifically — which is the same
+gap #20 identified, now with both sides measured.
+
+### One thing the mean hides
+
+`contradict` raises the spread on both judges: sd 0.225 → 0.263 on deepseek,
+0.220 → 0.320 on GLM. A contradiction does not move every cell the same way; it
+splits them. The per-cell data is in the raw file and is not decomposed here.
+
+**Not established:**
+
+- **Whether the contradictions are equally hard.** Eleven were hand-written by me,
+  one per context. `100x → 20x` is blatant; `工单 → 等待90天自动解除` is a
+  procedural reversal that may be easier or harder to spot. They are in a tracked
+  fixture and auditable, but they are not calibrated against each other, and that
+  is researcher discretion sitting inside the effect size.
+- **Whether the judge finds the contradiction or just the inconsistency.** The
+  answer and the context now disagree; nothing here shows the judge identified
+  *which* claim failed rather than sensing that something no longer lines up.
+  Asking for the offending claim, rather than a number, would separate these.
+- **The cited/uncited split**, at 34 vs 5, is too unbalanced to read. It is logged
+  in the raw output only.
+- **GLM's `perturb_unused` at −0.039** — scoring higher after an irrelevant edit.
+  Not significant, not explained.
+- **One corpus, 13 queries, one judging prompt, two judges.** MiniMax still
+  excluded since #19.

@@ -47,6 +47,7 @@ import { parseScore, ScoreParseError } from '../lib/assay/parse'
 
 const STAGE2 = process.argv.includes('--stage2')
 const STAGE3 = process.argv.includes('--stage3')
+const STAGE4 = process.argv.includes('--stage4')
 
 const ROUTER_BASE = process.env.ASSAY_JUDGE_BASE_URL
 const ROUTER_KEY = process.env.ASSAY_JUDGE_API_KEY
@@ -72,10 +73,21 @@ const JUDGE_SYSTEM =
 
 const TAIL = '0.0 = contains claims absent from the context / 1.0 = every claim is supported.'
 
-type Rung = 'intact' | 'shuffled' | 'other' | 'identity_free' | 'empty' | 'swap_top1' | 'swap_bot2'
+type Rung = 'intact' | 'shuffled' | 'other' | 'identity_free' | 'empty' | 'swap_top1' | 'swap_bot2' | 'contradict' | 'perturb_unused'
 const STAGE1_RUNGS: Rung[] = ['intact', 'empty']
 const STAGE2_RUNGS: Rung[] = ['intact', 'identity_free', 'shuffled', 'other', 'empty']
 const STAGE3_RUNGS: Rung[] = ['intact', 'swap_top1', 'swap_bot2', 'identity_free']
+// Stage 4: one fact rewritten so the context CONTRADICTS the answer. Everything
+// else — length, topic, block count, internal coherence — is held. It is the
+// rung FINDINGS #21 listed as untried; it was first scoped as `one_number` and
+// rejected for power (4 of 13 queries share a numeric token), then widened from
+// "change a number" to "contradict a stated fact", which all 11 contexts allow.
+// `perturb_unused` is the controlled comparison: an edit of the same kind and
+// size, landing on the 常見追問 line that no answer draws on. The cited/uncited
+// split from `cite` is kept as a secondary read but is badly unbalanced (34 vs
+// 5) and depends on whether an answer happened to mention the fact; this rung
+// does not depend on that.
+const STAGE4_RUNGS: Rung[] = ['intact', 'contradict', 'perturb_unused']
 /** Repeats per rung. The two anchors of the contrast get two; the rest get one,
  *  because stage 1 already measured the noise floor for these judges. */
 const REPEATS: Record<Rung, number> = {
@@ -83,6 +95,7 @@ const REPEATS: Record<Rung, number> = {
   // stage 3: the two swap rungs are the contrast, identity_free only anchors the
   // floor and stage 2 already showed it is a hard 0.000 for both judges.
   swap_top1: 2, swap_bot2: 2,
+  contradict: 2, perturb_unused: 2,
 }
 
 type Frozen = { query: string; intent: string; context: string; answer: string }
@@ -183,6 +196,47 @@ function swapBlocks(a: Frozen, mode: 'top1' | 'bot2'): string | null {
   return header + blocks.map((b, i) => (victims.has(i) ? fillerBlock(f++) : b)).join('\n\n')
 }
 
+type Contradiction = { match: string; find: string; replace: string; cite: string }
+const CONTRADICTIONS: Contradiction[] = (() => {
+  try {
+    return JSON.parse(readFileSync('fixtures/contradictions.json', 'utf8')).contradictions
+  } catch { return [] }
+})()
+
+function contradictionFor(ctx: string): Contradiction | null {
+  return CONTRADICTIONS.find(c => ctx.includes(c.match) && ctx.includes(c.find)) ?? null
+}
+
+/** Did this answer actually rely on the fact we are about to break?
+ *  Decided offline from the frozen answer, so the cited/uncited split is not a
+ *  judgement call made after seeing scores. */
+function cites(a: Frozen): boolean {
+  const c = contradictionFor(a.context)
+  return !!c && a.answer.includes(c.cite)
+}
+
+function contradict(a: Frozen): string | null {
+  const c = contradictionFor(a.context)
+  return c ? a.context.replace(c.find, c.replace) : null
+}
+
+/** Same kind of edit, same rough size, on material no answer relies on. */
+function perturbUnused(a: Frozen): string | null {
+  const m = a.context.match(/常見追問：[^\n]+/)
+  return m ? a.context.replace(m[0], '常見追問：可以用支付宝付款吗？ / 客服电话是多少？') : null
+}
+
+/** Positive control for stage 4. Token overlap cannot see a single swapped
+ *  value, so it cannot validate this rung; this can. Fraction of the answer's
+ *  fact tokens still present in the context. */
+function factMatch(a: Frozen, ctx: string | null): number {
+  if (ctx === null) return 0
+  const facts = (s: string) => s.match(/\d+(?:\.\d+)?%?|[A-Za-z][A-Za-z0-9.-]{2,}/g) ?? []
+  const inCtx = new Set(facts(ctx))
+  const ans = facts(a.answer)
+  return ans.length ? ans.filter(f => inCtx.has(f)).length / ans.length : 1
+}
+
 function shuffleSentences(ctx: string, r: () => number): string {
   const parts = ctx.split(/(?<=[。！？\n])/).filter(s => s.trim())
   for (let i = parts.length - 1; i > 0; i--) {
@@ -204,6 +258,8 @@ function buildContext(a: Frozen, rung: Rung, others: string[], r: () => number):
     case 'identity_free': return identityFree(a.context.length, r)
     case 'swap_top1': return swapBlocks(a, 'top1')
     case 'swap_bot2': return swapBlocks(a, 'bot2')
+    case 'contradict': return contradict(a)
+    case 'perturb_unused': return perturbUnused(a)
   }
 }
 
@@ -247,7 +303,7 @@ function runControls(cells: Cell[], others: string[]): { ok: boolean; lines: str
 
   // The positive control must fall as the ladder degrades, or the ladder is not
   // a ladder. This is the rung ordering asserted offline, before any judge runs.
-  const rungs = STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
+  const rungs = STAGE4 ? STAGE4_RUNGS : STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
   const means = rungs.map(rung => {
     const v = cells.map(c => tokenOverlap(c.a, buildContext(c.a, rung, others, r)))
     return [rung, v.reduce((s, x) => s + x, 0) / v.length] as const
@@ -262,6 +318,20 @@ function runControls(cells: Cell[], others: string[]): { ok: boolean; lines: str
   const negOk = constantScorer() - constantScorer() === 0
   lines.push(`  negative · constant scorer  max|diff| 0.000   ${negOk ? 'PASS' : 'FAIL'}`)
 
+  if (STAGE4) {
+    const r4 = rng(1)
+    const fm = (rg: Rung) => {
+      const v = cells.map(c => factMatch(c.a, buildContext(c.a, rg, others, r4)))
+      return v.reduce((s, x) => s + x, 0) / v.length
+    }
+    const [fi, fc, fu] = [fm('intact'), fm('contradict'), fm('perturb_unused')]
+    lines.push(`  positive · fact match:  intact ${fi.toFixed(3)}  contradict ${fc.toFixed(3)}  perturb_unused ${fu.toFixed(3)}`)
+    const ok4 = fc < fi - 0.005 && Math.abs(fu - fi) < 0.005
+    lines.push(`  stage-4 verdict: ${ok4 ? 'PASS' : 'FAIL — contradict must lower fact match and perturb_unused must not'}`)
+    const nCited = cells.filter(c => cites(c.a)).length
+    lines.push(`  secondary split: cited ${nCited}/${cells.length}, uncited ${cells.length - nCited} (underpowered, reported not relied on)`)
+    if (!ok4) return { ok: false, lines }
+  }
   if (STAGE2 || STAGE3) {
     const r2 = rng(7)
     const leaks = cells.map(c => leakTokens(c.a.answer, identityFree(c.a.context.length, r2)))
@@ -312,9 +382,9 @@ const sd = (xs: number[]) => {
 }
 
 async function main() {
-  const stage = STAGE3 ? 3 : STAGE2 ? 2 : 1
-  const rungs = STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
-  const judgesAll = STAGE2 || STAGE3 ? STAGE2_JUDGES : STAGE1_JUDGES
+  const stage = STAGE4 ? 4 : STAGE3 ? 3 : STAGE2 ? 2 : 1
+  const rungs = STAGE4 ? STAGE4_RUNGS : STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
+  const judgesAll = STAGE2 || STAGE3 || STAGE4 ? STAGE2_JUDGES : STAGE1_JUDGES
 
   console.log(`assay · substitution stage ${stage} — is the score a function of the context?`)
   console.log('═'.repeat(78))
@@ -339,7 +409,7 @@ async function main() {
     console.log(`\n── ${j.id}`)
     const jobs = cells.flatMap(c =>
       rungs.flatMap(rg =>
-        Array.from({ length: STAGE2 || STAGE3 ? REPEATS[rg] : 2 }, (_, k) => ({ c, rg, rep: k + 1 }))))
+        Array.from({ length: STAGE2 || STAGE3 || STAGE4 ? REPEATS[rg] : 2 }, (_, k) => ({ c, rg, rep: k + 1 }))))
     process.stdout.write(`   ${jobs.length} calls  `)
     // Seeded per cell+rung so a rerun swaps in the same substitute.
     const got = await pool(jobs, 8, async ({ c, rg, rep }) =>

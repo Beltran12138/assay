@@ -1,0 +1,82 @@
+{
+  "_doc": "One precise contradiction per distinct context, for the `contradict` rung of scripts/assay-substitution.ts. See docs/SUBSTITUTION-CONTROL.md.",
+  "_design": [
+    "Each entry rewrites ONE fact in the context so that it CONTRADICTS what the answers assert, rather than removing it. The context stays the same length, topic, format and block count; it stays internally coherent; only the value changes.",
+    "`cite` is the token an answer must contain to count as having relied on the altered fact. It splits the 39 cells into a cited group (should lose points) and an uncited group (should not). That split is decided offline from the frozen answers, with no human labelling.",
+    "This is the rung that FINDINGS #21 recorded as untried. It was first scoped as `one_number` and rejected for power, because only 4 of 13 queries share a numeric token between answer and context. Widening it from 'change a number' to 'contradict a stated fact' — entities, directions and conditions included — makes all 11 contexts usable.",
+    "`match` identifies the context by a string unique to it among the 11."
+  ],
+  "contradictions": [
+    {
+      "match": "【现货交易手续费】",
+      "find": "maker = taker = 0.1%",
+      "replace": "maker 0.1%，taker 0.3%",
+      "cite": "0.1%",
+      "note": "breaks both the value and the maker=taker equality. Query 0 asserts it; query 1 answers only about futures and is the built-in control."
+    },
+    {
+      "match": "【提币操作步骤】",
+      "find": "提币处理时间通常为1–2个工作日",
+      "replace": "提币处理时间通常为7–10个工作日",
+      "cite": "1–2",
+      "note": "query 3 asserts the figure; query 2 answers the steps and mostly does not."
+    },
+    {
+      "match": "【KYC认证所需材料】",
+      "find": "审核时间通常为1个工作日内完成",
+      "replace": "审核时间通常为15个工作日内完成",
+      "cite": "1个工作日"
+    },
+    {
+      "match": "【如何充值入金】",
+      "find": "错误网络会导致资产丢失",
+      "replace": "即使选错网络资产也会在24小时内自动退回",
+      "cite": "丢失",
+      "note": "a direction reversal, not a number — the answers all warn that the wrong network loses funds."
+    },
+    {
+      "match": "【账户安全建议】",
+      "find": "强烈建议开启2FA（Google Authenticator或短信验证）",
+      "replace": "强烈建议开启2FA（仅支持硬件密钥YubiKey，不支持Google Authenticator）",
+      "cite": "Google Authenticator",
+      "note": "entity contradiction: the answers recommend the method the context now excludes."
+    },
+    {
+      "match": "【永续合约交易介绍】",
+      "find": "最高支持100x杠杆",
+      "replace": "最高支持20x杠杆",
+      "cite": "100",
+      "note": "the cleanest case — all three answers state 100x explicitly."
+    },
+    {
+      "match": "【注册账户流程】",
+      "find": "全程约5分钟完成",
+      "replace": "全程约3个工作日完成",
+      "cite": "5分钟"
+    },
+    {
+      "match": "【API接口说明】",
+      "find": "权限分只读和交易两级",
+      "replace": "权限分只读、交易和提币三级",
+      "cite": "两级"
+    },
+    {
+      "match": "【限价单未成交原因】",
+      "find": "②账户可用余额不足（部分被其他挂单冻结）",
+      "replace": "②系统限制每个账户每日最多3笔挂单",
+      "cite": "余额不足"
+    },
+    {
+      "match": "【账户被冻结原因及解冻】",
+      "find": "解冻流程：提交官方工单，说明情况并配合提供所需材料",
+      "replace": "解冻流程：冻结后不可申诉，须等待90天系统自动解除",
+      "cite": "工单"
+    },
+    {
+      "match": "【税务报表与交易记录导出】",
+      "find": "Form 1099-DA（自2025税年起生效）",
+      "replace": "Form 1099-B（自2028税年起生效）",
+      "cite": "1099-DA"
+    }
+  ]
+}

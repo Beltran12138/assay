@@ -1,6 +1,6 @@
 # Substitution control: does the judge use what it reads?
 
-> Written 2026-09-21. **Stage 1 has run** — see [Stage 1 result](#stage-1-result-2026-09-21--and-what-it-invalidates). Stage 2 (the full ladder) has not, and its design changed because of what stage 1 returned.
+> Written 2026-09-21. **Stages 1–4 have all run** — see [Stage 1 result](#stage-1-result-2026-09-21--and-what-it-invalidates). Each stage changed the next one's design; two of my own stated conclusions were reversed by the following stage, and both corrections are kept in place rather than edited away.
 >
 > **This one needs no human labels.** Unlike `docs/STATED-CONFIDENCE.md`, which is
 > blocked on 421 annotations, every arm below runs against answers already frozen
@@ -484,3 +484,68 @@ Same discipline as `npm run stated`: with no arms wired it runs its controls and
 exits 2, and the demo path exercises the reporting code before any judge is called.
 Reuses `lib/assay/calibration.ts` for the paired bootstrap and
 `lib/assay/mentions.ts` for the positive control — no new statistics.
+
+## Stage 4 result (2026-09-21) — the ladder is complete, and the topic-matching explanation is dead
+
+`npm run substitution -- --stage4` · raw in `fixtures/runs/substitution-stage4.json` ·
+written up as FINDINGS #22.
+
+**The `one_number` rejection in stage 3 was wrong, and reversing it cost nothing.**
+It was rejected because only 4 of 13 queries share a numeric token between answer
+and context. But the rung was never about numbers — it is about making the context
+*contradict* the answer, and a contradiction can be an entity, a direction or a
+condition. All 11 distinct contexts support one. `fixtures/contradictions.json`
+holds them, one per context, each altering exactly one fact.
+
+This matters because **every earlier rung is compatible with "the judge recognises
+the topic"**: whole blocks swapped, whole contexts swapped, every sentence
+reordered. This rung holds the topic perfectly and makes one fact false.
+
+| | intact | contradict | Δ | perturb_unused | Δ |
+|---|---:|---:|---:|---:|---:|
+| token overlap | 0.770 | 0.760 | — | 0.769 | — |
+| fact match | 0.715 | 0.640 | — | 0.715 | — |
+| deepseek | 0.794 | **0.217** | **0.577 ±0.089** | 0.768 | 0.026 ±0.036 |
+| GLM | 0.863 | **0.146** | **0.717 ±0.112** | 0.902 | −0.039 ±0.075 |
+
+Both judges locate the contradiction; both ignore an identically-sized edit on the
+`常見追問` line that no answer uses (CI spans zero on both). **Pre-registered
+reading one.** The topic-matching explanation for #19–#21 is ruled out.
+
+### The complete ladder
+
+```
+                deepseek   GLM      what is destroyed
+intact            0.794    0.863    —
+perturb_unused    0.768    0.902    an unused line
+shuffled          0.579      —      sentence order (tokens all kept)
+swap_bot2         0.536    0.428    2/3 of the text, the irrelevant part
+contradict        0.217    0.146    ONE fact, everything else intact
+swap_top1         0.141    0.153    1/3 of the text, the relevant block
+other             0.000    0.014    the whole context, replaced with a real one
+identity_free     0.000    0.000    the whole context, replaced with filler
+empty             0.000    0.051    the context block itself
+```
+
+**One contradicted fact sits almost exactly where "delete the block that carried
+the answer" sits.** For these judges, a source that says the wrong thing is worth
+about as little as no source at all — which is the correct behaviour for a
+faithfulness metric and was not knowable from any earlier rung.
+
+### Design status
+
+All rungs originally specified are now run or explicitly dropped with a reason:
+
+| rung | status |
+|---|---|
+| `intact` `empty` | stage 1 |
+| `identity_free` `shuffled` `other` | stage 2 |
+| `swap_top1` `swap_bot2` | stage 3 |
+| `contradict` `perturb_unused` | stage 4 |
+| `sibling` / `distant` | **dropped** — 13 queries over 11 intents leaves 4 same-intent pairs, resolving 0.17 |
+| `one_number` | **superseded** by `contradict`, which is the same idea without the numeric constraint |
+
+What is not built: nothing asks the judge *which* claim failed. Every rung reads a
+single number, so "found the contradiction" and "sensed an inconsistency" remain
+indistinguishable. That is the next question, and it needs a different output
+format rather than a new rung.
