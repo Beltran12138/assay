@@ -1,0 +1,1898 @@
+[
+  {
+    "judge": "deepseek-chat",
+    "mode": "claims",
+    "n": 39,
+    "lost": {
+      "transport": 0,
+      "unparseable": 0
+    },
+    "lift": 0.5641025641025641,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 2,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "contradict",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.9333333333333333,
+        "claims": 15,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.9285714285714286,
+        "claims": 14,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.9333333333333333,
+        "claims": 15,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.5555555555555556,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.2222222222222222,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.8461538461538461,
+        "claims": 13,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 12,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8461538461538461,
+        "claims": 13,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.42857142857142855,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.3,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.375,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.2857142857142857,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.42857142857142855,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "contradict",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.8,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.9230769230769231,
+        "claims": 13,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.375,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 12,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6428571428571429,
+        "claims": 14,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 12,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.2,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.5555555555555556,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.7142857142857143,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.7142857142857143,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.2727272727272727,
+        "claims": 11,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.2727272727272727,
+        "claims": 11,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.2727272727272727,
+        "claims": 11,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.9090909090909091,
+        "claims": 11,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8181818181818182,
+        "claims": 11,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.2,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.2,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8888888888888888,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.5714285714285714,
+        "claims": 14,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.35714285714285715,
+        "claims": 14,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6428571428571429,
+        "claims": 14,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      }
+    ]
+  },
+  {
+    "judge": "zai-org/GLM-5.3-Flash",
+    "mode": "claims",
+    "n": 39,
+    "lost": {
+      "transport": 0,
+      "unparseable": 17
+    },
+    "lift": 0.4545454545454545,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 2,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "contradict",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.9,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.7142857142857143,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.625,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.7142857142857143,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.42857142857142855,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "intact",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "contradict",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 12,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "intact",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.5,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "contradict",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8888888888888888,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.5,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.375,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.2857142857142857,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.5,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "intact",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "contradict",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "perturb_unused",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.2,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.625,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.7777777777777778,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "perturb_unused",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "contradict",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.42857142857142855,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.7777777777777778,
+        "claims": 9,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "perturb_unused",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.5714285714285714,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 8,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "intact",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "contradict",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.3,
+        "claims": 10,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "intact",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "perturb_unused",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "intact",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "contradict",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "perturb_unused",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "intact",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "perturb_unused",
+        "loc": "felt",
+        "derived": 0.5,
+        "claims": 4,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "contradict",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "intact",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "contradict",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "perturb_unused",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "intact",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "contradict",
+        "loc": "located",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "perturb_unused",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "lost": null
+      }
+    ]
+  }
+]

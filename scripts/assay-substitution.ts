@@ -53,6 +53,13 @@ const STAGE2 = process.argv.includes('--stage2')
 const STAGE3 = process.argv.includes('--stage3')
 const STAGE4 = process.argv.includes('--stage4')
 const CLAIMS = process.argv.includes('--claims')
+/** Repeat runs go to their own artifact. A rerun at temperature 0 on the same
+ *  cells is the decomposition-stability check FINDINGS #23 listed as missing, so
+ *  it must not overwrite the run it is being compared against. */
+const TAG = (() => {
+  const i = process.argv.indexOf('--tag')
+  return i > 0 && process.argv[i + 1] ? `-${process.argv[i + 1]}` : ''
+})()
 
 const ROUTER_BASE = process.env.ASSAY_JUDGE_BASE_URL
 const ROUTER_KEY = process.env.ASSAY_JUDGE_API_KEY
@@ -526,7 +533,7 @@ async function claimsMain() {
   }
 
   if (!existsSync('fixtures/runs')) mkdirSync('fixtures/runs', { recursive: true })
-  const out = 'fixtures/runs/substitution-claims.json'
+  const out = `fixtures/runs/substitution-claims${TAG}.json`
   writeFileSync(out, JSON.stringify(rows, null, 2))
   console.log(`\n${'═'.repeat(78)}\nraw → ${out}`)
 }

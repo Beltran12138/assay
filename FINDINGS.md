@@ -2149,6 +2149,9 @@ its 16 dropped cells; not a finding, a thing to check with a third judge.
 
 ### What is wrong with this run
 
+- ✅ **Resolved in #24** — all of them are unparseable, none are transport, and
+  the readable cells reproduce exactly across two runs. The text below is what
+  was known when #23 was written.
 - 🔴 **GLM: 16/117 replies unreadable, and the script cannot say why.** The catch
   in `scoreClaims` swallows API errors and `ClaimParseError` alike, so "GLM emits
   malformed JSON" and "the router timed out" are indistinguishable in this data.
@@ -2163,3 +2166,63 @@ its 16 dropped cells; not a finding, a thing to check with a third judge.
   context-driven is well under 39, as pre-registered.
 - `unsupported` on the tampered block counts as `located`. Silence and conflict
   are both reactions to the edit; splitting them needs a larger corpus.
+
+---
+
+## #24 — Repeat run: GLM's losses are all one thing, and the two judges are unstable in opposite ways
+
+`npm run claims -- --tag run2` · 2026-09-22 · 234 calls · raw in
+`fixtures/runs/substitution-claims-run2.json`. Same cells, same prompts,
+temperature 0, with the transport/parse split #23 said was missing.
+
+### The 16 losses were not noise
+
+| judge | lost | transport | unparseable |
+|---|---:|---:|---:|
+| deepseek-chat | 0/117 | 0 | 0 |
+| GLM-5.3-Flash | 17/117 | **0** | **17** |
+
+Not one router failure. Every GLM loss is the model failing to emit a parseable
+object, so it is **a result about GLM, not about the network**, and #23's
+suspension of GLM's numbers is lifted — with the caveat below.
+
+The first example: `<think>Let me analyze the answer and compare it to the
+context provided…` followed by a JSON-shaped span that does not parse. Since
+`stripReasoning` returns the text *after* `</think>`, a reply reaching the parser
+in that state closed its reasoning and then ran out of budget mid-object. So the
+likely cause is the 1600-token cap being eaten by reasoning — the same disease as
+#16 and #19. **This is an inference from one example**, not measured: the per-cell
+detail is not stored. The cheap test is to raise the cap and re-run GLM alone; it
+has not been run, and the number 17 should be read as a property of *this token
+budget*, not of the model.
+
+### ⭐⭐ Stability is inverted between the two judges
+
+The decomposition-stability hole pre-registered in #23, answered by pairing the
+two runs cell by cell:
+
+| judge | readable in both | same claim count | same localisation verdict | mean \|Δderived\| |
+|---|---:|---:|---:|---:|
+| deepseek-chat | 117/117 | **96 (82%)**, max Δ **5 claims** | 106 (91%) | 0.024 |
+| GLM-5.3-Flash | 100/117 | **100 (100%)** | **100 (100%)** | **0.000** |
+
+**deepseek never fails and never quite repeats; GLM fails often and is bit-stable
+when it does not.** At temperature 0, on identical input, deepseek split the same
+answer into a different number of claims in one cell out of five, once by five
+claims. GLM reproduced every cell exactly.
+
+Consequences:
+
+- **`derivedScore` has a moving denominator for deepseek and a fixed one for
+  GLM.** The caveat #23 attached to the metric applies unevenly, and any
+  deepseek mean over it carries a decomposition wobble that no CI in #23 reports.
+- **The localisation lift has run-to-run noise larger than it looks.** deepseek
+  0.487 → **0.564**, GLM 0.438 → **0.455**. The deepseek spread of ~0.08 across
+  two runs is a noise floor estimate the single-run CIs did not contain. The
+  conclusion is unaffected — both runs clear the pre-registered 0.2 floor by a
+  wide margin — but a *lift difference* under ~0.1 between judges is not readable.
+- **Prediction 2 stays not-detected.** deepseek beat GLM again (0.564 vs 0.455),
+  by 0.109, which is now roughly the size of its own run-to-run wobble.
+- ⛔ **This does not say GLM is the better instrument.** Losing 15% of cells to a
+  format it cannot hold is a defect; being reproducible on the rest is a separate
+  property. The two have to be reported apart, not netted.
