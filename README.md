@@ -123,10 +123,25 @@ npm test            # golden cases: intent routing + retrieval, no network
 npm run eval        # judge-scored eval of the reference agent
 npm run selfpref    # generator × judge matrix (see below)
 npm run sensitivity # can this harness still detect a failure it is known to have?
+npm run gates       # frozen release gates, evaluated against results on disk
+npm run claims      # claim-level grading: did the judge find it, or only feel it?
 ```
 
 `eval` needs `DEEPSEEK_API_KEY`. `selfpref` additionally needs
 `ASSAY_JUDGE_BASE_URL` and `ASSAY_JUDGE_API_KEY` for the cross-family judges.
+`gates` needs no network at all — it reads tracked results.
+
+`gates` is where the other checks turn into a release decision, and it inverts the
+usual default: **a gate with no observations does not pass.** Every CI system
+treats a missing test as a green build, which is how a criterion important enough
+to gate on goes unmeasured for months. A threshold is frozen with a hash of its
+own contents, so moving a bar fails to load until it is re-stamped and the
+re-stamp lands in the diff. And a gate is only as good as the score under it: if
+the grader shares a family with the graded, a cleared bar reports `unevaluable`,
+not `pass`. Run against this repo today it returns `unevaluable` on every
+blocking gate, for three different reasons. That is the honest state of the
+evidence, and a harness that reported `release` instead would be the thing this
+repo exists to warn about.
 
 `sensitivity` is the control the other two do not contain: known-label inputs in,
 known verdicts expected out. It exits 1 when a control fails and 2 when one could

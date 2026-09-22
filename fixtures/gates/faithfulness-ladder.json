@@ -1,0 +1,40 @@
+{
+  "_doc": "Release gates for the faithfulness ladder. Frozen before evaluation; see lib/assay/gates.ts. To move a bar you must also re-stamp `hash` and `frozenAt`, which puts the change in the diff — that visibility is the whole mechanism.",
+  "_note": "Evaluated against the current repo this set returns `unevaluable`, not `release`, because nothing has ever measured correctness. That is the intended reading: absent is unknown, not safe.",
+  "frozenAt": "2026-09-22",
+  "hash": "819264483498e6ea",
+  "gates": [
+    {
+      "id": "correctness-no-falsehood",
+      "tier": "redline",
+      "construct": "correctness",
+      "method": "human",
+      "min": 1.0,
+      "rationale": "No answer may be false. Set against `human` on purpose: correctness needs a source outside the pipeline, and the judge cannot supply it (report.ts correctness_absent). With no labels on disk this gate is unevaluable, which is the honest state of this repo and must not read as a pass."
+    },
+    {
+      "id": "faithfulness-intact-floor",
+      "tier": "gate",
+      "construct": "faithfulness",
+      "method": "llm_judge",
+      "min": 0.7,
+      "rationale": "Intact-context means observed in FINDINGS #19/#22 were 0.783 (deepseek) and 0.717-0.863 (GLM). 0.70 sits at the lower observed floor: it fails a run that degrades below what these judges already produce on unedited context, and does not pretend to be a quality standard. ⚠️ FINDINGS #23: this scale is NOT a proportion of supported claims — breaking one fact of seven costs the holistic score 0.58 while the itemised count moves 0.14. The bar is on a severity verdict, so the distance from 0.70 to 0.60 is not the distance from 0.60 to 0.50, and the number must not be read as 'seventy percent of claims were grounded'."
+    },
+    {
+      "id": "retrieval-recall-floor",
+      "tier": "gate",
+      "construct": "retrieval_recall",
+      "method": "deterministic",
+      "min": 0.9,
+      "rationale": "FINDINGS #1: the only document covering FOK/IOC ranks 4th under topK=3, so the fixture has a recall hole that four months of green tests never saw. A deterministic recall check is the cheapest gate in the repo and the one that would have caught it."
+    },
+    {
+      "id": "fact-token-baseline",
+      "tier": "observe",
+      "construct": "fact_token_presence",
+      "method": "deterministic",
+      "min": null,
+      "rationale": "Recorded, never a bar. FINDINGS #2: a correct answer scored 0.00 because it said 100 倍杠杆 and the required token was 100x. Gating on token presence would institutionalise that error; tracking it still detects a corpus that drifted away from its own fixtures."
+    }
+  ]
+}
