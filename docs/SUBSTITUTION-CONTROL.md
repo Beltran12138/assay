@@ -549,3 +549,87 @@ What is not built: nothing asks the judge *which* claim failed. Every rung reads
 single number, so "found the contradiction" and "sensed an inconsistency" remain
 indistinguishable. That is the next question, and it needs a different output
 format rather than a new rung.
+
+---
+
+## Claim-level attribution (`--claims`) — pre-registered 2026-09-22, run the same day
+
+> **Status: run.** Results in FINDINGS #23. Prediction 1 (lift > 0 for both judges)
+> held at 0.487 / 0.438. Prediction 2 (GLM ≥ deepseek) **did not hold**, and the
+> gap is below resolution, so it is recorded as not-detected rather than reversed.
+> Prediction 3 held hard and turned into the run's main result: the holistic
+> scalar falls four times further than the claim count justifies.
+> The text below is the pre-registration, unedited.
+
+The gap above, answered with a different output format rather than another rung.
+`lib/assay/claims.ts` asks the judge to split the answer into claims and return,
+per claim, `supported | contradicted | unsupported` plus the block title it rests
+on. The block label space is closed to the titles present in the context, for the
+same reason `ARGUMENT_FALLACIES` is closed: a judge free to invent a label
+produces a result nobody can reproduce, and here an invented block would be
+counted as a successful localisation.
+
+The three-level shape is taken from the session / trajectory / step attribution in
+AWS's *Agent DLC* whitepaper. The vocabulary does not transfer — a single-turn
+faithfulness probe has no session and no tool trajectory — so it maps onto what is
+actually graded here: **answer → claim → span**.
+
+### The measure
+
+`localisation()` returns one of three values against the block that
+`fixtures/contradictions.json` says was rewritten:
+
+| value | meaning |
+|---|---|
+| `located` | flagged a claim and named the tampered block |
+| `felt` | flagged something, but not there |
+| `missed` | called every claim supported |
+
+**Primary statistic: localisation lift** = P(`located` \| `contradict`) − max over the
+two controls. `contradict` alone is uninterpretable: a judge that names the fee
+block on every context scores 100% `located` and is measuring nothing. `intact`
+and `perturb_unused` run the identical cells with that block untouched, so the
+lift is the only readable quantity. The whitepaper's three-level attribution ships
+with no such control; it assumes the attribution is right.
+
+### Predictions, fixed before the first call
+
+1. **Lift > 0 for both judges.** If lift ≈ 0 while the scalar ladder showed
+   Δ 0.577 (deepseek) and 0.717 (GLM) on the same rung, then these judges detect
+   without localising — "felt", not "found" — and FINDINGS #22's reading of that
+   Δ as *fact-checking rather than topic-matching* is weakened. It would not be
+   overturned: #22 rests on `perturb_unused` being null, which stands either way.
+2. **GLM ≥ deepseek on lift**, since GLM had the larger scalar Δ on `contradict`.
+   If deepseek localises better despite the smaller Δ, the scalar and the
+   claim-level reply are not two views of one quantity, and neither can be used
+   to interpret the other.
+3. `derivedScore` is **not** predicted to track the scalar score. Its denominator
+   is a judge output — the answer's decomposition — so two answers graded alike
+   can differ because one was split into three claims and the other into seven.
+   Comparing the two is a separate experiment, not a validation.
+
+### Power, stated before seeing anything
+
+n = 39 cells per rung per judge, but **39 cells share only 11 distinct contexts**
+(three generators answer the same queries). Cluster size ≈ 3.5, so for anything
+driven by the context rather than the answer the effective n is well below 39:
+at ρ̄ = 0.5 the design effect is 2.25 and n_eff ≈ 17.
+
+Unpaired, two proportions near 0.5 at n = 39 resolve a difference of about 0.22;
+at n_eff = 17 that becomes about 0.33. The rungs are paired on the same cells, so
+a paired analysis does better than this, but the honest statement is: **a lift
+below roughly 0.2 is not readable at this corpus size, and should be reported as
+not-detected rather than as zero.**
+
+### Known holes, listed now rather than found later
+
+- **The decomposition is not checked for stability.** Nothing measures whether a
+  judge splits the same answer into the same claims across two runs. If it does
+  not, `derivedScore` has a moving denominator and every mean over it is suspect.
+  This needs a repeat run before `derivedScore` is used for anything.
+- **`unsupported` on the tampered block counts as `located`.** Silence and
+  conflict are both reactions to the edit, and the judge may reasonably read a
+  rewritten fact as "the context no longer backs this". Splitting them is a
+  finer question than the corpus can support.
+- Unparseable replies are dropped and reported as a count, never counted as
+  supported (FINDINGS #4).

@@ -2070,3 +2070,96 @@ splits them. The per-cell data is in the raw file and is not decomposed here.
   Not significant, not explained.
 - **One corpus, 13 queries, one judging prompt, two judges.** MiniMax still
   excluded since #19.
+
+---
+
+## #23 — Both judges locate the contradiction, and the scalar overstates it by 4×
+
+`npm run claims` · 2026-09-22 · 234 calls · raw in `fixtures/runs/substitution-claims.json`
+
+#22 closed on an admission: every rung reads one number, so "found the
+contradiction" and "sensed an inconsistency" produce identical data. This asks
+the judge for a different reply — each claim in the answer, its verdict
+(`supported` / `contradicted` / `unsupported`), and the context block it rests on,
+with the block label space closed to the titles actually present. Design and
+pre-registration: `docs/SUBSTITUTION-CONTROL.md`, written before the first call.
+
+### They find it, and the control was necessary
+
+| judge | rung | located | felt | missed | n |
+|---|---|---:|---:|---:|---:|
+| deepseek-chat | intact | 0.179 | 0.564 | 0.256 | 39 |
+| | **contradict** | **0.667** | 0.282 | 0.051 | 39 |
+| | perturb_unused | 0.128 | 0.590 | 0.282 | 39 |
+| GLM-5.3-Flash | intact | 0.212 | 0.364 | 0.424 | 33 |
+| | **contradict** | **0.667** | 0.273 | 0.061 | 33 |
+| | perturb_unused | 0.229 | 0.457 | 0.314 | 35 |
+
+Localisation lift **0.487** (deepseek) and **0.438** (GLM), against a
+pre-registered readability floor of ~0.2. Paired on the same cells, McNemar
+exact: deepseek **19 vs 0** discordant (p = 3.8e-6), GLM **15 vs 0** (p = 6.1e-5).
+Not one cell in either judge named the target block on intact context and failed
+to name it once the fact was broken.
+
+⭐ **The control earned its place.** The raw `located` rate on `contradict` is
+0.667 for both judges — and 0.18–0.23 of that is available for free, because both
+flag *something* on untouched context in 57–74% of answers. Reporting 0.667 as
+"the judge localises two thirds of contradictions" would have been wrong by a
+third. The whitepaper pattern this output format is borrowed from ships its
+three-level attribution with no control of this kind.
+
+### ⭐⭐⭐ The scalar is not counting claims
+
+Same cells, same edit, two ways of reading the judge:
+
+| judge | Δ(intact − contradict), scalar (#22) | Δ, claim-level | extra claims flagged |
+|---|---:|---:|---:|
+| deepseek-chat | 0.577 | **0.144** | **+1.05** ±0.32 vs intact, +1.18 ±0.27 vs perturb_unused |
+| GLM-5.3-Flash | 0.717 | **0.147** | +0.66 ±0.40, +0.47 ±0.29 |
+
+We broke **exactly one fact**. deepseek's itemised reply registers exactly that:
+one more claim goes non-supported, CI containing 1 and excluding 0. The holistic
+0..1 score for the same cells falls by 0.58 — **four times what the claim count
+justifies**.
+
+So the 0..1 faithfulness scale is not a proportion of supported claims. It is
+closer to a severity verdict — *is there anything wrong in here* — and #5 already
+suspected this from the leverage question's `0.00 / 0.95 / 1.00` spread. Now it
+has a number. Consequences, in order of how much they cost:
+
+- **Averaging holistic faithfulness across cells averages something nearer a flag
+  than a fraction.** `fixtures/gates/faithfulness-ladder.json` sets a bar of 0.70
+  on exactly that quantity; the bar is not on a linear scale, and the gate's
+  rationale should say so.
+- **A one-fact error and a wholly ungrounded answer land in the same region** of
+  the scalar. The claim-level reply separates them and the scalar cannot.
+- **#22 is not overturned.** Its claim was that the judges fact-check rather than
+  topic-match, resting on `perturb_unused` being null — and the localisation data
+  is a second, independent confirmation, at the level of *which* block.
+
+### Prediction 2 failed, and failed below resolution
+
+Pre-registered: GLM ≥ deepseek on lift, since GLM had the larger scalar Δ.
+Observed deepseek 0.487 > GLM 0.438. The gap is 0.049 against a resolvable
+difference of ~0.22, so this is **not detected, not a reversal** — but the
+ordering the scalar implied did not appear, and on the extra-claims measure GLM's
+CI vs `perturb_unused` ([0.18, 0.76]) **excludes 1**: its scalar collapses hardest
+while its itemised accounting registers less than one broken claim. Confounded by
+its 16 dropped cells; not a finding, a thing to check with a third judge.
+
+### What is wrong with this run
+
+- 🔴 **GLM: 16/117 replies unreadable, and the script cannot say why.** The catch
+  in `scoreClaims` swallows API errors and `ClaimParseError` alike, so "GLM emits
+  malformed JSON" and "the router timed out" are indistinguishable in this data.
+  deepseek was 0/117. The two must be split before GLM's numbers are used for
+  anything. Drops are at least spread evenly across rungs (6/6/4), so they are
+  not selectively removing the hard cells.
+- **The decomposition is not checked for stability.** Nothing here reruns a cell
+  to see whether the judge splits the same answer into the same claims. deepseek
+  produced 7.3–7.6 claims per answer and GLM 5.6–6.3 — a standing difference in
+  granularity, and `derivedScore` has a denominator the judge chose.
+- **39 cells over 11 contexts.** Cluster size ≈3.5; the effective n for anything
+  context-driven is well under 39, as pre-registered.
+- `unsupported` on the tampered block counts as `located`. Silence and conflict
+  are both reactions to the edit; splitting them needs a larger corpus.

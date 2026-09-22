@@ -44,10 +44,15 @@ loadEnv({ path: '.env.local' })
 loadEnv()
 
 import { parseScore, ScoreParseError } from '../lib/assay/parse'
+import {
+  CLAIM_JUDGE_SYSTEM, blockTitles, claimUserMessage, derivedScore, localisation,
+  parseClaimReport, type ClaimReport, type Localisation,
+} from '../lib/assay/claims'
 
 const STAGE2 = process.argv.includes('--stage2')
 const STAGE3 = process.argv.includes('--stage3')
 const STAGE4 = process.argv.includes('--stage4')
+const CLAIMS = process.argv.includes('--claims')
 
 const ROUTER_BASE = process.env.ASSAY_JUDGE_BASE_URL
 const ROUTER_KEY = process.env.ASSAY_JUDGE_API_KEY
@@ -381,7 +386,153 @@ const sd = (xs: number[]) => {
   return Math.sqrt(xs.reduce((s, x) => s + (x - m) ** 2, 0) / (xs.length - 1))
 }
 
+// ── claim-level mode (--claims) ─────────────────────────────────────────────
+//
+// FINDINGS #22 closed on this gap: every rung reads one number, so "the judge
+// located the contradiction" and "the judge felt something was off" are the
+// same datum. The fix is a different reply, not another rung — see
+// lib/assay/claims.ts for the three levels and why the whitepaper's
+// session/trajectory/step vocabulary does not transfer to a single-turn probe.
+//
+// The rung set is stage 4's, because that is where the ground truth lives:
+// fixtures/contradictions.json names the block carrying the rewritten fact, so
+// a claim-level reply can be checked against it rather than believed.
+//
+// ⚠️ `contradict` alone proves nothing. A judge that names the fee block on
+// every context would score 100% located and be measuring nothing. `intact` and
+// `perturb_unused` are run as the false-alarm control: same cells, same
+// question, nothing broken in the block under test. Localisation is only
+// readable as the gap between them. The whitepaper's three-level attribution
+// ships with no such control — it assumes the attribution is right.
+
+const CLAIM_RUNGS: Rung[] = ['intact', 'contradict', 'perturb_unused']
+
+/** Why a cell produced nothing. FINDINGS #23 ran without this distinction and
+ *  could not say whether GLM's 16 losses were malformed JSON or a router
+ *  timeout — which is the difference between "this judge cannot hold the output
+ *  format" (a result) and "the network was busy" (noise). */
+type ClaimOutcome =
+  | { ok: true; report: ClaimReport }
+  | { ok: false; why: 'transport' | 'unparseable'; detail: string }
+
+async function scoreClaims(j: Judge, a: Frozen, ctx: string | null): Promise<ClaimOutcome> {
+  const client = new OpenAI({ apiKey: j.apiKey, baseURL: j.baseURL })
+  let raw: string
+  try {
+    const res = await client.chat.completions.create({
+      model: j.id,
+      messages: [
+        { role: 'system', content: CLAIM_JUDGE_SYSTEM },
+        { role: 'user', content: claimUserMessage(ctx, a.answer) },
+      ],
+      // A structured reply needs more room than a bare decimal; a truncated
+      // object parses as nothing, which is the correct outcome but wastes the call.
+      max_tokens: Math.max(j.maxTokens, 1200),
+      temperature: 0,
+    })
+    raw = res.choices[0]?.message?.content ?? ''
+  } catch (e) {
+    process.stdout.write('T')
+    return { ok: false, why: 'transport', detail: e instanceof Error ? e.message : String(e) }
+  }
+  try {
+    // unparseable ≠ "everything supported" — FINDINGS #4
+    return { ok: true, report: parseClaimReport(raw, blockTitles(ctx ?? '')) }
+  } catch (e) {
+    process.stdout.write('P')
+    return { ok: false, why: 'unparseable', detail: e instanceof Error ? e.message : String(e) }
+  }
+}
+
+async function claimsMain() {
+  console.log('assay · substitution --claims — did the judge find it, or only feel it?')
+  console.log('═'.repeat(78))
+
+  const all = loadCells()
+  // Only cells whose context has a registered contradiction: without ground
+  // truth there is nothing to check a localisation against.
+  const cells = all.filter(c => contradictionFor(c.a.context))
+  console.log(`\n${cells.length}/${all.length} frozen answers have a registered contradiction`)
+  if (cells.length < 3) { console.log('too few to read anything'); process.exit(1) }
+
+  const judges = STAGE2_JUDGES.filter(j => j.apiKey)
+  console.log(`── judges reachable: ${judges.length}/${STAGE2_JUDGES.length}`)
+  if (!judges.length) { console.log('\nNo judge credential. Nothing ran.'); process.exit(2) }
+
+  const rows: Record<string, unknown>[] = []
+  for (const j of judges) {
+    console.log(`\n── ${j.id}`)
+    const jobs = cells.flatMap(c => CLAIM_RUNGS.map(rg => ({ c, rg })))
+    process.stdout.write(`   ${jobs.length} calls  `)
+    const got = await pool(jobs, 6, async ({ c, rg }) =>
+      scoreClaims(j, c.a, buildContext(c.a, rg, [], rng(c.idx * 31 + rg.length * 7))))
+
+    type Row = {
+      cell: string; rung: Rung; loc: Localisation | null
+      derived: number | null; claims: number | null
+      lost: 'transport' | 'unparseable' | null
+    }
+    const out: Row[] = jobs.map(({ c, rg }, k) => {
+      const r = got[k]
+      // The block under test is the same one in every rung — on `intact` and
+      // `perturb_unused` it is intact, which is exactly what makes them the control.
+      const target = contradictionFor(c.a.context)!.match.replace(/[【】]/g, '')
+      return {
+        cell: `${c.gen}#${c.idx}`,
+        rung: rg,
+        loc: r.ok ? localisation(r.report, target) : null,
+        derived: r.ok ? derivedScore(r.report) : null,
+        claims: r.ok ? r.report.findings.length : null,
+        lost: r.ok ? null : r.why,
+      }
+    })
+
+    const nTransport = out.filter(r => r.lost === 'transport').length
+    const nUnparseable = out.filter(r => r.lost === 'unparseable').length
+    const unreadable = nTransport + nUnparseable
+    console.log(`   lost: ${unreadable}/${out.length} — ${nTransport} transport, ${nUnparseable} unparseable ` +
+      `(dropped, never counted as supported)`)
+    if (nUnparseable > 0) {
+      // A judge that cannot hold the output format is a result about that judge,
+      // not noise, so the first example is printed rather than buried in the JSON.
+      const eg = got.find(r => !r.ok && r.why === 'unparseable')
+      if (eg && !eg.ok) console.log(`      e.g. ${eg.detail.slice(0, 160)}`)
+    }
+
+    console.log(`\n   ${'rung'.padEnd(17)}${'located'.padStart(9)}${'felt'.padStart(8)}${'missed'.padStart(8)}` +
+      `${'derived'.padStart(10)}${'claims/ans'.padStart(12)}`)
+    for (const rg of CLAIM_RUNGS) {
+      const xs = out.filter(r => r.rung === rg && r.loc !== null)
+      if (!xs.length) { console.log(`   ${rg.padEnd(17)}   (no readable replies)`); continue }
+      const share = (l: Localisation) => xs.filter(r => r.loc === l).length / xs.length
+      console.log(`   ${rg.padEnd(17)}${share('located').toFixed(3).padStart(9)}${share('felt').toFixed(3).padStart(8)}` +
+        `${share('missed').toFixed(3).padStart(8)}${mean(xs.map(r => r.derived!)).toFixed(3).padStart(10)}` +
+        `${mean(xs.map(r => r.claims!)).toFixed(1).padStart(12)}`)
+    }
+
+    const rate = (rg: Rung) => {
+      const xs = out.filter(r => r.rung === rg && r.loc !== null)
+      return xs.length ? xs.filter(r => r.loc === 'located').length / xs.length : NaN
+    }
+    const lift = rate('contradict') - Math.max(rate('intact'), rate('perturb_unused'))
+    console.log(`\n   ⭐ localisation lift = ${lift.toFixed(3)}  ` +
+      `(contradict ${rate('contradict').toFixed(3)} − worst control ${Math.max(rate('intact'), rate('perturb_unused')).toFixed(3)})`)
+    console.log(`      A judge that names this block regardless scores 0 here, however high its raw located rate.`)
+
+    rows.push({
+      judge: j.id, mode: 'claims', n: cells.length,
+      lost: { transport: nTransport, unparseable: nUnparseable }, lift, perCell: out,
+    })
+  }
+
+  if (!existsSync('fixtures/runs')) mkdirSync('fixtures/runs', { recursive: true })
+  const out = 'fixtures/runs/substitution-claims.json'
+  writeFileSync(out, JSON.stringify(rows, null, 2))
+  console.log(`\n${'═'.repeat(78)}\nraw → ${out}`)
+}
+
 async function main() {
+  if (CLAIMS) return claimsMain()
   const stage = STAGE4 ? 4 : STAGE3 ? 3 : STAGE2 ? 2 : 1
   const rungs = STAGE4 ? STAGE4_RUNGS : STAGE3 ? STAGE3_RUNGS : STAGE2 ? STAGE2_RUNGS : STAGE1_RUNGS
   const judgesAll = STAGE2 || STAGE3 || STAGE4 ? STAGE2_JUDGES : STAGE1_JUDGES
