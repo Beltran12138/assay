@@ -554,6 +554,10 @@ format rather than a new rung.
 
 ## Claim-level attribution (`--claims`) — pre-registered 2026-09-22, run the same day
 
+> 🔴 **Partly superseded by the `ablate_target` result below.** The lift figures
+> in this status line were scored against the wrong block on 6 of 39 cells;
+> corrected they are 0.718 / 0.655. Prediction 2 is unchanged in direction.
+
 > **Status: run.** Results in FINDINGS #23. Prediction 1 (lift > 0 for both judges)
 > held at 0.487 / 0.438. Prediction 2 (GLM ≥ deepseek) **did not hold**, and the
 > gap is below resolution, so it is recorded as not-detected rather than reversed.
@@ -633,3 +637,178 @@ not-detected rather than as zero.**
   finer question than the corpus can support.
 - Unparseable replies are dropped and reported as a count, never counted as
   supported (FINDINGS #4).
+
+## `ablate_target` — pre-registered 2026-09-22, before the first call
+
+> **Status: run.** The text below is the pre-registration, unedited; it was
+> fixed before any judge was called. Results in the next section and in
+> FINDINGS #25. Predictions 1 and 2 held, 3 held for one judge and exposed a
+> flaw in its own bound, 4 failed.
+
+Two of the three holes listed above are closed by one rung, and the reason the
+rung exists at all came from outside this repo.
+
+### Where it comes from
+
+Bespoke Labs released `nimble` on 2026-09-20, an open reproduction of TypeSafe's
+Jev: a LoRA on Qwen3.5-9B, Apache 2.0, with training data and method published.
+Its data construction is the same primitive this ladder uses — two contexts
+differing in exactly one fact, with the label flipped — arrived at independently.
+That alone is worth recording: the substitution design is not idiosyncratic.
+
+Their step 3 is the part this repo did not have:
+
+> Then we remove each evidence sentence in turn. With either sentence removed,
+> the focus fact must become unknown, even with all of the other text present.
+> This way, we know that no other text gives away the answer.
+
+### What the transplant found before any judge ran
+
+`lib/assay/ablation.ts` implements it as a deterministic offline audit of
+`fixtures/contradictions.json`, checking five properties the file asserted in
+prose and never tested. The fixture passes all five: **0 issues on 11
+contradictions × 11 distinct contexts.** So there is no verbatim duplicate of any
+cited fact, and — contrary to the expectation that motivated the transplant — no
+leakage deflating the stage-4 or claim-level results. Coverage limit, stated
+here rather than discovered later: the check is a substring match, so a
+paraphrased duplicate passes it and is still a leak.
+
+The structural dump alongside the audit found something the audit itself did not
+look for.
+
+### 🔴 The ground truth for `localisation` was the wrong field
+
+`claimsMain` derived the tampered block from `match` with its brackets stripped.
+`match` only has to identify the **context** uniquely; the edited fact can live
+in a different block of that context, and in one of the eleven it does:
+
+| entry | `match` selects the context by | `find` actually lives in |
+|---|---|---|
+| withdrawal | `【提币操作步骤】` | `【提币到账时间】` |
+
+On the 6 of 39 cells sharing that context, FINDINGS #23 scored a judge that named
+the block it had actually broken as `felt`, and a judge that named an untouched
+block as `located`. The statistic was inverted there.
+
+It cannot be repaired from disk: `fixtures/runs/substitution-claims*.json` stored
+only the collapsed `located | felt | missed`, not the block names the judge
+returned, so recomputing against corrected ground truth needs another API run.
+The artifact now keeps `verdicts` and `blocks` per reply, so the next ground-truth
+correction costs nothing.
+
+### The rung
+
+| rung | the target fact is | ground truth verdict |
+|---|---|---|
+| `intact` | present, agreeing | `supported` |
+| `contradict` | present, disagreeing | `contradicted` |
+| `ablate_target` | **absent** | `unsupported` |
+
+`CLAIM_JUDGE_SYSTEM` instructs the judge that `unsupported` and `contradicted`
+are different verdicts and must not be merged. That instruction has had no
+observable since it was written. Three rungs give ground truth for all three
+values of `ClaimVerdict`, one each, on the same cells.
+
+The block is replaced with filler rather than deleted, so block count and rough
+length are held the way `swap_top1` holds them. The difference from `swap_top1`
+is the point: that rung picks its victim by character-set overlap with the
+answer, a heuristic; this one takes the block the fixture names.
+
+⚠️ `located` is **undefined** on this rung — the target title leaves the closed
+label set with the block, so a judge naming it is a parse failure, which is the
+correct reading. It prints `n/a`, not `0.000`. An unmeasurable is not a zero.
+
+⚠️ The rung is **not** added to `STAGE4_RUNGS`. Stage 4's artifact is the input to
+`npm run gates` and a gate set is frozen against a content hash; widening the
+rung set there would force a re-stamp for a reason unrelated to the gates.
+
+### Two new statistics, each with its own control
+
+**conflict/silence separation** = P(any `contradicted` \| `contradict`) −
+P(any `contradicted` \| `ablate_target`).
+
+The ablated context contradicts nothing — the fact is simply gone. Every
+`contradicted` finding on that rung is a conflict invented out of an absence.
+
+**absence detection** = P(any non-`supported` \| `ablate_target`) −
+P(any non-`supported` \| `intact`).
+
+`intact` is the control: same answer, same question, block still there.
+
+### Predictions, fixed before the first call
+
+1. **conflict/silence separation > 0 for both judges.** If it is ≈ 0, the judges
+   react to a removed block exactly as to a rewritten one, and the
+   `contradicted` / `unsupported` split is a distinction they do not make — which
+   would make every claim-level `contradicted` count in FINDINGS #23
+   uninterpretable, not merely imprecise.
+2. **absence detection > 0 for both judges.** If it is ≤ 0, removing the block
+   that supports the answer does not move the judge, which is "absent read as
+   safe" at the claim level — this repo's central rule failing on its own
+   instrument. This is the prediction I most expect to be wrong, because a judge
+   that never marks anything `unsupported` on `intact` has nowhere to go but up,
+   and one that marks plenty has no headroom.
+3. **The corrected localisation lift moves by less than 0.154 for both judges.**
+   Not a guess: 6 of 39 cells were mis-scored, so the largest possible change in
+   any single rung's `located` rate is 6/39 = 0.154, and the lift is a difference
+   of two such rates. A larger move than that is arithmetically impossible and
+   would mean something else changed. Direction is genuinely open — correcting
+   the target raises `located` on `contradict` for those cells, and also on the
+   controls if the judge names that block spuriously.
+4. **`ablate_target` loses more replies to parse failure than the other rungs,
+   for at least one judge.** The removed title leaves the closed label set, so a
+   judge anchored on it now names a block that is not there. If parse loss is
+   flat across rungs, the judges were not anchored on that block at all, which
+   would weaken the localisation reading in the other direction.
+
+### Power
+
+Unchanged from the claim-level pre-registration: 39 cells over 11 distinct
+contexts, cluster size ≈ 3.5, n_eff ≈ 17 at ρ̄ = 0.5. **A difference below roughly
+0.2 is not readable and is to be reported as not-detected rather than as zero.**
+Both new statistics are differences of proportions on paired cells, so they do
+somewhat better than the unpaired bound, but nothing here resolves 0.1.
+
+### What this does not establish
+
+- **Nothing about accuracy.** Ground truth here is the state of the context, not
+  the truth of the answer. A judge can score perfectly on all three rungs and
+  still be wrong about the world.
+- **One fixture, eleven contexts, fictional.** The same limit every stage has.
+- **The ablation removes a whole block, not a sentence.** Bespoke removes one
+  evidence sentence; this corpus has no cell where two sentences are both
+  required, so the finer version is not available here.
+
+## `ablate_target` result (2026-09-22) — the corpus does support the split, and the scoreboard was wrong
+
+`npm run claims -- --tag ablate` · raw in `fixtures/runs/substitution-claims-ablate.json` ·
+written up as FINDINGS #25.
+
+| prediction | outcome |
+|---|---|
+| 1. separation > 0 for both | ✅ deepseek **0.718**, GLM **0.842** |
+| 2. absence detection > 0 for both | ✅ **0.205** / **0.563** — deepseek's at the edge of resolution, for the reason given |
+| 3. corrected lift moves < 0.154 | ✅ exactly for deepseek (+0.1538 against a 6/39 = 0.15385 bound); ❌ GLM (+0.2001) — the bound was **underspecified**, it holds only with a fixed readable set |
+| 4. `ablate_target` loses more replies | ❌ deepseek 0/156; GLM flat at 20–23 per rung |
+
+Three things the run settled:
+
+- **The declared hole is closed.** Both judges separate `contradicted` from
+  `unsupported` against ground truth; GLM makes zero false contradictions in 68
+  readable replies across all three control rungs. The split was not finer than
+  the corpus could support — it was finer than the *rung set* could support.
+- 🔴 **The localisation ground truth was the wrong field on 6 of 39 cells**, and
+  deepseek's corrected lift moved by exactly the arithmetic maximum, meaning it
+  had named the right block on every one of them and been scored `felt` for it.
+  `targetTitle()` now derives it from where `find` is; `ablation.test.ts` pins
+  the one entry where the two fields legitimately differ.
+- 🔴 **Absence costs ~2.8× more than contradiction** on `derivedScore`, for both
+  judges, within 0.12 of each other. Expected once stated — ablation removes
+  support for every claim on the block — and therefore the first validation
+  `derivedScore` has had as a dependence measure.
+
+⚠️ **GLM lost 88 of 156 replies**, up from 17 of 117 the day before with every
+declared parameter unchanged. The printed sample is an unterminated JSON string,
+so truncation is the leading explanation and the untested `max_tokens` experiment
+is now the obvious next run — but silent drift behind an unversioned router alias
+fits the same evidence, and this run does not separate them.

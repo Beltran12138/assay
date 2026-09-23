@@ -1,0 +1,6936 @@
+[
+  {
+    "judge": "deepseek-chat",
+    "mode": "claims",
+    "n": 39,
+    "lost": {
+      "transport": 0,
+      "unparseable": 0
+    },
+    "lift": 0.717948717948718,
+    "conflictSilenceSeparation": 0.717948717948718,
+    "absenceDetection": 0.20512820512820507,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "verdicts": [
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 2,
+        "verdicts": [
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "verdicts": [
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 2,
+        "verdicts": [
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.9333333333333333,
+        "claims": 15,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8571428571428571,
+        "claims": 14,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "contradicted",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.9333333333333333,
+        "claims": 15,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.6666666666666666,
+        "claims": 15,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.3333333333333333,
+        "claims": 6,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币未到账处理",
+          null,
+          "提币未到账处理",
+          null,
+          "提币操作步骤",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "intact",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "contradict",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "contradicted",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "perturb_unused",
+        "target": "KYC认证所需材料",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          null,
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "ablate_target",
+        "target": "KYC认证所需材料",
+        "loc": null,
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          "KYC被拒或长时间未审核",
+          null,
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "intact",
+        "target": "如何充值入金",
+        "loc": "located",
+        "derived": 0.5555555555555556,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "contradict",
+        "target": "如何充值入金",
+        "loc": "located",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "contradicted",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "perturb_unused",
+        "target": "如何充值入金",
+        "loc": "located",
+        "derived": 0.5555555555555556,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "ablate_target",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": 0.25,
+        "claims": 8,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "充值未到账处理",
+          null,
+          null,
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "intact",
+        "target": "账户安全建议",
+        "loc": "felt",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "contradict",
+        "target": "账户安全建议",
+        "loc": "located",
+        "derived": 0.2222222222222222,
+        "claims": 9,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "contradicted",
+          "contradicted",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "账户安全建议",
+          "账户安全建议",
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "perturb_unused",
+        "target": "账户安全建议",
+        "loc": "felt",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "ablate_target",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": 0.1111111111111111,
+        "claims": 9,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "intact",
+        "target": "永续合约交易介绍",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          null,
+          null,
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "contradict",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          null,
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "perturb_unused",
+        "target": "永续合约交易介绍",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          null,
+          null,
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "ablate_target",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": 0.3333333333333333,
+        "claims": 6,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "合约强平机制",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "intact",
+        "target": "注册账户流程",
+        "loc": "felt",
+        "derived": 0.8461538461538461,
+        "claims": 13,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          "注册账户流程",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          "邀请码使用说明",
+          "邀请码使用说明",
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "contradict",
+        "target": "注册账户流程",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 12,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          "注册账户流程",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          "注册账户流程",
+          "邀请码使用说明",
+          "邀请码使用说明",
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "perturb_unused",
+        "target": "注册账户流程",
+        "loc": "felt",
+        "derived": 0.8461538461538461,
+        "claims": 13,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          "注册账户流程",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          "邀请码使用说明",
+          "邀请码使用说明",
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "ablate_target",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": 0.4166666666666667,
+        "claims": 12,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          null,
+          null,
+          null,
+          "邀请码使用说明",
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "intact",
+        "target": "API接口说明",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          "API接口说明",
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "contradict",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          "API接口说明",
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "perturb_unused",
+        "target": "API接口说明",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          "API接口说明",
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "ablate_target",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": 0.3333333333333333,
+        "claims": 6,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "intact",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "contradict",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          null,
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "perturb_unused",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "ablate_target",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "撤单操作与常见问题",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "intact",
+        "target": "账户被冻结原因及解冻",
+        "loc": "felt",
+        "derived": 0.42857142857142855,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "contradict",
+        "target": "账户被冻结原因及解冻",
+        "loc": "located",
+        "derived": 0,
+        "claims": 9,
+        "verdicts": [
+          "unsupported",
+          "contradicted",
+          "contradicted",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "perturb_unused",
+        "target": "账户被冻结原因及解冻",
+        "loc": "felt",
+        "derived": 0.3,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "ablate_target",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": 0.1,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "账户功能受限原因",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "intact",
+        "target": "税务报表与交易记录导出",
+        "loc": "felt",
+        "derived": 0.375,
+        "claims": 8,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          "税务报表与交易记录导出",
+          null,
+          null,
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "contradict",
+        "target": "税务报表与交易记录导出",
+        "loc": "located",
+        "derived": 0.2857142857142857,
+        "claims": 7,
+        "verdicts": [
+          "unsupported",
+          "contradicted",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          "税务报表与交易记录导出",
+          null,
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "perturb_unused",
+        "target": "税务报表与交易记录导出",
+        "loc": "felt",
+        "derived": 0.375,
+        "claims": 8,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          "税务报表与交易记录导出",
+          null,
+          null,
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "ablate_target",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": 0,
+        "claims": 7,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "现货交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "现货交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "现货交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.25,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "合约交易手续费",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 11,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币到账时间",
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.7,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "contradicted"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.9230769230769231,
+        "claims": 13,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.625,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币操作步骤",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          null,
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          null,
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          null,
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "intact",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "contradict",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "perturb_unused",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "ablate_target",
+        "target": "KYC认证所需材料",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          "KYC被拒或长时间未审核",
+          "KYC被拒或长时间未审核",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "intact",
+        "target": "如何充值入金",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "充错网络资产找回",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "contradict",
+        "target": "如何充值入金",
+        "loc": "located",
+        "derived": 0.3333333333333333,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "perturb_unused",
+        "target": "如何充值入金",
+        "loc": "felt",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "充错网络资产找回",
+          null,
+          null,
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "ablate_target",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": 0.1,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "充错网络资产找回",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "intact",
+        "target": "账户安全建议",
+        "loc": "felt",
+        "derived": 0.4444444444444444,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          "账户安全建议"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "contradict",
+        "target": "账户安全建议",
+        "loc": "located",
+        "derived": 0.375,
+        "claims": 8,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "contradicted",
+          "contradicted",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "账户安全建议",
+          "账户安全建议",
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          "账户安全建议"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "perturb_unused",
+        "target": "账户安全建议",
+        "loc": "felt",
+        "derived": 0.3,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          "账户安全建议",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "ablate_target",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": 0.125,
+        "claims": 8,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "intact",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "contradict",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "perturb_unused",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "ablate_target",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "合约强平机制",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "intact",
+        "target": "注册账户流程",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 12,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          null,
+          "注册账户流程",
+          "注册验证邮件未收到",
+          null,
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "contradict",
+        "target": "注册账户流程",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 15,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "contradicted"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          null,
+          "注册账户流程",
+          "注册验证邮件未收到",
+          null,
+          "邀请码使用说明",
+          "注册账户流程"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "perturb_unused",
+        "target": "注册账户流程",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 12,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          null,
+          "注册账户流程",
+          "注册验证邮件未收到",
+          null,
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "ablate_target",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": 0.3125,
+        "claims": 16,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          null,
+          null,
+          null,
+          "注册验证邮件未收到",
+          null,
+          "邀请码使用说明",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "intact",
+        "target": "API接口说明",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          null,
+          "API接口说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "contradict",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          null,
+          "API接口说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "perturb_unused",
+        "target": "API接口说明",
+        "loc": "felt",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          null,
+          "API接口说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "ablate_target",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "API速率限制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "intact",
+        "target": "限价单未成交原因",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "contradict",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          null,
+          null,
+          null,
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "perturb_unused",
+        "target": "限价单未成交原因",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "撤单操作与常见问题",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "ablate_target",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": 0.125,
+        "claims": 8,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "撤单操作与常见问题",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "intact",
+        "target": "账户被冻结原因及解冻",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "contradict",
+        "target": "账户被冻结原因及解冻",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "contradicted",
+          "contradicted"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "perturb_unused",
+        "target": "账户被冻结原因及解冻",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "ablate_target",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": 0.2,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户功能受限原因",
+          null,
+          null,
+          null,
+          "账户功能受限原因",
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "intact",
+        "target": "税务报表与交易记录导出",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "contradict",
+        "target": "税务报表与交易记录导出",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "perturb_unused",
+        "target": "税务报表与交易记录导出",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "ablate_target",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": 0,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "contradicted",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币到账时间",
+          null,
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.75,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币到账时间",
+          null,
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币到账时间",
+          null,
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.5555555555555556,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.42857142857142855,
+        "claims": 7,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "intact",
+        "target": "KYC认证所需材料",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          null,
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "contradict",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "perturb_unused",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "ablate_target",
+        "target": "KYC认证所需材料",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          "KYC被拒或长时间未审核",
+          "KYC被拒或长时间未审核",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "intact",
+        "target": "如何充值入金",
+        "loc": "located",
+        "derived": 0.5454545454545454,
+        "claims": 11,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "充错网络资产找回",
+          "充值未到账处理",
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "contradict",
+        "target": "如何充值入金",
+        "loc": "located",
+        "derived": 0.7142857142857143,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "perturb_unused",
+        "target": "如何充值入金",
+        "loc": "felt",
+        "derived": 0.7142857142857143,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "如何充值入金",
+          "充错网络资产找回",
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "ablate_target",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": 0.3,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "contradicted",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "充值未到账处理",
+          null,
+          null,
+          "充值未到账处理",
+          "充错网络资产找回",
+          null,
+          "充值未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "intact",
+        "target": "账户安全建议",
+        "loc": "felt",
+        "derived": 0.2727272727272727,
+        "claims": 11,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "账户安全建议",
+          null,
+          "手机丢失/无法使用2FA",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "contradict",
+        "target": "账户安全建议",
+        "loc": "located",
+        "derived": 0.18181818181818182,
+        "claims": 11,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "contradicted",
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          null,
+          "账户安全建议",
+          "账户安全建议",
+          null,
+          null,
+          "账户安全建议",
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "perturb_unused",
+        "target": "账户安全建议",
+        "loc": "felt",
+        "derived": 0.2727272727272727,
+        "claims": 11,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "账户安全建议",
+          null,
+          "手机丢失/无法使用2FA",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "ablate_target",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": 0.08333333333333333,
+        "claims": 12,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "contradicted",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          null,
+          "账户被盗或疑似入侵处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "intact",
+        "target": "永续合约交易介绍",
+        "loc": "felt",
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "contradict",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "perturb_unused",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "ablate_target",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": 0.25,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "合约强平机制",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "intact",
+        "target": "注册账户流程",
+        "loc": "felt",
+        "derived": 0.9090909090909091,
+        "claims": 11,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          "注册账户流程",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          "邀请码使用说明",
+          "邀请码使用说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "contradict",
+        "target": "注册账户流程",
+        "loc": "located",
+        "derived": 0.8181818181818182,
+        "claims": 11,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          "注册账户流程",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          "注册账户流程",
+          "邀请码使用说明",
+          "邀请码使用说明",
+          "邀请码使用说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "perturb_unused",
+        "target": "注册账户流程",
+        "loc": "felt",
+        "derived": 0.9,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "注册账户流程",
+          "注册账户流程",
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册账户流程",
+          "注册账户流程",
+          "邀请码使用说明",
+          "邀请码使用说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "ablate_target",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          "注册验证邮件未收到",
+          null,
+          null,
+          "邀请码使用说明",
+          "邀请码使用说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "intact",
+        "target": "API接口说明",
+        "loc": "felt",
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "contradict",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          null,
+          "API接口说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "perturb_unused",
+        "target": "API接口说明",
+        "loc": "felt",
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "API接口说明",
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "ablate_target",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": 0,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "intact",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.8888888888888888,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "撤单操作与常见问题",
+          "撤单操作与常见问题",
+          "限价单未成交原因",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "contradict",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          null,
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "撤单操作与常见问题",
+          "撤单操作与常见问题",
+          "限价单未成交原因"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "perturb_unused",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.8888888888888888,
+        "claims": 9,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "撤单操作与常见问题",
+          "撤单操作与常见问题",
+          "限价单未成交原因",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "ablate_target",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": 0.2727272727272727,
+        "claims": 11,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          "撤单操作与常见问题",
+          "撤单操作与常见问题",
+          "撤单操作与常见问题",
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "intact",
+        "target": "账户被冻结原因及解冻",
+        "loc": "felt",
+        "derived": 0.5714285714285714,
+        "claims": 14,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "contradict",
+        "target": "账户被冻结原因及解冻",
+        "loc": "located",
+        "derived": 0.35714285714285715,
+        "claims": 14,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "contradicted",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "contradicted",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          null,
+          null,
+          "账户被冻结原因及解冻",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "perturb_unused",
+        "target": "账户被冻结原因及解冻",
+        "loc": "felt",
+        "derived": 0.6428571428571429,
+        "claims": 14,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "账户被冻结原因及解冻",
+          null,
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          "账户被冻结原因及解冻",
+          null,
+          "账户功能受限原因",
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "ablate_target",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": 0.3076923076923077,
+        "claims": 13,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          "账户功能受限原因",
+          null,
+          "账户功能受限原因",
+          "账户功能受限原因",
+          null,
+          null,
+          null,
+          "账户功能受限原因",
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "intact",
+        "target": "税务报表与交易记录导出",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "税务报表与交易记录导出",
+          null,
+          null,
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "contradict",
+        "target": "税务报表与交易记录导出",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "税务报表与交易记录导出",
+          null,
+          null,
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "perturb_unused",
+        "target": "税务报表与交易记录导出",
+        "loc": "felt",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "税务报表与交易记录导出",
+          null,
+          null,
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出",
+          "税务报表与交易记录导出"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "ablate_target",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": 0,
+        "claims": 6,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      }
+    ]
+  },
+  {
+    "judge": "zai-org/GLM-5.3-Flash",
+    "mode": "claims",
+    "n": 39,
+    "lost": {
+      "transport": 0,
+      "unparseable": 88
+    },
+    "lift": 0.6546052631578947,
+    "conflictSilenceSeparation": 0.8421052631578947,
+    "absenceDetection": 0.5625,
+    "perCell": [
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "verdicts": [
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 2,
+        "verdicts": [
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 2,
+        "verdicts": [
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#0",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 2,
+        "verdicts": [
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#1",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#2",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币操作步骤",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#3",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.3333333333333333,
+        "claims": 6,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币未到账处理",
+          null,
+          "提币未到账处理",
+          null,
+          "提币操作步骤",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "intact",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "contradict",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "perturb_unused",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC认证的好处",
+          "KYC被拒或长时间未审核"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#4",
+        "rung": "ablate_target",
+        "target": "KYC认证所需材料",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "intact",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "contradict",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "perturb_unused",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#5",
+        "rung": "ablate_target",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "intact",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "contradict",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "perturb_unused",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#6",
+        "rung": "ablate_target",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "intact",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "contradict",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 6,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "合约强平机制",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "perturb_unused",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "合约强平机制",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#7",
+        "rung": "ablate_target",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "intact",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "contradict",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "perturb_unused",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#8",
+        "rung": "ablate_target",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "intact",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.5714285714285714,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "contradict",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "perturb_unused",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#9",
+        "rung": "ablate_target",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": 0.3333333333333333,
+        "claims": 6,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "intact",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "contradict",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "perturb_unused",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#10",
+        "rung": "ablate_target",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "intact",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "contradict",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "perturb_unused",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#11",
+        "rung": "ablate_target",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "intact",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "contradict",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "perturb_unused",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "deepseek-chat#12",
+        "rung": "ablate_target",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": 0,
+        "claims": 11,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "现货交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "contradicted",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "现货交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "现货交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#0",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.3333333333333333,
+        "claims": 3,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          "合约交易手续费",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#1",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 1,
+        "claims": 3,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#2",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#3",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          "提币未到账处理"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "intact",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "contradict",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "perturb_unused",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#4",
+        "rung": "ablate_target",
+        "target": "KYC认证所需材料",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          "KYC被拒或长时间未审核",
+          "KYC被拒或长时间未审核",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "intact",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "contradict",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "perturb_unused",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#5",
+        "rung": "ablate_target",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "intact",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "contradict",
+        "target": "账户安全建议",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "contradicted",
+          "contradicted",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          "账户安全建议",
+          "账户安全建议",
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          "账户安全建议"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "perturb_unused",
+        "target": "账户安全建议",
+        "loc": "located",
+        "derived": 0.5,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "账户安全建议",
+          null,
+          "账户安全建议",
+          null,
+          null,
+          "手机丢失/无法使用2FA",
+          "账户安全建议",
+          "账户安全建议"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#6",
+        "rung": "ablate_target",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "intact",
+        "target": "永续合约交易介绍",
+        "loc": "felt",
+        "derived": 0.8333333333333334,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          null,
+          "永续合约交易介绍",
+          "合约强平机制",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "contradict",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "perturb_unused",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#7",
+        "rung": "ablate_target",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "合约强平机制",
+          "合约强平机制",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "intact",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "contradict",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "perturb_unused",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#8",
+        "rung": "ablate_target",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "intact",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.4,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          "API接口说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "contradict",
+        "target": "API接口说明",
+        "loc": "located",
+        "derived": 0.2,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "API接口说明",
+          "API接口说明",
+          "API接口说明",
+          null,
+          "API接口说明"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "perturb_unused",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#9",
+        "rung": "ablate_target",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": 0,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "API Key安全须知",
+          "API Key安全须知",
+          "API Key安全须知",
+          "API Key安全须知",
+          "API速率限制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "intact",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "contradict",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "perturb_unused",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#10",
+        "rung": "ablate_target",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "intact",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "contradict",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "perturb_unused",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#11",
+        "rung": "ablate_target",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "intact",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "contradict",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "perturb_unused",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "MiniMaxAI/MiniMax-M2.7#12",
+        "rung": "ablate_target",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": 0,
+        "claims": 10,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "contradicted",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "现货交易手续费",
+          "现货交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#0",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.5,
+        "claims": 4,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          null,
+          null,
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "intact",
+        "target": "现货交易手续费",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "contradict",
+        "target": "现货交易手续费",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "perturb_unused",
+        "target": "现货交易手续费",
+        "loc": "felt",
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#1",
+        "rung": "ablate_target",
+        "target": "现货交易手续费",
+        "loc": null,
+        "derived": 0.75,
+        "claims": 4,
+        "verdicts": [
+          "supported",
+          "unsupported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费",
+          "合约交易手续费"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.7,
+        "claims": 10,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "提币操作步骤",
+          "提币操作步骤",
+          null,
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币操作步骤",
+          "提币到账时间",
+          "提币到账时间",
+          null,
+          "提币到账时间"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#2",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "intact",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "contradict",
+        "target": "提币到账时间",
+        "loc": "located",
+        "derived": 0.8571428571428571,
+        "claims": 7,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "perturb_unused",
+        "target": "提币到账时间",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 7,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币到账时间",
+          "提币未到账处理",
+          "提币未到账处理",
+          "提币操作步骤"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#3",
+        "rung": "ablate_target",
+        "target": "提币到账时间",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "intact",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "contradict",
+        "target": "KYC认证所需材料",
+        "loc": "located",
+        "derived": 0.8,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "contradicted",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "perturb_unused",
+        "target": "KYC认证所需材料",
+        "loc": "missed",
+        "derived": 1,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ],
+        "blocks": [
+          "KYC认证所需材料",
+          "KYC认证所需材料",
+          "KYC被拒或长时间未审核",
+          "KYC认证所需材料",
+          "KYC认证的好处"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#4",
+        "rung": "ablate_target",
+        "target": "KYC认证所需材料",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "intact",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "contradict",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "perturb_unused",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#5",
+        "rung": "ablate_target",
+        "target": "如何充值入金",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "intact",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "contradict",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "perturb_unused",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#6",
+        "rung": "ablate_target",
+        "target": "账户安全建议",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "intact",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.6666666666666666,
+        "claims": 6,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "contradict",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "contradicted",
+          "supported",
+          "supported",
+          "unsupported",
+          "supported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "perturb_unused",
+        "target": "永续合约交易介绍",
+        "loc": "located",
+        "derived": 0.6,
+        "claims": 5,
+        "verdicts": [
+          "supported",
+          "supported",
+          "unsupported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "永续合约交易介绍",
+          "合约强平机制"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#7",
+        "rung": "ablate_target",
+        "target": "永续合约交易介绍",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "intact",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "contradict",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "perturb_unused",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#8",
+        "rung": "ablate_target",
+        "target": "注册账户流程",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "intact",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "contradict",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "perturb_unused",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#9",
+        "rung": "ablate_target",
+        "target": "API接口说明",
+        "loc": null,
+        "derived": 0,
+        "claims": 5,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          "API Key安全须知",
+          "API Key安全须知",
+          "API Key安全须知",
+          "API Key安全须知",
+          "API Key安全须知"
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "intact",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "contradict",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "perturb_unused",
+        "target": "限价单未成交原因",
+        "loc": "felt",
+        "derived": 0.875,
+        "claims": 8,
+        "verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "supported",
+          "unsupported"
+        ],
+        "blocks": [
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "限价单未成交原因",
+          "撤单操作与常见问题",
+          "撤单操作与常见问题",
+          "限价单未成交原因",
+          null
+        ],
+        "lost": null
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#10",
+        "rung": "ablate_target",
+        "target": "限价单未成交原因",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "intact",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "contradict",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "perturb_unused",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#11",
+        "rung": "ablate_target",
+        "target": "账户被冻结原因及解冻",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "intact",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "contradict",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "perturb_unused",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": null,
+        "claims": null,
+        "verdicts": null,
+        "blocks": null,
+        "lost": "unparseable"
+      },
+      {
+        "cell": "moonshotai/Kimi-K2.6#12",
+        "rung": "ablate_target",
+        "target": "税务报表与交易记录导出",
+        "loc": null,
+        "derived": 0,
+        "claims": 7,
+        "verdicts": [
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported",
+          "unsupported"
+        ],
+        "blocks": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "lost": null
+      }
+    ]
+  }
+]

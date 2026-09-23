@@ -46,8 +46,11 @@ loadEnv()
 import { parseScore, ScoreParseError } from '../lib/assay/parse'
 import {
   CLAIM_JUDGE_SYSTEM, blockTitles, claimUserMessage, derivedScore, localisation,
-  parseClaimReport, type ClaimReport, type Localisation,
+  parseClaimReport, type ClaimReport, type ClaimVerdict, type Localisation,
 } from '../lib/assay/claims'
+import {
+  ablateTarget, auditContradictions, findTargetBlock, type ContradictionEntry,
+} from '../lib/assay/ablation'
 
 const STAGE2 = process.argv.includes('--stage2')
 const STAGE3 = process.argv.includes('--stage3')
@@ -85,7 +88,7 @@ const JUDGE_SYSTEM =
 
 const TAIL = '0.0 = contains claims absent from the context / 1.0 = every claim is supported.'
 
-type Rung = 'intact' | 'shuffled' | 'other' | 'identity_free' | 'empty' | 'swap_top1' | 'swap_bot2' | 'contradict' | 'perturb_unused'
+type Rung = 'intact' | 'shuffled' | 'other' | 'identity_free' | 'empty' | 'swap_top1' | 'swap_bot2' | 'contradict' | 'perturb_unused' | 'ablate_target'
 const STAGE1_RUNGS: Rung[] = ['intact', 'empty']
 const STAGE2_RUNGS: Rung[] = ['intact', 'identity_free', 'shuffled', 'other', 'empty']
 const STAGE3_RUNGS: Rung[] = ['intact', 'swap_top1', 'swap_bot2', 'identity_free']
@@ -108,6 +111,13 @@ const REPEATS: Record<Rung, number> = {
   // floor and stage 2 already showed it is a hard 0.000 for both judges.
   swap_top1: 2, swap_bot2: 2,
   contradict: 2, perturb_unused: 2,
+  // Claim-mode only. ⚠️ `ablate_target` is deliberately absent from
+  // STAGE4_RUNGS: stage 4's saved artifact is the input to `npm run gates`, and
+  // a gate set is frozen against a content hash, so widening the rung set would
+  // force a re-stamp for a reason that has nothing to do with the gates. The
+  // rung earns its place where the three-verdict ground truth lives, and stays
+  // out of the scalar ladder until the scalar has a question it can answer.
+  ablate_target: 2,
 }
 
 type Frozen = { query: string; intent: string; context: string; answer: string }
@@ -208,7 +218,7 @@ function swapBlocks(a: Frozen, mode: 'top1' | 'bot2'): string | null {
   return header + blocks.map((b, i) => (victims.has(i) ? fillerBlock(f++) : b)).join('\n\n')
 }
 
-type Contradiction = { match: string; find: string; replace: string; cite: string }
+type Contradiction = ContradictionEntry & { note?: string }
 const CONTRADICTIONS: Contradiction[] = (() => {
   try {
     return JSON.parse(readFileSync('fixtures/contradictions.json', 'utf8')).contradictions
@@ -230,6 +240,24 @@ function cites(a: Frozen): boolean {
 function contradict(a: Frozen): string | null {
   const c = contradictionFor(a.context)
   return c ? a.context.replace(c.find, c.replace) : null
+}
+
+/**
+ * The block carrying the fact under test, by title.
+ *
+ * 🔴 NOT `match` with the brackets stripped, which is what FINDINGS #23 used.
+ * `match` only has to identify the *context* uniquely; the edited fact can sit
+ * in a different block of that context, and in one of the eleven it does:
+ * `【提币操作步骤】` selects the withdrawal context while `find` lives in
+ * `【提币到账时间】`. On those cells #23 scored a judge that named the block it
+ * actually broke as `felt`, and a judge that named an untouched block as
+ * `located` — the statistic inverted on 6 of 39 cells. Derived from where `find`
+ * is, so the two cannot drift apart again.
+ */
+function targetTitle(a: Frozen): string | null {
+  const c = contradictionFor(a.context)
+  if (!c) return null
+  return findTargetBlock(a.context, c.find)?.title ?? null
 }
 
 /** Same kind of edit, same rough size, on material no answer relies on. */
@@ -272,6 +300,13 @@ function buildContext(a: Frozen, rung: Rung, others: string[], r: () => number):
     case 'swap_bot2': return swapBlocks(a, 'bot2')
     case 'contradict': return contradict(a)
     case 'perturb_unused': return perturbUnused(a)
+    case 'ablate_target': {
+      const c = contradictionFor(a.context)
+      // Same filler mechanism as swap_top1, so block count and rough length are
+      // held; the difference is that the victim is named by the fixture rather
+      // than picked by character overlap.
+      return c ? ablateTarget(a.context, c.find, fillerBlock(0)) : null
+    }
   }
 }
 
@@ -411,8 +446,39 @@ const sd = (xs: number[]) => {
 // question, nothing broken in the block under test. Localisation is only
 // readable as the gap between them. The whitepaper's three-level attribution
 // ships with no such control — it assumes the attribution is right.
+//
+// ─── `ablate_target`, added 2026-09-22 ──────────────────────────────────────
+//
+// Closes the second hole `docs/SUBSTITUTION-CONTROL.md` declared when this mode
+// was pre-registered: "`unsupported` on the tampered block counts as `located`.
+// Silence and conflict are both reactions to the edit … Splitting them is a
+// finer question than the corpus can support."
+//
+// With a third rung the corpus supports it, because the three rungs supply
+// ground truth for the three values of `ClaimVerdict`, one each:
+//
+//   intact          fact present, agreeing     → supported
+//   contradict      fact present, disagreeing  → contradicted
+//   ablate_target   fact absent                → unsupported
+//
+// `CLAIM_JUDGE_SYSTEM` tells the judge those last two are different verdicts and
+// must not be merged. That instruction has had no observable until now. A judge
+// answering `contradicted` where the block was simply removed is manufacturing a
+// conflict out of a silence — the exact direction of error "absent is unknown,
+// not safe" exists to catch, and invisible to every rung run so far.
+//
+// The rung and the fixture audit it depends on come from Bespoke Labs' `nimble`;
+// `lib/assay/ablation.ts` has the provenance and the coverage limits.
+//
+// ⚠️ `located` is undefined on this rung: the target block is gone, so its title
+// is not in the closed label set and a judge naming it is a parse failure, which
+// is the correct reading. The lift below is therefore computed over the other
+// three rungs only, and this one is printed with `n/a` rather than 0.000 —
+// FINDINGS #4 in a new place: an unmeasurable is not a zero.
 
-const CLAIM_RUNGS: Rung[] = ['intact', 'contradict', 'perturb_unused']
+const CLAIM_RUNGS: Rung[] = ['intact', 'contradict', 'perturb_unused', 'ablate_target']
+/** Rungs on which `localisation` has a target block to check against. */
+const LOCATABLE_RUNGS: Rung[] = ['intact', 'contradict', 'perturb_unused']
 
 /** Why a cell produced nothing. FINDINGS #23 ran without this distinction and
  *  could not say whether GLM's 16 losses were malformed JSON or a router
@@ -462,6 +528,34 @@ async function claimsMain() {
   console.log(`\n${cells.length}/${all.length} frozen answers have a registered contradiction`)
   if (cells.length < 3) { console.log('too few to read anything'); process.exit(1) }
 
+  // ── fixture audit, offline, before any judge call ──────────────────────────
+  // The rungs are built by string surgery on the context; if `find` is not
+  // unique, or the cited token survives elsewhere, the edit does not do what the
+  // rung claims and no amount of judge data will show it.
+  console.log('\n── fixture audit (offline, before any judge call)')
+  const contexts = [...new Set(all.map(c => c.a.context))]
+  const issues = auditContradictions(contexts, CONTRADICTIONS)
+  console.log(`   ${CONTRADICTIONS.length} contradictions × ${contexts.length} distinct contexts → ${issues.length} issue(s)`)
+  for (const i of issues) console.log(`   ⚠️ [${i.code}] ${i.entry} — ${i.detail}`)
+  console.log('   coverage: verbatim substrings only — a paraphrased duplicate passes this and is still a leak')
+  if (issues.length) { console.log('\nFixture audit failed. Not calling any judge.'); process.exit(1) }
+
+  // Every cell must have a resolvable target block, or its localisation is
+  // unreadable and it would be silently scored against the wrong ground truth.
+  const untargeted = cells.filter(c => targetTitle(c.a) === null)
+  if (untargeted.length) {
+    console.log(`\n${untargeted.length} cell(s) have no resolvable target block. Not calling any judge.`)
+    process.exit(1)
+  }
+  const retargeted = cells.filter(c => targetTitle(c.a) !== contradictionFor(c.a.context)!.match.replace(/[【】]/g, ''))
+  if (retargeted.length) {
+    console.log(`   🔴 ${retargeted.length}/${cells.length} cells: the edited block is not the one named by \`match\` ` +
+      `— FINDINGS #23 scored these against the wrong block`)
+    for (const t of new Set(retargeted.map(c => `${contradictionFor(c.a.context)!.match} → 【${targetTitle(c.a)}】`))) {
+      console.log(`      ${t}`)
+    }
+  }
+
   const judges = STAGE2_JUDGES.filter(j => j.apiKey)
   console.log(`── judges reachable: ${judges.length}/${STAGE2_JUDGES.length}`)
   if (!judges.length) { console.log('\nNo judge credential. Nothing ran.'); process.exit(2) }
@@ -475,21 +569,30 @@ async function claimsMain() {
       scoreClaims(j, c.a, buildContext(c.a, rg, [], rng(c.idx * 31 + rg.length * 7))))
 
     type Row = {
-      cell: string; rung: Rung; loc: Localisation | null
+      cell: string; rung: Rung; target: string; loc: Localisation | null
       derived: number | null; claims: number | null
+      /** Verdicts present in the reply, and the blocks named. Kept because
+       *  FINDINGS #23's artifact stored only the collapsed `loc`, so when the
+       *  ground truth turned out to be wrong the statistic could not be
+       *  recomputed from disk — it needed another API run. */
+      verdicts: ClaimVerdict[] | null
+      blocks: (string | null)[] | null
       lost: 'transport' | 'unparseable' | null
     }
     const out: Row[] = jobs.map(({ c, rg }, k) => {
       const r = got[k]
       // The block under test is the same one in every rung — on `intact` and
       // `perturb_unused` it is intact, which is exactly what makes them the control.
-      const target = contradictionFor(c.a.context)!.match.replace(/[【】]/g, '')
+      const target = targetTitle(c.a)!
       return {
         cell: `${c.gen}#${c.idx}`,
         rung: rg,
-        loc: r.ok ? localisation(r.report, target) : null,
+        target,
+        loc: r.ok && LOCATABLE_RUNGS.includes(rg) ? localisation(r.report, target) : null,
         derived: r.ok ? derivedScore(r.report) : null,
         claims: r.ok ? r.report.findings.length : null,
+        verdicts: r.ok ? r.report.findings.map(f => f.verdict) : null,
+        blocks: r.ok ? r.report.findings.map(f => f.block) : null,
         lost: r.ok ? null : r.why,
       }
     })
@@ -499,6 +602,16 @@ async function claimsMain() {
     const unreadable = nTransport + nUnparseable
     console.log(`   lost: ${unreadable}/${out.length} — ${nTransport} transport, ${nUnparseable} unparseable ` +
       `(dropped, never counted as supported)`)
+    // Per rung, because `ablate_target` removes a block title from the closed
+    // label set: a judge that keeps naming it now fails to parse, and that
+    // concentrates in one rung rather than spreading evenly. Reporting only the
+    // total would hide a rung-specific effect as general noise.
+    if (unreadable > 0) {
+      console.log('   by rung: ' + CLAIM_RUNGS.map(rg => {
+        const xs = out.filter(r => r.rung === rg)
+        return `${rg} ${xs.filter(r => r.lost).length}/${xs.length}`
+      }).join('  '))
+    }
     if (nUnparseable > 0) {
       // A judge that cannot hold the output format is a result about that judge,
       // not noise, so the first example is printed rather than buried in the JSON.
@@ -506,29 +619,64 @@ async function claimsMain() {
       if (eg && !eg.ok) console.log(`      e.g. ${eg.detail.slice(0, 160)}`)
     }
 
+    /** Readable replies for a rung. */
+    const readable = (rg: Rung) => out.filter(r => r.rung === rg && r.verdicts !== null)
+    /** Share of readable replies containing at least one finding of this verdict. */
+    const vRate = (rg: Rung, v: ClaimVerdict) => {
+      const xs = readable(rg)
+      return xs.length ? xs.filter(r => r.verdicts!.includes(v)).length / xs.length : NaN
+    }
+    const f3 = (x: number) => (Number.isNaN(x) ? '  n/a' : x.toFixed(3))
+
     console.log(`\n   ${'rung'.padEnd(17)}${'located'.padStart(9)}${'felt'.padStart(8)}${'missed'.padStart(8)}` +
-      `${'derived'.padStart(10)}${'claims/ans'.padStart(12)}`)
+      `${'derived'.padStart(10)}${'claims'.padStart(8)}${'contra'.padStart(9)}${'unsup'.padStart(8)}`)
     for (const rg of CLAIM_RUNGS) {
-      const xs = out.filter(r => r.rung === rg && r.loc !== null)
+      const xs = readable(rg)
       if (!xs.length) { console.log(`   ${rg.padEnd(17)}   (no readable replies)`); continue }
-      const share = (l: Localisation) => xs.filter(r => r.loc === l).length / xs.length
-      console.log(`   ${rg.padEnd(17)}${share('located').toFixed(3).padStart(9)}${share('felt').toFixed(3).padStart(8)}` +
-        `${share('missed').toFixed(3).padStart(8)}${mean(xs.map(r => r.derived!)).toFixed(3).padStart(10)}` +
-        `${mean(xs.map(r => r.claims!)).toFixed(1).padStart(12)}`)
+      const loc = xs.filter(r => r.loc !== null)
+      const share = (l: Localisation) =>
+        loc.length ? f3(loc.filter(r => r.loc === l).length / loc.length) : '  n/a'
+      console.log(`   ${rg.padEnd(17)}${share('located').padStart(9)}${share('felt').padStart(8)}` +
+        `${share('missed').padStart(8)}${mean(xs.map(r => r.derived!)).toFixed(3).padStart(10)}` +
+        `${mean(xs.map(r => r.claims!)).toFixed(1).padStart(8)}` +
+        `${f3(vRate(rg, 'contradicted')).padStart(9)}${f3(vRate(rg, 'unsupported')).padStart(8)}`)
     }
 
     const rate = (rg: Rung) => {
       const xs = out.filter(r => r.rung === rg && r.loc !== null)
       return xs.length ? xs.filter(r => r.loc === 'located').length / xs.length : NaN
     }
-    const lift = rate('contradict') - Math.max(rate('intact'), rate('perturb_unused'))
+    const worstControl = Math.max(rate('intact'), rate('perturb_unused'))
+    const lift = rate('contradict') - worstControl
     console.log(`\n   ⭐ localisation lift = ${lift.toFixed(3)}  ` +
-      `(contradict ${rate('contradict').toFixed(3)} − worst control ${Math.max(rate('intact'), rate('perturb_unused')).toFixed(3)})`)
+      `(contradict ${rate('contradict').toFixed(3)} − worst control ${worstControl.toFixed(3)})`)
     console.log(`      A judge that names this block regardless scores 0 here, however high its raw located rate.`)
+
+    // Ground truth: the ablated context contains no contradiction of anything.
+    // Every `contradicted` finding on that rung is a conflict invented out of an
+    // absence. The gap is how far the judge separates the two verdicts it was
+    // explicitly told not to merge.
+    const sep = vRate('contradict', 'contradicted') - vRate('ablate_target', 'contradicted')
+    console.log(`   ⭐ conflict/silence separation = ${f3(sep)}  ` +
+      `(contradicted on contradict ${f3(vRate('contradict', 'contradicted'))} − on ablate_target ${f3(vRate('ablate_target', 'contradicted'))})`)
+    console.log(`      0 means the judge reacts to a removed block exactly as to a rewritten one.`)
+
+    // Does the judge notice the support is gone at all? `intact` is the control:
+    // same answer, same question, the block still there.
+    const flagged = (rg: Rung) => {
+      const xs = readable(rg)
+      return xs.length ? xs.filter(r => r.verdicts!.some(v => v !== 'supported')).length / xs.length : NaN
+    }
+    const absence = flagged('ablate_target') - flagged('intact')
+    console.log(`   ⭐ absence detection = ${f3(absence)}  ` +
+      `(any non-supported on ablate_target ${f3(flagged('ablate_target'))} − on intact ${f3(flagged('intact'))})`)
+    console.log(`      Negative or ~0 means removing the supporting block did not move the judge — absent read as safe.`)
 
     rows.push({
       judge: j.id, mode: 'claims', n: cells.length,
-      lost: { transport: nTransport, unparseable: nUnparseable }, lift, perCell: out,
+      lost: { transport: nTransport, unparseable: nUnparseable },
+      lift, conflictSilenceSeparation: sep, absenceDetection: absence,
+      perCell: out,
     })
   }
 
