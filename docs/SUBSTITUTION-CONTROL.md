@@ -812,3 +812,37 @@ declared parameter unchanged. The printed sample is an unterminated JSON string,
 so truncation is the leading explanation and the untested `max_tokens` experiment
 is now the obvious next run — but silent drift behind an unversioned router alias
 fits the same evidence, and this run does not separate them.
+
+## GLM's losses: truncation or a changed model? — pre-registered 2026-09-22
+
+> **Status: pre-registration**, written before either arm ran.
+
+FINDINGS #25 recorded GLM's claim-mode loss rate going from 14.5% to 56.4% in one
+day with prompt, `max_tokens` and temperature all unchanged, flat across rungs.
+Two explanations fit: replies are hitting the 1600-token cap, or the model behind
+the unversioned `zai-org/GLM-5.3-Flash` alias changed. Raising the cap alone does
+not separate them — a changed model can also produce longer output. What does is
+the provider's own `finish_reason`, now recorded per reply alongside the model id
+the router reports back and the completion-token count.
+
+**Design.** GLM only, the same 39 cells × 4 rungs, two arms run back to back in
+one session so that any drift between them is minutes, not a day:
+
+| arm | claim `max_tokens` |
+|---|---|
+| `cap1600` | the default, `max(1600, 1200)` — reproduces #25's condition |
+| `cap4000` | `--max-tokens 4000` |
+
+**Readings, fixed in advance.**
+
+| observation | reading |
+|---|---|
+| `cap1600` losses mostly `finish_reason = length`, and `cap4000` loses < 10% | **truncation.** The cap is the cause of the losses; yesterday's lower rate then means GLM's replies got longer, which is itself a change in the model's output, but not a format failure |
+| `cap1600` losses mostly `stop` | **not truncation.** GLM ends its reply on its own and the reply does not parse — a format change; the cap is irrelevant |
+| `served` differs from the requested id, or varies across calls | direct evidence of routing to a different model, whatever `finish_reason` says |
+| `cap1600` does not reproduce a high loss rate today | the 56.4% was transient; neither reading can be made from this run |
+
+**What the arms must not be used for.** The localisation statistics from
+`cap4000` are *not* a replacement for #25's GLM numbers unless the readable set is
+near-complete; a judge read at 95% and one read at 44% are different samples, and
+#25 already records why the lift bound failed when the readable set moved.

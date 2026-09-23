@@ -484,13 +484,36 @@ const LOCATABLE_RUNGS: Rung[] = ['intact', 'contradict', 'perturb_unused']
  *  could not say whether GLM's 16 losses were malformed JSON or a router
  *  timeout — which is the difference between "this judge cannot hold the output
  *  format" (a result) and "the network was busy" (noise). */
+/** What the provider said about the call, kept on every outcome that got a
+ *  response. FINDINGS #25 saw GLM's loss rate go from 14.5% to 56.4% in a day
+ *  with every declared parameter held, and could not say whether replies were
+ *  being cut off or had changed shape. `finish` answers that directly: `length`
+ *  is truncation by the cap, `stop` on an unparseable reply is the model's own
+ *  output. `served` is the model id the router reports back, which is the only
+ *  visible trace of a silent swap behind an alias. */
+type CallMeta = { finish: string | null; served: string | null; completionTokens: number | null }
+
 type ClaimOutcome =
-  | { ok: true; report: ClaimReport }
-  | { ok: false; why: 'transport' | 'unparseable'; detail: string }
+  | ({ ok: true; report: ClaimReport } & CallMeta)
+  | ({ ok: false; why: 'unparseable'; detail: string } & CallMeta)
+  | { ok: false; why: 'transport'; detail: string }
+
+/** `--max-tokens N` overrides the claim-mode cap for every judge in the run. */
+const MAX_TOKENS_OVERRIDE = (() => {
+  const i = process.argv.indexOf('--max-tokens')
+  const n = i > 0 ? Number(process.argv[i + 1]) : NaN
+  return Number.isFinite(n) && n > 0 ? n : null
+})()
+/** `--only <substring>` restricts the run to judges whose id contains it. */
+const ONLY = (() => {
+  const i = process.argv.indexOf('--only')
+  return i > 0 && process.argv[i + 1] ? process.argv[i + 1] : null
+})()
 
 async function scoreClaims(j: Judge, a: Frozen, ctx: string | null): Promise<ClaimOutcome> {
   const client = new OpenAI({ apiKey: j.apiKey, baseURL: j.baseURL })
   let raw: string
+  let meta: CallMeta
   try {
     const res = await client.chat.completions.create({
       model: j.id,
@@ -500,20 +523,25 @@ async function scoreClaims(j: Judge, a: Frozen, ctx: string | null): Promise<Cla
       ],
       // A structured reply needs more room than a bare decimal; a truncated
       // object parses as nothing, which is the correct outcome but wastes the call.
-      max_tokens: Math.max(j.maxTokens, 1200),
+      max_tokens: MAX_TOKENS_OVERRIDE ?? Math.max(j.maxTokens, 1200),
       temperature: 0,
     })
     raw = res.choices[0]?.message?.content ?? ''
+    meta = {
+      finish: res.choices[0]?.finish_reason ?? null,
+      served: res.model ?? null,
+      completionTokens: res.usage?.completion_tokens ?? null,
+    }
   } catch (e) {
     process.stdout.write('T')
     return { ok: false, why: 'transport', detail: e instanceof Error ? e.message : String(e) }
   }
   try {
     // unparseable ≠ "everything supported" — FINDINGS #4
-    return { ok: true, report: parseClaimReport(raw, blockTitles(ctx ?? '')) }
+    return { ok: true, report: parseClaimReport(raw, blockTitles(ctx ?? '')), ...meta }
   } catch (e) {
     process.stdout.write('P')
-    return { ok: false, why: 'unparseable', detail: e instanceof Error ? e.message : String(e) }
+    return { ok: false, why: 'unparseable', detail: e instanceof Error ? e.message : String(e), ...meta }
   }
 }
 
@@ -556,8 +584,10 @@ async function claimsMain() {
     }
   }
 
-  const judges = STAGE2_JUDGES.filter(j => j.apiKey)
-  console.log(`── judges reachable: ${judges.length}/${STAGE2_JUDGES.length}`)
+  const judges = STAGE2_JUDGES.filter(j => j.apiKey && (!ONLY || j.id.includes(ONLY)))
+  console.log(`── judges reachable: ${judges.length}/${STAGE2_JUDGES.length}` +
+    (ONLY ? `  (--only ${ONLY})` : '') +
+    `  · claim max_tokens: ${MAX_TOKENS_OVERRIDE ?? 'default max(judge, 1200)'}`)
   if (!judges.length) { console.log('\nNo judge credential. Nothing ran.'); process.exit(2) }
 
   const rows: Record<string, unknown>[] = []
@@ -578,6 +608,7 @@ async function claimsMain() {
       verdicts: ClaimVerdict[] | null
       blocks: (string | null)[] | null
       lost: 'transport' | 'unparseable' | null
+      finish: string | null; served: string | null; completionTokens: number | null
     }
     const out: Row[] = jobs.map(({ c, rg }, k) => {
       const r = got[k]
@@ -594,6 +625,9 @@ async function claimsMain() {
         verdicts: r.ok ? r.report.findings.map(f => f.verdict) : null,
         blocks: r.ok ? r.report.findings.map(f => f.block) : null,
         lost: r.ok ? null : r.why,
+        finish: 'finish' in r ? r.finish : null,
+        served: 'served' in r ? r.served : null,
+        completionTokens: 'completionTokens' in r ? r.completionTokens : null,
       }
     })
 
@@ -612,6 +646,19 @@ async function claimsMain() {
         return `${rg} ${xs.filter(r => r.lost).length}/${xs.length}`
       }).join('  '))
     }
+    // Truncation or a changed model? The provider's own finish_reason separates
+    // them without inference: `length` means the cap cut the reply off.
+    const tally = (xs: Row[], k: 'finish' | 'served') => {
+      const m = new Map<string, number>()
+      for (const r of xs) { const v = String(r[k] ?? '∅'); m.set(v, (m.get(v) ?? 0) + 1) }
+      return [...m.entries()].sort((a, b) => b[1] - a[1]).map(([v, n]) => `${v} ${n}`).join(', ')
+    }
+    const answered = out.filter(r => r.lost !== 'transport')
+    console.log(`   finish_reason · unparseable: ${tally(out.filter(r => r.lost === 'unparseable'), 'finish') || '—'}` +
+      `  |  readable: ${tally(out.filter(r => r.lost === null), 'finish') || '—'}`)
+    console.log(`   served model: ${tally(answered, 'served') || '—'}`)
+    const toks = answered.map(r => r.completionTokens).filter((x): x is number => typeof x === 'number').sort((a, b) => a - b)
+    if (toks.length) console.log(`   completion tokens: median ${toks[Math.floor(toks.length / 2)]}, max ${toks[toks.length - 1]}`)
     if (nUnparseable > 0) {
       // A judge that cannot hold the output format is a result about that judge,
       // not noise, so the first example is printed rather than buried in the JSON.
