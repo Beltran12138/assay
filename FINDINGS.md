@@ -2181,6 +2181,10 @@ its 16 dropped cells; not a finding, a thing to check with a third judge.
 > #23's wrong ground-truth block. Corrected: deepseek 0.564 → **0.718**, GLM
 > 0.455 → **0.655**. The decomposition-stability result below is unaffected —
 > it pairs runs cell by cell and never uses the target block.
+>
+> ⚠️ **Also qualified by #26:** "GLM reproduced every cell exactly" holds only
+> with the whole request fixed. Changing `max_tokens` alone, with no truncation
+> on either side, changed 25 of 68 of its answers.
 
 `npm run claims -- --tag run2` · 2026-09-22 · 234 calls · raw in
 `fixtures/runs/substitution-claims-run2.json`. Same cells, same prompts,
@@ -2241,6 +2245,12 @@ Consequences:
 ---
 
 ## #25 — The scoreboard was reading the wrong block, and absence costs 2.8× more than contradiction
+
+> 🔴 **GLM figures superseded in part by #26.** Every GLM number below comes from
+> the 68 of 156 replies that survived truncation, and the survivors were not
+> random. "0 false contradictions — GLM obeys it perfectly" is a survivor
+> artifact (4/35 on the rescued cells); treat GLM's statistics here as upper
+> bounds. deepseek's figures and the ground-truth correction are unaffected.
 
 `npm run claims -- --tag ablate` · raw in `fixtures/runs/substitution-claims-ablate.json` ·
 pre-registration in `docs/SUBSTITUTION-CONTROL.md` · code in `lib/assay/ablation.ts`
@@ -2415,3 +2425,109 @@ replies you can barely read.
   reply long enough to truncate may correlate with the cell, so GLM's rates are
   conditioned on surviving truncation and are not directly comparable to
   deepseek's.
+
+---
+
+## #26 — GLM's losses are its own reasoning eating the budget, and the survivors flattered it
+
+`npm run claims -- --only GLM --tag glm-cap1600` and `… --max-tokens 4000 --tag glm-cap4000`,
+run back to back · raw in `fixtures/runs/substitution-claims-glm-cap{1600,4000}.json` ·
+pre-registration in `docs/SUBSTITUTION-CONTROL.md`, committed before either arm ran.
+
+#25 left GLM's loss rate unexplained: 14.5% → 56.4% in a day with prompt,
+`max_tokens` and temperature unchanged. Two readings were pre-registered —
+truncation by the cap, or a changed model behind the unversioned alias — to be
+separated by the provider's own `finish_reason`, now recorded per reply.
+
+### The mechanism: reasoning and answer share one budget
+
+| arm | lost | `finish_reason` of losses | `finish_reason` of readable | completion tokens, median / max |
+|---|---:|---|---|---:|
+| cap1600 | 88/156 | **length 88** | stop 68 | 1600 / 1600 |
+| cap4000 | 42/156 | **length 42** | stop 114 | 1869 / 4000 |
+
+Every loss at both caps is `length`. Not one reply ended on its own and failed to
+parse. But raising the cap to 4000 did not bring losses under 10%, which the
+pre-registration named as the truncation signature — and the sample printed by
+the 4000 arm is an **empty `content` string on a reply that spent all 4000
+completion tokens**.
+
+A one-cell probe settles where they went. GLM's response message carries a
+`reasoning` field beside `content`, and `usage.completion_tokens` covers both —
+on the probed cell, 220 tokens for 272 characters of answer and 269 of reasoning.
+**The reasoning is billed against `max_tokens`.** On cells where GLM thinks long,
+the answer is squeezed to a truncated object; at the extreme the reasoning takes
+the whole budget and the answer is empty. `thinking: {"type": "disabled"}` was
+passed and ignored by the router: the reasoning field came back unchanged.
+
+So the pre-registered table half-fits. Row 1's mechanism holds (it is the cap);
+its signature does not (a larger cap does not fix it), because the cap is being
+consumed by output the table did not anticipate.
+
+The other rows: `served` is `zai-org/GLM-5.3-Flash` on all 312 replies — no
+evidence of a swap, though a router is free to report the alias it was asked
+for. And the cap1600 arm reproduced #25 **bit for bit** — same 88 losses, same
+table to three decimals — so there was no drift between those two runs.
+Yesterday's 14.5% remains unexplained: that artifact has no `finish_reason`, and
+the leading hypothesis — reasoning appearing, or lengthening, between the two
+days — cannot be tested retroactively.
+
+### 🔴 The losses were not random, and #25's GLM numbers were survivors
+
+The 42 cells lost at 4000 are **all** among the 88 lost at 1600; none is new.
+Losing a reply is a stable property of the cell, which is what "this cell makes
+GLM reason long" predicts. Cells that make a judge think longer are plausibly the
+harder ones, so dropping them should flatter it. It did:
+
+| any `contradicted` finding on | survivors at 1600 | rescued by 4000 |
+|---|---:|---:|
+| intact | 0/16 | 1/10 |
+| perturb_unused | 0/17 | 1/10 |
+| ablate_target | 0/16 | 2/15 |
+| contradict | 16/19 | 8/11 |
+
+#25 reported that GLM "obeys perfectly — 0 false contradictions in 68 readable
+replies across all three control rungs." True of those 68, and **entirely an
+artifact of which 68**: on the cells the cap had been silently removing, GLM
+reports a contradiction where none exists 4 times in 35.
+
+| GLM statistic | cap1600 (68 readable) | cap4000 (114 readable) |
+|---|---:|---:|
+| localisation lift | 0.655 | **0.554** |
+| conflict/silence separation | 0.842 | **0.735** |
+| absence detection | 0.563 | **0.397** |
+| false contradiction, three controls | 0/49 | 4/80 |
+
+Every statistic falls as the readable set grows. **Neither column is GLM's
+number.** The 4000 arm still loses 27% by the same mechanism, so it is a less
+biased survivor sample, not an unbiased one; the pre-registration already ruled
+that neither arm replaces #25's figures unless the readable set is near-complete.
+What can be said: GLM's claim-mode statistics are **upper bounds**, and #25's
+were looser ones than it presented.
+
+deepseek is untouched by all of this — it lost nothing in either run.
+
+### Not predicted: the output depends on `max_tokens` even when nothing is cut
+
+Of the 68 cells readable at both caps — both ended with `stop`, same prompt,
+temperature 0 — only **43 (63%)** returned identical verdicts and block names.
+Changing only the token ceiling changed a third of the untruncated answers. Yet
+the same request repeated at the same ceiling is bit-identical (cap1600 against
+#25). So #24's "GLM reproduced every cell exactly" is true only when the whole
+request is held fixed, `max_tokens` included; it is not a property of the model
+on the prompt. Whether the budget is visible to the reasoning or reaches a
+different serving path is not determinable from outside.
+
+### Consequences
+
+- **GLM is not a usable claim-mode judge on this router** as configured: the
+  reasoning cannot be switched off, and a fixed budget will always drop the
+  cells it thinks hardest about, biasing every statistic upward. A higher cap
+  narrows the bias; it does not remove it.
+- **Report GLM's #25 claim-mode figures as upper bounds**, and discard the
+  "perfect specificity" reading.
+- **The lesson generalises beyond GLM.** A judge whose parse failures correlate
+  with item difficulty produces a clean-looking survivor sample. The per-rung
+  loss table added in #25 could not catch this — loss was flat across rungs —
+  because the correlation runs through the *cell*, not the rung. Only rerunning
+  with the losses rescued exposed it.

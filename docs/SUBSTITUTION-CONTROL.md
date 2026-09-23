@@ -815,7 +815,10 @@ fits the same evidence, and this run does not separate them.
 
 ## GLM's losses: truncation or a changed model? — pre-registered 2026-09-22
 
-> **Status: pre-registration**, written before either arm ran.
+> **Status: run** — FINDINGS #26. The text below is the pre-registration, unedited.
+> Row 1's mechanism held and its signature did not: every loss is `length` at both
+> caps, but the budget is consumed by a `reasoning` field billed against `max_tokens`,
+> which the table did not anticipate. Row 4's guard held and mattered.
 
 FINDINGS #25 recorded GLM's claim-mode loss rate going from 14.5% to 56.4% in one
 day with prompt, `max_tokens` and temperature all unchanged, flat across rungs.
@@ -846,3 +849,18 @@ one session so that any drift between them is minutes, not a day:
 `cap4000` are *not* a replacement for #25's GLM numbers unless the readable set is
 near-complete; a judge read at 95% and one read at 44% are different samples, and
 #25 already records why the lift bound failed when the readable set moved.
+
+### Result (2026-09-23)
+
+| reading | outcome |
+|---|---|
+| losses mostly `length` | ✅ 88/88 and 42/42 |
+| cap4000 loses < 10% | ❌ 42/156 = 26.9%, still all `length` |
+| `served` differs or varies | ❌ alias reported on all 312 |
+| cap1600 fails to reproduce | ❌ reproduced #25 bit for bit |
+
+Cause, from a one-cell probe: the response carries a `reasoning` field and
+`completion_tokens` covers it; `thinking: disabled` is ignored by the router.
+Losses at 4000 are a strict subset of losses at 1600, and the rescued cells
+contain the false contradictions the survivors lacked — so GLM's claim-mode
+statistics are upper bounds at any fixed cap. Full write-up in FINDINGS #26.
