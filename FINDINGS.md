@@ -2075,6 +2075,12 @@ splits them. The per-cell data is in the raw file and is not decomposed here.
 
 ## #23 — Both judges locate the contradiction, and the scalar overstates it by 4×
 
+> 🔴 **Superseded in part by #25 (2026-09-22).** Every `located` / `felt` /
+> `missed` figure below was scored against the block named by the fixture's
+> `match` field, which is the wrong block on 6 of 39 cells. The corrected
+> localisation lift is **0.718** (deepseek) and **0.655** (GLM), both higher.
+> The numbers are left as computed; do not quote them without #25.
+
 `npm run claims` · 2026-09-22 · 234 calls · raw in `fixtures/runs/substitution-claims.json`
 
 #22 closed on an admission: every rung reads one number, so "found the
@@ -2171,6 +2177,15 @@ its 16 dropped cells; not a finding, a thing to check with a third judge.
 
 ## #24 — Repeat run: GLM's losses are all one thing, and the two judges are unstable in opposite ways
 
+> 🔴 **Superseded in part by #25 (2026-09-22).** The lift figures here inherit
+> #23's wrong ground-truth block. Corrected: deepseek 0.564 → **0.718**, GLM
+> 0.455 → **0.655**. The decomposition-stability result below is unaffected —
+> it pairs runs cell by cell and never uses the target block.
+>
+> ⚠️ **Also qualified by #26:** "GLM reproduced every cell exactly" holds only
+> with the whole request fixed. Changing `max_tokens` alone, with no truncation
+> on either side, changed 25 of 68 of its answers.
+
 `npm run claims -- --tag run2` · 2026-09-22 · 234 calls · raw in
 `fixtures/runs/substitution-claims-run2.json`. Same cells, same prompts,
 temperature 0, with the transport/parse split #23 said was missing.
@@ -2226,3 +2241,293 @@ Consequences:
 - ⛔ **This does not say GLM is the better instrument.** Losing 15% of cells to a
   format it cannot hold is a defect; being reproducible on the rest is a separate
   property. The two have to be reported apart, not netted.
+
+---
+
+## #25 — The scoreboard was reading the wrong block, and absence costs 2.8× more than contradiction
+
+> 🔴 **GLM figures superseded in part by #26.** Every GLM number below comes from
+> the 68 of 156 replies that survived truncation, and the survivors were not
+> random. "0 false contradictions — GLM obeys it perfectly" is a survivor
+> artifact (4/35 on the rescued cells); treat GLM's statistics here as upper
+> bounds. deepseek's figures and the ground-truth correction are unaffected.
+
+`npm run claims -- --tag ablate` · raw in `fixtures/runs/substitution-claims-ablate.json` ·
+pre-registration in `docs/SUBSTITUTION-CONTROL.md` · code in `lib/assay/ablation.ts`
+
+Bespoke Labs released `nimble` on 2026-09-20, an open reproduction of TypeSafe's
+Jev. Its training data is built the same way this ladder is — two contexts
+differing in exactly one fact, label flipped — which is worth recording on its
+own: the substitution design was arrived at independently by someone solving a
+different problem. It carries one step this repo did not have, quoted in
+`lib/assay/ablation.ts`: with the evidence removed, the focus fact **must become
+unknown**, or some other text was giving the answer away.
+
+Transplanting it produced three things, in ascending order of importance.
+
+### 1. The fixture is clean, and the expectation that motivated the check was backwards
+
+`auditContradictions` checks five properties `fixtures/contradictions.json`
+asserts in prose and never tested. **0 issues on 11 contradictions × 11 distinct
+contexts.** No cited fact is duplicated verbatim anywhere outside the block that
+carries it.
+
+The reasoning that motivated the transplant was also wrong about the direction.
+A leak would mean `contradict` does not really break the support, so the judge
+would correctly keep calling the claim supported and be scored as having missed —
+a leak **deflates** the localisation lift. There was nothing to deflate, but the
+sign matters for anyone repeating this: this control raises a floor, it does not
+lower a ceiling.
+
+⚠️ Coverage: substring matching only. A paraphrased duplicate passes it and is
+still a leak. "No verbatim duplicate" is the whole claim.
+
+### 2. 🔴 `localisation` was scored against the wrong block on 6 of 39 cells
+
+Found by the structural dump printed beside the audit, not by the audit.
+
+`claimsMain` derived the tampered block from the fixture's `match` field with its
+brackets stripped. `match` only has to identify the **context** uniquely; the
+edited fact may live in a different block of it, and in one of the eleven it
+does — `【提币操作步骤】` selects the withdrawal context while `find` sits in
+`【提币到账时间】`. On the 6 cells sharing that context, #23 scored a judge that
+named the block it had actually broken as `felt`, and one that named an untouched
+block as `located`.
+
+The correction is exact, and it goes the flattering way:
+
+| judge | #24 rerun | corrected | delta | lost then → now |
+|---|---:|---:|---:|---|
+| deepseek-chat | 0.5641 | **0.7179** | **+0.1538** | 0/117 → 0/156 |
+| GLM-5.3-Flash | 0.4545 | **0.6546** | +0.2001 | 17/117 → **88/156** |
+
+6/39 = **0.15385**. deepseek's lift moved by that number to four decimals, with
+its readable set unchanged at 100%. That is the arithmetic maximum: **all six
+mis-scored cells flipped from `felt` to `located` on `contradict`, and not one
+flipped on either control.** deepseek had named the right block every time and
+been marked down for it. #23 and #24 understated it by exactly the size of the
+bug.
+
+GLM moved further than the bound, which was a flaw in the bound rather than a
+result: 6/39 is only a ceiling when the readable set is fixed, and GLM's went
+from 100 cells to 68.
+
+⛔ The correction could not be computed from disk. `substitution-claims*.json`
+stored only the collapsed `located | felt | missed`, so recomputing against
+corrected ground truth needed another API run. The artifact now keeps `verdicts`
+and `blocks` per reply.
+
+### 3. The three-verdict matrix, and what closes the hole #23 declared
+
+#23 shipped with a declared hole: "`unsupported` on the tampered block counts as
+`located` … splitting them is a finer question than the corpus can support." It
+can, with a third rung. `ablate_target` removes the block the fixture names, so
+the three rungs supply ground truth for the three values of `ClaimVerdict`:
+
+| rung | the fact is | ground truth |
+|---|---|---|
+| `intact` | present, agreeing | `supported` |
+| `contradict` | present, disagreeing | `contradicted` |
+| `ablate_target` | **absent** | `unsupported` |
+
+| | located | felt | missed | derived | claims | any contradicted | any unsupported |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| **deepseek** intact | 0.128 | 0.615 | 0.256 | 0.723 | 7.5 | 0.051 | 0.744 |
+| contradict | 0.846 | 0.103 | 0.051 | 0.586 | 7.4 | 0.846 | 0.744 |
+| perturb_unused | 0.128 | 0.641 | 0.231 | 0.722 | 7.5 | 0.051 | 0.769 |
+| ablate_target | n/a | n/a | n/a | **0.344** | 7.4 | 0.128 | 0.949 |
+| **GLM** intact | 0.188 | 0.125 | 0.688 | 0.889 | 5.0 | **0.000** | 0.313 |
+| contradict | 0.842 | 0.053 | 0.105 | 0.712 | 5.4 | 0.842 | 0.368 |
+| perturb_unused | 0.176 | 0.176 | 0.647 | 0.898 | 5.2 | **0.000** | 0.353 |
+| ablate_target | n/a | n/a | n/a | **0.378** | 5.2 | **0.000** | 0.875 |
+
+**conflict/silence separation** = P(any contradicted | contradict) − P(same | ablate_target):
+deepseek **0.718**, GLM **0.842**. Both far above the 0.2 resolution floor.
+`CLAIM_JUDGE_SYSTEM` tells the judge those two verdicts are different and must
+not be merged; until this rung existed the instruction had no observable. **Both
+judges obey it.** GLM obeys it perfectly — 0 false contradictions in 68 readable
+replies across all three control rungs.
+
+deepseek's 0.128 on `ablate_target` against 0.051 on the two intact controls is
+five cells against two. The gap is 0.077, **below resolution, reported as
+not-detected** rather than as a tendency to invent conflicts out of absences.
+
+### 🔴 The result that was not predicted: absence is punished ~2.8× harder than contradiction
+
+| judge | derived on intact | on contradict | on ablate_target | drop ratio |
+|---|---:|---:|---:|---:|
+| deepseek | 0.723 | 0.586 (−0.137) | 0.344 (**−0.379**) | **2.77×** |
+| GLM | 0.889 | 0.712 (−0.177) | 0.378 (**−0.511**) | **2.89×** |
+
+Two judges with opposite failure profiles land within 0.12 of each other on this
+ratio. The repo's standing worry is the other direction — "absent is unknown, not
+safe", the fear that a judge reads silence as fine. At the claim level neither
+judge does. Both react to a removed block roughly three times as hard as to a
+rewritten one.
+
+This is the expected sign once stated, and that is the point: ablation removes
+support for **every** claim resting on the block, while contradiction only flips
+the claims touching the one rewritten fact, so a judge tracking claim-to-block
+dependence must fall further on ablation. It is therefore a **validation** of
+`derivedScore` as a dependence measure, and the first one it has had.
+
+⚠️ It cannot be compared to #23's headline. That result — the holistic scalar
+falls four times further than the claim count justifies — needs the scalar run on
+the same rung, and `ablate_target` is deliberately not in `STAGE4_RUNGS` because
+stage 4's artifact is the frozen input to `npm run gates`.
+
+### The inversion of #24 reappears, and sharpens
+
+deepseek flags something on **74.4%** of `intact` cells; GLM on **31.3%**. Every
+statistic here is a difference against that baseline, so deepseek has almost no
+headroom: its absence detection is 0.205, barely clearing the resolution floor,
+while GLM's is 0.563. On all three statistics GLM is the more discriminating
+instrument — and GLM is the one that lost **88 of 156 replies**.
+
+🔴 **GLM's loss rate quadrupled between two runs one day apart**: 14.5% → 56.4%,
+same prompt, same `max_tokens`, same temperature. It is flat across rungs
+(20–23 per 39), so it is not caused by the new rung. The sample error printed by
+the run is an unterminated JSON string cut mid-`quote`, which is truncation, not
+malformed output — the `max_tokens` hypothesis in the open items, now much better
+motivated. But a four-fold change with every declared parameter held also fits
+**silent model drift behind a router alias**, and this run cannot separate the
+two. `zai-org/GLM-5.3-Flash` is an unversioned endpoint.
+
+⛔ Read apart, not netted: the judge with the cleaner signal is the one whose
+replies you can barely read.
+
+### Pre-registered predictions
+
+1. **separation > 0 for both** — ✅ held, 0.718 / 0.842.
+2. **absence detection > 0 for both** — ✅ held, 0.205 / 0.563; deepseek's is at
+   the edge of resolution, for the reason predicted (no headroom over a 74.4%
+   baseline).
+3. **corrected lift moves < 0.154** — ✅ exactly, for deepseek; ❌ for GLM, and
+   the prediction was **underspecified**: 6/39 bounds the move only when the
+   readable set is held fixed, which it was for deepseek and was not for GLM.
+4. **`ablate_target` loses more replies for at least one judge** — ❌ failed.
+   deepseek lost nothing; GLM's loss is flat across rungs. Neither judge was
+   anchored on the removed block title, so removing it from the closed label set
+   cost nothing. The localisation reading is weaker for it: a judge that never
+   reaches for a missing title is not proof of nothing, but it removes one
+   mechanism by which high `located` rates could have been an artifact.
+
+### What this does not establish
+
+- **Nothing about accuracy.** Ground truth here is the state of the context, not
+  the truth of the answer.
+- **One fixture, eleven contexts, fictional.** n_eff ≈ 17; nothing under 0.2 is
+  readable.
+- **The ablation removes a block, not a sentence.** Bespoke removes one of two
+  required evidence sentences; no cell in this corpus needs two, so the finer
+  version is unavailable here.
+- **GLM's readable 68 are not a random subset of its 156.** Whatever makes a
+  reply long enough to truncate may correlate with the cell, so GLM's rates are
+  conditioned on surviving truncation and are not directly comparable to
+  deepseek's.
+
+---
+
+## #26 — GLM's losses are its own reasoning eating the budget, and the survivors flattered it
+
+`npm run claims -- --only GLM --tag glm-cap1600` and `… --max-tokens 4000 --tag glm-cap4000`,
+run back to back · raw in `fixtures/runs/substitution-claims-glm-cap{1600,4000}.json` ·
+pre-registration in `docs/SUBSTITUTION-CONTROL.md`, committed before either arm ran.
+
+#25 left GLM's loss rate unexplained: 14.5% → 56.4% in a day with prompt,
+`max_tokens` and temperature unchanged. Two readings were pre-registered —
+truncation by the cap, or a changed model behind the unversioned alias — to be
+separated by the provider's own `finish_reason`, now recorded per reply.
+
+### The mechanism: reasoning and answer share one budget
+
+| arm | lost | `finish_reason` of losses | `finish_reason` of readable | completion tokens, median / max |
+|---|---:|---|---|---:|
+| cap1600 | 88/156 | **length 88** | stop 68 | 1600 / 1600 |
+| cap4000 | 42/156 | **length 42** | stop 114 | 1869 / 4000 |
+
+Every loss at both caps is `length`. Not one reply ended on its own and failed to
+parse. But raising the cap to 4000 did not bring losses under 10%, which the
+pre-registration named as the truncation signature — and the sample printed by
+the 4000 arm is an **empty `content` string on a reply that spent all 4000
+completion tokens**.
+
+A one-cell probe settles where they went. GLM's response message carries a
+`reasoning` field beside `content`, and `usage.completion_tokens` covers both —
+on the probed cell, 220 tokens for 272 characters of answer and 269 of reasoning.
+**The reasoning is billed against `max_tokens`.** On cells where GLM thinks long,
+the answer is squeezed to a truncated object; at the extreme the reasoning takes
+the whole budget and the answer is empty. `thinking: {"type": "disabled"}` was
+passed and ignored by the router: the reasoning field came back unchanged.
+
+So the pre-registered table half-fits. Row 1's mechanism holds (it is the cap);
+its signature does not (a larger cap does not fix it), because the cap is being
+consumed by output the table did not anticipate.
+
+The other rows: `served` is `zai-org/GLM-5.3-Flash` on all 312 replies — no
+evidence of a swap, though a router is free to report the alias it was asked
+for. And the cap1600 arm reproduced #25 **bit for bit** — same 88 losses, same
+table to three decimals — so there was no drift between those two runs.
+Yesterday's 14.5% remains unexplained: that artifact has no `finish_reason`, and
+the leading hypothesis — reasoning appearing, or lengthening, between the two
+days — cannot be tested retroactively.
+
+### 🔴 The losses were not random, and #25's GLM numbers were survivors
+
+The 42 cells lost at 4000 are **all** among the 88 lost at 1600; none is new.
+Losing a reply is a stable property of the cell, which is what "this cell makes
+GLM reason long" predicts. Cells that make a judge think longer are plausibly the
+harder ones, so dropping them should flatter it. It did:
+
+| any `contradicted` finding on | survivors at 1600 | rescued by 4000 |
+|---|---:|---:|
+| intact | 0/16 | 1/10 |
+| perturb_unused | 0/17 | 1/10 |
+| ablate_target | 0/16 | 2/15 |
+| contradict | 16/19 | 8/11 |
+
+#25 reported that GLM "obeys perfectly — 0 false contradictions in 68 readable
+replies across all three control rungs." True of those 68, and **entirely an
+artifact of which 68**: on the cells the cap had been silently removing, GLM
+reports a contradiction where none exists 4 times in 35.
+
+| GLM statistic | cap1600 (68 readable) | cap4000 (114 readable) |
+|---|---:|---:|
+| localisation lift | 0.655 | **0.554** |
+| conflict/silence separation | 0.842 | **0.735** |
+| absence detection | 0.563 | **0.397** |
+| false contradiction, three controls | 0/49 | 4/80 |
+
+Every statistic falls as the readable set grows. **Neither column is GLM's
+number.** The 4000 arm still loses 27% by the same mechanism, so it is a less
+biased survivor sample, not an unbiased one; the pre-registration already ruled
+that neither arm replaces #25's figures unless the readable set is near-complete.
+What can be said: GLM's claim-mode statistics are **upper bounds**, and #25's
+were looser ones than it presented.
+
+deepseek is untouched by all of this — it lost nothing in either run.
+
+### Not predicted: the output depends on `max_tokens` even when nothing is cut
+
+Of the 68 cells readable at both caps — both ended with `stop`, same prompt,
+temperature 0 — only **43 (63%)** returned identical verdicts and block names.
+Changing only the token ceiling changed a third of the untruncated answers. Yet
+the same request repeated at the same ceiling is bit-identical (cap1600 against
+#25). So #24's "GLM reproduced every cell exactly" is true only when the whole
+request is held fixed, `max_tokens` included; it is not a property of the model
+on the prompt. Whether the budget is visible to the reasoning or reaches a
+different serving path is not determinable from outside.
+
+### Consequences
+
+- **GLM is not a usable claim-mode judge on this router** as configured: the
+  reasoning cannot be switched off, and a fixed budget will always drop the
+  cells it thinks hardest about, biasing every statistic upward. A higher cap
+  narrows the bias; it does not remove it.
+- **Report GLM's #25 claim-mode figures as upper bounds**, and discard the
+  "perfect specificity" reading.
+- **The lesson generalises beyond GLM.** A judge whose parse failures correlate
+  with item difficulty produces a clean-looking survivor sample. The per-rung
+  loss table added in #25 could not catch this — loss was flat across rungs —
+  because the correlation runs through the *cell*, not the rung. Only rerunning
+  with the losses rescued exposed it.
