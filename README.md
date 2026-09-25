@@ -176,6 +176,10 @@ grading half of the experiment is reproducible without re-running generation.
 
 ## References
 
+Where this sits relative to standard judge validation (train/dev/test, TPR/TNR
+against human labels) → [`RELATED-WORK.md`](RELATED-WORK.md).
+
+- Husain & Shankar, [*AI Evals: Everything You Need to Know*](https://hamel.dev/blog/posts/evals-faq/) — the reference practice this repo extends with counterfactual controls
 - Yao et al., *τ-bench* / [tau2-bench](https://github.com/sierra-research/tau2-bench) — deterministic state-diff scoring for CS agents
 - [Self-Preference Bias in Rubric-Based Evaluation of LLMs](https://arxiv.org/abs/2604.06996) — bias persists under verifiable rubrics
 - [Agreement Measurement for Rubric-based LLM Judges](https://arxiv.org/abs/2606.00093) — why agreement numbers across differing rubrics aren't comparable
