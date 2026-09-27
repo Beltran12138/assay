@@ -70,6 +70,48 @@ There it is used to *train* a classifier; here it is used to *audit* one.
   above, and this repo has not measured it for its own fixture.
 - One corpus, 13 queries, one judging prompt, two to three judges.
 
+## Trajectory benchmarks: two numbers that need a denominator
+
+[LexAgentHallu](https://arxiv.org/abs/2609.09754) (HKUST, 2026-09-09) is a
+careful benchmark — 3,414 expert-curated Chinese legal instances, a 27-subclass
+taxonomy, and one design choice this repo would copy outright: the tool specs
+each agent saw are replayed byte-for-byte to the judge (its App. F.4), so
+"misused the tool" is judged against what the agent was actually shown. Its two
+headline numbers, though, show both reporting gaps `lib/assay/anyrate.ts` exists
+to close.
+
+**"At least one" over many items.** The best configuration still has ≥1
+hallucination in 89% of trajectories; among correct answers, 68% have ≥1
+substantive hallucination (RAWR-S). Both are flags produced by a
+rubric-anchored LLM judge across each instance's checklist, aggregated with
+*any*. An any-rate compounds the judge's per-item false positives: 5% per item
+over ten items flags 40% of clean trajectories (`anyRate(0.05, 10)`). The paper
+does not report items per trajectory or a per-item false positive rate, so how
+much of 68% is the agent and how much is the instrument cannot be recovered.
+RAWR-S spanning roughly 0.6–0.85 across agents as different as GPT-5.4 and a
+9B model (its Fig. 4) is consistent with a floor set by the judge, though it
+does not show one.
+
+**Raw agreement as the validation.** Judge–human consistency is reported as
+86.90% (Table 4; cited in the text as "Table ??"), with no TPR, TNR or kappa.
+Raw agreement does not pin TNR: at a human base rate of 0.5 it leaves TNR
+anywhere in [0.74, 1]; at 0.8, in [0.35, 1] (`tnrBoundsFromAgreement`). This is
+the same shape as the Gandalf-the-Grader entry in the sibling decision-confidence
+repo (`docs/failure-families.md`) — a ceiling reported as raw agreement next to a result that cannot be read
+against it.
+
+The same arithmetic applies here. In the archived `--claims` runs the
+`intact` rung — context present, nothing perturbed — has "any claim not
+supported" on 74.4% of deepseek replies (k = 7.5 claims/reply;
+`fixtures/runs/substitution-claims-ablate.json`), a per-claim equivalent of
+0.188. `intact` is not ground-truth clean (the fixture's answers do sometimes
+invent specifics — FINDINGS #5, #7), so this is not a false positive rate; it is
+why every rung is read against `intact` rather than on its own. Across runs the
+normalisation matters: GLM's `intact` any-rate is 0.312 at the 1600-token cap
+and 0.538 at 4000, but the replies also grew (k 5.0 → 6.5), and the per-claim
+equivalents are 0.073 and 0.119 — length explains part of that gap, not all.
+The claims mode now prints the per-claim equivalent next to absence detection.
+
 ### Also
 
 - The FAQ's *"If you're passing 100% of your evals, you're likely not
