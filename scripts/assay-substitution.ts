@@ -51,6 +51,7 @@ import {
 import {
   ablateTarget, auditContradictions, findTargetBlock, type ContradictionEntry,
 } from '../lib/assay/ablation'
+import { impliedPerItemRate } from '../lib/assay/anyrate'
 
 const STAGE2 = process.argv.includes('--stage2')
 const STAGE3 = process.argv.includes('--stage3')
@@ -718,6 +719,16 @@ async function claimsMain() {
     console.log(`   ⭐ absence detection = ${f3(absence)}  ` +
       `(any non-supported on ablate_target ${f3(flagged('ablate_target'))} − on intact ${f3(flagged('intact'))})`)
     console.log(`      Negative or ~0 means removing the supporting block did not move the judge — absent read as safe.`)
+    // "Any non-supported" is an at-least-one rate over each reply's claims, so
+    // a rung whose replies list more claims is flagged more often by arithmetic
+    // alone. The per-claim rate that reproduces each any-rate (independence
+    // model, lib/assay/anyrate.ts) is the length-free comparison.
+    const perClaim = (rg: Rung) => {
+      const xs = readable(rg)
+      return xs.length ? impliedPerItemRate(xs.map(r => r.claims!), flagged(rg)) : NaN
+    }
+    console.log(`      per-claim equivalent: ablate_target ${f3(perClaim('ablate_target'))}, intact ${f3(perClaim('intact'))}` +
+      `  (k = ${mean(readable('ablate_target').map(r => r.claims!)).toFixed(1)} vs ${mean(readable('intact').map(r => r.claims!)).toFixed(1)} claims/reply)`)
 
     rows.push({
       judge: j.id, mode: 'claims', n: cells.length,
