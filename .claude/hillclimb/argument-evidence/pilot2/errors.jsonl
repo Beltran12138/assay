@@ -1,0 +1,5 @@
+{"prompt_id":"cardio-02","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"deepseek-flash","usage":{"input_tokens":695,"output_tokens":3}}
+{"prompt_id":"python-vs-c-14","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"deepseek-flash","usage":{"input_tokens":146,"output_tokens":3}}
+{"prompt_id":"cardio-03","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"deepseek-flash","usage":{"input_tokens":561,"output_tokens":3}}
+{"prompt_id":"kaoyan-03","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"deepseek-flash","usage":{"input_tokens":711,"output_tokens":3}}
+{"prompt_id":"syn-kaoyan-c","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"deepseek-flash","usage":{"input_tokens":86,"output_tokens":3}}

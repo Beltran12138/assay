@@ -2531,3 +2531,78 @@ different serving path is not determinable from outside.
   loss table added in #25 could not catch this — loss was flat across rungs —
   because the correlation runs through the *cell*, not the rung. Only rerunning
   with the losses rescued exposed it.
+
+## #27 — The evidence judge ranks well and scores low; the predicted inflation ran the other way
+
+`npm run evidence-eval -- --variant baseline --reps 3` (thinking disabled) and
+`--variant v1 --reps 3` (thinking enabled) · judge `deepseek-flash` on the official
+`api.deepseek.com` endpoint (DeepSeek-V4.1-Flash), prompt `scorePrompt` from
+`lib/assay/argument-prompt.ts` unchanged · cases, labels, policy, both agreement
+rounds and raw rows in `.claude/hillclimb/argument-evidence/` (built with
+`/claude-api build-eval`) · summary in that directory's `RESULT.md`.
+
+The first eval of an `argument_*` construct against labels rather than against
+itself. 43 cases: 31 real high-vote Zhihu answers from `fixtures/argument/arena/`
+(5 dropped — one byte-identical duplicate filed under both sides, one 14-window
+overlap, three that argue nothing), 3 existing hand-written mediocre arguments,
+9 synthesized low-tier ones. Labels 0–3 on the `RUBRIC.md` evidence anchors,
+plus four execution rules the anchors left open (`LABELING-POLICY.md`).
+
+### The labels are only good to ±1 grade, so this eval is directional
+
+Labels were written by Claude, a different family from the judge. The user
+blind-labelled 12, pre-registered gate exact ≥ 80%:
+
+| round | exact | within 1 | quadratic κ | mean diff (user − Claude) |
+|---|---:|---:|---:|---:|
+| 1 (user had not read the policy) | 6/12 | 10/12 | 0.33 | +0.75 |
+| 2 (fresh 12, policy read) | 9/12 | 12/12 | 0.82 | +0.08 |
+
+Round 2 failed the gate by one case. The gate was not lowered; instead the eval is
+declared directional: human–human MAE is 0.25, so differences under ~0.5 are not
+read as evidence. Round 1 is itself the cleanest demonstration of this repo's
+central claim — the same rater moved from κ 0.33 to 0.82 by reading the anchors.
+
+### Results
+
+| | baseline (thinking off) | v1 (thinking on) |
+|---|---:|---:|
+| MAE \|3s − label\|, case-bootstrap 95% CI | 0.527 [0.40, 0.67] | 0.831 [0.66, 1.02] |
+| signed bias 3s − label | **−0.47** [−0.63, −0.32] | **−0.82** [−1.01, −0.65] |
+| case-level Spearman | 0.78 | 0.59 |
+| mean 3s at label 0 / 1 / 2 / 3 | 0.14 / 0.63 / 0.80 / 1.60 | 0.02 / 0.20 / 0.34 / 1.52 |
+| cost (peak price) | $0.014 | $0.080 |
+
+Reference lines: always-1 constant 0.488; constant 0.5 (null) 0.756; oracle 0.
+Paired v1 − baseline MAE +0.305 [+0.22, +0.39] — consistent in sign, under the
+0.5 bar, so directional only.
+
+1. **The pre-registered prediction is refuted.** Written down before any paid
+   call: an anchorless judge would score *high*, like the user's unanchored
+   round 1. Both modes score low, CIs entirely negative. The analogy failed.
+   Label direction cannot explain it: the user labels slightly *above* Claude,
+   so user labels would make the bias larger.
+2. **Order is right, scale is not.** Spearman 0.78, yet the baseline does not
+   beat the always-1 constant on MAE (0.527 vs 0.488, CIs overlap). The judge
+   compresses everything into the lower half of the scale — a calibration
+   failure, not a ranking one. The prompt says `1 = 完全满足` and nothing else;
+   the obvious next arm is the 0–3 anchors in the prompt.
+3. **Thinking makes it harsher and less ordered** at 5.6× the cost.
+
+### The router swapped the model again
+
+Before the official endpoint, the pilot ran through `.env.local`'s router asking
+for `deepseek-ai/DeepSeek-V4-Flash-0731` (the #16 judge). 4 of 5 replies came
+back from `MiniMaxAI/MiniMax-M2.7`; the fifth looped `0.55. response0.55…` to
+`max_tokens`. The runner asserts the served model on every reply, so all five
+landed in `errors.jsonl` / `truncated`, none as a score — the same failure as #8
+and #14, caught this time by a check written before the first call.
+
+On the official endpoint `deepseek-chat` is served as `deepseek-flash`; rather
+than accept the alias by assumption, the eval requests `deepseek-flash` and
+switches modes with `thinking: {type}`.
+
+### Limits
+
+Labels from one rater family plus a 24-case human check; 2 cases at label 3;
+real answers are search-API excerpts, often cut mid-sentence. Directional only.

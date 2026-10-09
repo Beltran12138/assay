@@ -46,3 +46,10 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# hillclimb bulk output
+.claude/hillclimb/**/traces/
+.claude/hillclimb/**/report.html
+.claude/hillclimb/**/state.json
+.claude/hillclimb/**/trajectory/
+.claude/hillclimb/**/*.log

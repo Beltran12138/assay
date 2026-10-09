@@ -1,0 +1,9 @@
+{"prompt_id":"kaoyan-03","rep":0,"attempt":1,"failure":"api-error","status":400,"message":"400 model \"deepseek-chat\" is not available; available models: deepseek-ai/DeepSeek-V4-Flash-0731, MiniMaxAI/MiniMax-M2.7, zai-org/GLM-5.3-Flash"}
+{"prompt_id":"python-vs-c-14","rep":0,"attempt":1,"failure":"api-error","status":400,"message":"400 model \"deepseek-chat\" is not available; available models: deepseek-ai/DeepSeek-V4-Flash-0731, MiniMaxAI/MiniMax-M2.7, zai-org/GLM-5.3-Flash"}
+{"prompt_id":"cardio-03","rep":0,"attempt":1,"failure":"api-error","status":400,"message":"400 model \"deepseek-chat\" is not available; available models: deepseek-ai/DeepSeek-V4-Flash-0731, MiniMaxAI/MiniMax-M2.7, zai-org/GLM-5.3-Flash"}
+{"prompt_id":"cardio-02","rep":0,"attempt":1,"failure":"api-error","status":400,"message":"400 model \"deepseek-chat\" is not available; available models: deepseek-ai/DeepSeek-V4-Flash-0731, MiniMaxAI/MiniMax-M2.7, zai-org/GLM-5.3-Flash"}
+{"prompt_id":"syn-kaoyan-c","rep":0,"attempt":1,"failure":"api-error","status":400,"message":"400 model \"deepseek-chat\" is not available; available models: deepseek-ai/DeepSeek-V4-Flash-0731, MiniMaxAI/MiniMax-M2.7, zai-org/GLM-5.3-Flash"}
+{"prompt_id":"python-vs-c-14","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"MiniMaxAI/MiniMax-M2.7","usage":{"input_tokens":165,"output_tokens":246}}
+{"prompt_id":"cardio-02","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"MiniMaxAI/MiniMax-M2.7","usage":{"input_tokens":753,"output_tokens":534}}
+{"prompt_id":"kaoyan-03","rep":0,"attempt":1,"failure":"served-model-mismatch","model":"MiniMaxAI/MiniMax-M2.7","usage":{"input_tokens":702,"output_tokens":751}}
+{"prompt_id":"syn-kaoyan-c","rep":0,"attempt":2,"failure":"served-model-mismatch","model":"MiniMaxAI/MiniMax-M2.7","usage":{"input_tokens":115,"output_tokens":614}}
