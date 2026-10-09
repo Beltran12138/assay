@@ -1,0 +1,43 @@
+{"prompt_id": "cardio-00", "label": 2, "reason": "中心主张=有氧+无氧配合最好；热量赤字机制可核且相关；膝盖、蛋白粉是个人经历；「只做有氧会进平台期」无支撑", "label_source": "claude"}
+{"prompt_id": "cardio-01", "label": 2, "reason": "主张=运动+饮食可长期维持；弟弟案例不可核；300-500 大卡缺口、热量下限是可核的常见建议；有机制说明，但数字无出处，部分说法可疑（代谢「永久降低」）", "label_source": "claude"}
+{"prompt_id": "cardio-02", "label": 3, "reason": "受限总能量消耗模型+狩猎采集者研究（可核）+肌肉 13 kcal/kg 数据+机制推导，写明了为什么有氧递减、为什么力量优先", "label_source": "claude"}
+{"prompt_id": "cardio-03", "label": 1, "reason": "主张=大体重人群应加力量训练；只有「长期有氧会分解肌肉」一句笼统断言，无数据无出处", "label_source": "claude"}
+{"prompt_id": "cardio-04", "label": 2, "reason": "主张=有氧不必要；能量平衡机制可核且直接支撑；「70-80% 缺口来自饮食」无出处；NEAT 对比为常识", "label_source": "claude"}
+{"prompt_id": "cardio-05", "label": 1, "reason": "主张=168+5:2+有氧速瘦；宏量营养素算术不是疗效证据；「帮不少朋友」不可核；配比合理性只断言", "label_source": "claude"}
+{"prompt_id": "cardio-10", "label": 1, "reason": "主张=肌肉量少的人要配有氧；支撑主要是个人训练安排；心率机制讲的是怎么做有氧，不支撑中心主张", "label_source": "claude"}
+{"prompt_id": "cardio-11", "label": 1, "reason": "主张=饮食赤字是重点、加运动低效；皮质醇机制一句断言，无数据", "label_source": "claude"}
+{"prompt_id": "cardio-12", "label": 1, "reason": "主张=力量训练最有效率；机制叙述有误（热量缺口≠糖原缺口、糖异生描述混乱），按规则 3 记 1", "label_source": "claude"}
+{"prompt_id": "cardio-13", "label": 1, "reason": "主张=饮食为主、复合动作最有效；中心主张只有断言；馒头/土豆热量数据可核，但只支撑「替代主食」这一子论点", "label_source": "claude"}
+{"prompt_id": "cardio-14", "label": 1, "reason": "主张=运动能辅助减肥；「肌肉耗能多」「提高新陈代谢」均为笼统断言，没说明量级", "label_source": "claude"}
+{"prompt_id": "cardio-15", "label": 3, "reason": "具名研究 4 项（Sacks 2009 NEJM、Hall 2011 Lancet、Weinheimer 2010、Fothergill 2016）+对比表+机制+个人案例，并逐条说明支撑关系", "label_source": "claude"}
+{"prompt_id": "kaoyan-00", "label": 1, "reason": "主张=没有规划就别考研；基本是建议与推理，只有「1000 多万毕业生」一个可核数字，且与主张弱相关", "label_source": "claude"}
+{"prompt_id": "kaoyan-01", "label": 1, "reason": "主张=双非考 985 热门专业有用；证据是个人经历（双非→东大→央企），不可核", "label_source": "claude"}
+{"prompt_id": "kaoyan-02", "label": 1, "reason": "主张=33 岁读研行不通；个人经历+年龄算术（算术是推理不是证据）；「20 小时学会」无出处", "label_source": "claude"}
+{"prompt_id": "kaoyan-03", "label": 2, "reason": "主张=按成本收益判断；考公岗位卡硕士、研究生扩招是可公开核实的事实，直接支撑成本端论证；无具体数据", "label_source": "claude"}
+{"prompt_id": "kaoyan-04", "label": 1, "reason": "主张=对提问者而言读研比现状好；依据是提问者自述处境+对市场的断言", "label_source": "claude"}
+{"prompt_id": "kaoyan-05", "label": 1, "reason": "主张=分专业看；只有「芯片研发需要研究生」一个例子，未展开", "label_source": "claude"}
+{"prompt_id": "kaoyan-10", "label": 2, "reason": "主张=放弃读研（学历贬值）；引《以日为鉴》+日本 90 年代案例（可核），与贬值论点相关；其余为个人好恶", "label_source": "claude"}
+{"prompt_id": "kaoyan-12", "label": 2, "reason": "主张=专业无关也不白读；「国企、事业单位、人才引进、大厂校招门槛设硕士」是可公开核实的事实，直接支撑「选择权」这一核心论点", "label_source": "claude", "correction": "2026-10-09 由 1 改 2：与 kaoyan-03（同类事实记 2）口径不一致。是第 2 轮盲标对照后发现的，不计入一致率"}
+{"prompt_id": "kaoyan-13", "label": 1, "reason": "主张=取决于三个变量；「高校教职需博士」可核，但只支撑一个分支；经管行情无出处", "label_source": "claude"}
+{"prompt_id": "kaoyan-14", "label": 1, "reason": "主张=看能考上什么档次；「我们校招 65% 是硕士」是自报内部数据，不可核", "label_source": "claude"}
+{"prompt_id": "python-vs-c-00", "label": 2, "reason": "主张=按目标选；指针/malloc/栈帧对应硬件是可核的技术事实，支撑「C 打底层」；Python 一侧多为断言", "label_source": "claude"}
+{"prompt_id": "python-vs-c-02", "label": 1, "reason": "主张=新手首选 Python；「语法简洁」「应用广」为断言，未举例或给出处", "label_source": "claude"}
+{"prompt_id": "python-vs-c-03", "label": 1, "reason": "主张=先学 Python；证据是表弟的个人经历", "label_source": "claude"}
+{"prompt_id": "python-vs-c-04", "label": 1, "reason": "主张=Python 对零基础最友好；「公认」+一个 print 例子（单个示意，偏弱）", "label_source": "claude"}
+{"prompt_id": "python-vs-c-05", "label": 1, "reason": "主张=先 Python 再 C++；「在我学过的语言中最简单」是个人感受，其余为断言", "label_source": "claude"}
+{"prompt_id": "python-vs-c-11", "label": 2, "reason": "主张=有时间就从 C 开始；调 C 函数需要声明、指针与手动内存是可核技术事实，另有烫烫烫代码演示", "label_source": "claude"}
+{"prompt_id": "python-vs-c-12", "label": 1, "reason": "主张=先打基础再学 Python、别从 C 开始；只有理由陈述和资源列表", "label_source": "claude"}
+{"prompt_id": "python-vs-c-13", "label": 0, "reason": "主张=按目的选语言；只有厨师类比和「走通了几十年」的断言，没有证据", "label_source": "claude"}
+{"prompt_id": "python-vs-c-14", "label": 0, "reason": "纯断言：「选门槛最高的，以后转哪个都轻松」", "label_source": "claude"}
+{"prompt_id": "med-cardio", "label": 1, "reason": "「我身边的人」不可核；「伤膝盖」为断言", "label_source": "claude"}
+{"prompt_id": "med-kaoyan", "label": 1, "reason": "「大厂招聘都要硕士起步」是没有出处的泛化，不可核", "label_source": "claude"}
+{"prompt_id": "med-python-vs-c", "label": 0, "reason": "纯断言", "label_source": "claude"}
+{"prompt_id": "syn-cardio-a", "label": 0, "reason": "纯断言（合成）", "label_source": "claude"}
+{"prompt_id": "syn-cardio-b", "label": 0, "reason": "纯断言（合成）", "label_source": "claude"}
+{"prompt_id": "syn-cardio-c", "label": 1, "reason": "单个不可核的个人案例（合成）", "label_source": "claude"}
+{"prompt_id": "syn-kaoyan-a", "label": 0, "reason": "纯断言（合成）", "label_source": "claude"}
+{"prompt_id": "syn-kaoyan-b", "label": 0, "reason": "纯断言（合成）", "label_source": "claude"}
+{"prompt_id": "syn-kaoyan-c", "label": 1, "reason": "单个不可核的个人案例（合成）", "label_source": "claude"}
+{"prompt_id": "syn-python-vs-c-a", "label": 0, "reason": "纯断言（合成）", "label_source": "claude"}
+{"prompt_id": "syn-python-vs-c-b", "label": 0, "reason": "纯断言（合成）", "label_source": "claude"}
+{"prompt_id": "syn-python-vs-c-c", "label": 1, "reason": "单个不可核的个人案例（合成）", "label_source": "claude"}

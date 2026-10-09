@@ -1,0 +1,14 @@
+{
+  "metrics": [
+    {"id": "mae", "label": "MAE", "kind": "float", "scale": 3, "better": "lower"},
+    {"id": "exact", "label": "exact", "kind": "float", "scale": 1},
+    {"id": "within1", "label": "within-1", "kind": "float", "scale": 1}
+  ],
+  "perf_fields": [
+    {"id": "in_tokens", "label": "in tok"},
+    {"id": "out_tokens", "label": "out tok"},
+    {"id": "latency_s", "label": "latency", "unit": "s"}
+  ],
+  "prices": {"deepseek-flash": {"in": 0.30, "out": 1.20}},
+  "goal": {"metric": "mae", "direction": "lower", "note": "directional only: human-human label MAE 0.25; majority-constant MAE 0.488"}
+}

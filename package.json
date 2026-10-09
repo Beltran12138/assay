@@ -12,6 +12,7 @@
     "selfpref": "tsx scripts/assay-selfpref.ts",
     "sensitivity": "tsx scripts/assay-sensitivity.ts",
     "rebuttal": "tsx scripts/assay-rebuttal-stability.ts",
+    "evidence-eval": "tsx scripts/assay-evidence-eval.ts",
     "faithfulness": "tsx scripts/assay-cot-faithfulness.ts",
     "reasons": "tsx scripts/assay-reason-profile.ts",
     "ambiguity": "tsx scripts/assay-ambiguity-dose.ts",
